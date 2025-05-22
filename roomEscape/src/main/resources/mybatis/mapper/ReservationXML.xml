@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.roomEscape.dao.IReservationDAO">
+
+	<!-- 전체 예약 조회 -->
+	<select id="reservationSelect"
+		resultType="com.example.roomEscape.dto.ReservationDTO">
+		SELECT
+		res.RESV_ID,
+		res.NUM_PEOPLE,
+		res.REQUEST_MSG,
+		res.RESV_DATE,
+		res.MEMBER_ID,
+		res.SCHEDULE_ID,
+		mem.NAME AS MEMBER_NAME,
+		time.TIME_LABEL,
+		br.BRANCH_ID,
+		br.NAME AS BRANCH_NAME
+		FROM RESERVATION res
+		JOIN MEMBER mem ON res.MEMBER_ID = mem.MEMBER_ID
+		JOIN THEME_SCHEDULE sche ON res.SCHEDULE_ID = sche.SCHEDULE_ID
+		JOIN TIME_SLOT time ON sche.SLOT_ID = time.SLOT_ID
+		JOIN THEME theme ON sche.THEME_ID = theme.THEME_ID
+		JOIN BRANCH br ON theme.BRANCH_ID = br.BRANCH_ID
+	</select>
+
+	<!-- 이름으로 예약 조회 -->
+	<select id="findReservationName"
+		resultType="com.example.roomEscape.dto.ReservationDTO">
+		SELECT
+		res.RESV_ID,
+		res.NUM_PEOPLE,
+		res.REQUEST_MSG,
+		res.RESV_DATE,
+		res.MEMBER_ID,
+		res.SCHEDULE_ID,
+		mem.NAME AS MEMBER_NAME,
+		time.TIME_LABEL,
+		br.BRANCH_ID,
+		br.NAME AS BRANCH_NAME
+		FROM RESERVATION res
+		JOIN MEMBER mem ON res.MEMBER_ID = mem.MEMBER_ID
+		JOIN THEME_SCHEDULE sche ON res.SCHEDULE_ID = sche.SCHEDULE_ID
+		JOIN TIME_SLOT time ON sche.SLOT_ID = time.SLOT_ID
+		JOIN THEME theme ON sche.THEME_ID = theme.THEME_ID
+		JOIN BRANCH br ON theme.BRANCH_ID = br.BRANCH_ID
+		WHERE mem.NAME = #{NAME}
+	</select>
+
+	<!-- 지점별 예약 건별 통계 -->
+	<select id="getReservationCountByDate" resultType="com.example.roomEscape.dto.ReservationCountDTO">
+	    SELECT
+	        b.NAME AS branch_name,
+	        COUNT(*) AS count
+	    FROM RESERVATION r
+	    JOIN THEME_SCHEDULE s ON r.SCHEDULE_ID = s.SCHEDULE_ID
+	    JOIN THEME t ON s.THEME_ID = t.THEME_ID
+	    JOIN BRANCH b ON t.BRANCH_ID = b.BRANCH_ID
+	    WHERE TRUNC(r.RESV_DATE) = TRUNC(#{find_date})
+	    GROUP BY b.NAME
+	    ORDER BY b.NAME
+	</select>
+</mapper>
