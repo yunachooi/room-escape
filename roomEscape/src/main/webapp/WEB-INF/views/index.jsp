@@ -8,7 +8,5 @@
 </head>
 <body>
 	<h1>Index Page</h1>
-	<h2>Test Commit Ksh</h2>
-	<h2>Test Commit csh</h2>
 </body>
 </html>
