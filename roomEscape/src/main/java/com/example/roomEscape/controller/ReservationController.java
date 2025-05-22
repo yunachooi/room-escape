@@ -8,10 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.roomEscape.dao.IReservationDAO;
-import com.example.roomEscape.dto.ReservationCountDTO;
 import com.example.roomEscape.dto.ReservationDTO;
 
 @Controller
@@ -42,11 +40,5 @@ public class ReservationController {
 
 		model.addAttribute("list", list);
 		return "/admin/reservation/reservation";
-	}
-
-	@GetMapping("/getReservationChartData")
-	public @ResponseBody List<ReservationCountDTO> getReservationChartData(@RequestParam String find_date) {
-	    List<ReservationCountDTO> reservationCounts = reservationDao.getReservationCountByDate(find_date);
-	    return reservationCounts;
 	}
 }

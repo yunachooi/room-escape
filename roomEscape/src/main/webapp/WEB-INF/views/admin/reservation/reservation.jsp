@@ -72,67 +72,6 @@
         // 기본값: 오늘 날짜로 설정
         const today = new Date().toISOString().split('T')[0];
         document.getElementById('find_date').value = today;
-
-        // 폼 제출 시 AJAX 요청
-        $('#reservationChartForm').on('submit', function(e) {
-            e.preventDefault();  // 폼 기본 동작 방지
-            
-            // 선택된 날짜 값 가져오기
-            const findDate = $('#find_date').val();
-            
-            // AJAX 요청 보내기
-            $.ajax({
-                url: '/getReservationChartData',  // 서버에서 데이터 받을 URL
-                method: 'GET',
-                data: { find_date: findDate },  // 날짜 데이터
-                success: function(response) {
-                    // 서버로부터 받은 데이터 처리
-                    const labels = response.map(item => item.branchName);
-                    const data = response.map(item => item.count);
-
-                    // 차트 업데이트
-                    const ctx = document.getElementById('myChart').getContext('2d');
-                    
-                    // 기존 차트가 존재하면 업데이트, 아니면 새로 생성
-                    if (window.myChart) {
-                        window.myChart.data.labels = labels;
-                        window.myChart.data.datasets[0].data = data;
-                        window.myChart.update();
-                    } else {
-                        // 새로운 차트 생성
-                        window.myChart = new Chart(ctx, {
-                            type: 'bar',
-                            data: {
-                                labels: labels,
-                                datasets: [{
-                                    label: '지점별 예약 건수',
-                                    data: data,
-                                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                                    borderColor: 'rgba(54, 162, 235, 1)',
-                                    borderWidth: 1
-                                }]
-                            },
-                            options: {
-                                scales: {
-                                    y: {
-                                        beginAtZero: true,  // y축이 0부터 시작
-                                        min: 0,  // 최소값 설정
-                                        ticks: {
-                                            stepSize: 1,  // 각 tick 간격 설정 (예: 1)
-                                        }
-                                    }
-                                },
-                                responsive: true,  // 반응형 차트
-                                maintainAspectRatio: false  // 크기 비율 유지하지 않음
-                            }
-                        });
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.error('Error:', error);
-                }
-            });
-        });
     </script>
 </body>
 </html>
