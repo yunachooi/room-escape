@@ -1,5 +1,9 @@
 package com.example.roomEscape.dto;
 
-public class ThemeTypeDTO {
+import lombok.Data;
 
+@Data
+public class ThemeTypeDTO {
+	private int typeId;
+	private String typeName;
 }

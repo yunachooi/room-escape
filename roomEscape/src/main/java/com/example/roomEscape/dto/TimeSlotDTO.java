@@ -1,5 +1,9 @@
 package com.example.roomEscape.dto;
 
-public class TimeSlotDTO {
+import lombok.Data;
 
+@Data
+public class TimeSlotDTO {
+	private int slotId;
+	private String timeLavel;
 }
