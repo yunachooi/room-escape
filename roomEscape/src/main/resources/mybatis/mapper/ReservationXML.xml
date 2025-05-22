@@ -50,16 +50,4 @@
 	</select>
 
 	<!-- 지점별 예약 건별 통계 -->
-	<select id="getReservationCountByDate" resultType="com.example.roomEscape.dto.ReservationCountDTO">
-	    SELECT
-	        b.NAME AS branch_name,
-	        COUNT(*) AS count
-	    FROM RESERVATION r
-	    JOIN THEME_SCHEDULE s ON r.SCHEDULE_ID = s.SCHEDULE_ID
-	    JOIN THEME t ON s.THEME_ID = t.THEME_ID
-	    JOIN BRANCH b ON t.BRANCH_ID = b.BRANCH_ID
-	    WHERE TRUNC(r.RESV_DATE) = TRUNC(#{find_date})
-	    GROUP BY b.NAME
-	    ORDER BY b.NAME
-	</select>
 </mapper>
