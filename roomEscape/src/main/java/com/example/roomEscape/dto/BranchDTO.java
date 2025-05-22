@@ -1,5 +1,10 @@
 package com.example.roomEscape.dto;
 
-public class BranchDTO {
+import lombok.Data;
 
+@Data
+public class BranchDTO {
+    private int branchId;
+    private String name;
+    private String adress;
 }
