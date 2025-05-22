@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class BranchDTO {
-    private int branchId;
+    private Integer branchId;
     private String name;
-    private String adress;
+    private String address;
 }
