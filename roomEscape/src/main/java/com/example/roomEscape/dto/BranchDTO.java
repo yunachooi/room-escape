@@ -7,4 +7,5 @@ public class BranchDTO {
     private Integer branchId;
     private String name;
     private String address;
+
 }
