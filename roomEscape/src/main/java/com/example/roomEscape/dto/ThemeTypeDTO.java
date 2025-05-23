@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class ThemeTypeDTO {
-	private int typeId;
-	private String typeName;
+	private int type_id;
+	private String type_name;
 }

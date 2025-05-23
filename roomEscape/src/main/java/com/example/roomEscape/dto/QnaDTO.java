@@ -1,5 +1,8 @@
 package com.example.roomEscape.dto;
 
-public class QnaDTO {
+import lombok.Data;
 
+@Data
+public class QnaDTO {
+	private String is_answered; 
 }
