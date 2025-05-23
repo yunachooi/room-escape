@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,26 +7,36 @@
 </head>
 <body>
 	<h2>예약정보입력</h2>
-	<form action="" method="POST">
+	<form action="/reservation/submit" method="POST" onsubmit="return validateForm()">
+		<input type="hidden" name="date" value="${date}" /> 
+		<input type="hidden" name="time" value="${time}" />
+		<input type="hidden" name="branch" value="${branch}" /> 
+		<input type="hidden" name="title" value="${title}" />
+		<input type="hidden" name="theme_type" value="${theme_type}" />
+		<input type="hidden" name="MEMBER_ID" value="user1" />
+		<input type="hidden" name="name" value="홍길동" />
+		<input type="hidden" name="PHONE" value="010-0000-0000" />
+
 		<table border="1">
 			<tbody>
 				<tr>
 					<td>예약일</td>
-					<td>${date } (${time })</td>
+					<td>${date} (${time}) - ${branch}</td>
 				</tr>
 				<tr>
 					<td>테마명</td>
-					<td>${title }<br /> (${theme_type })
-					</td>
+					<td>${title} <br /> (${theme_type})</td>
 				</tr>
 				<tr>
 					<td>성함</td>
+					<!-- 추후 id 정보 가져와서 자동 기입 예정 -->
 					<td></td>
 				</tr>
 				<tr>
 					<td>연락처</td>
+					<!-- 추후 id 정보 가져와서 자동 기입 예정 -->
 					<td>
-						<input type="tel" name="tel" /><br />
+						▶ 연락처 변경은 회원정보 수정을 통해 가능합니다.<br />
 						▶ 예약 완료 시 확인 문자가 자동으로 발송됩니다. 문자를 받지 못한 경우 번호 입력이 잘못 되었을 수도 있으니 해당 매장으로 꼭 연락해주세요.<br />
 						▶ 매장에서 예약 1~2일 전에 선입금 및 방문 확인을 위해 연락드립니다. 수차례 연락을 받지 않는 경우 예약이 취소될 수 있습니다.
 					</td>
@@ -55,7 +64,10 @@
 				</tr>
 				<tr>
 					<td>전달사항</td>
-					<td>▶함께 하실 분들이나 매장에 전달하실 사항을 남겨주세요.</td>
+					<td>
+						▶함께 하실 분들이나 매장에 전달하실 사항을 남겨주세요.<br />
+						<input type="text" name="msg" placeholder="기타 요청 사항 입력">
+					</td>
 				</tr>
 				<tr>
 					<td>주의사항</td>
@@ -70,27 +82,35 @@
 				</tr>
 				<tr>
 					<td colspan="2">
-					<input type="checkbox" name="agree" value="Y"> 개인정보취급방침에 동의함</td>
+						<input type="checkbox" name="agree" value="Y" required>
+						개인정보취급방침에 동의함
+					</td>
 				</tr>
 			</tbody>
 		</table>
-		
+
 		<button type="submit">예약하기</button>
 		<button type="button" onclick="resetForm()">취소</button>
 	</form>
-	
+
 	<script>
-		function resetForm(){
-			location.href="userReservation";
+		function resetForm() {
+			location.href = "/userReservation";
 		}
 
 		function updatePrice() {
-			const select = document.getElementById("participants");
-			const count = parseInt(select.value, 10);
-			const totalPrice = count * 10000;
+			const count = parseInt(document.getElementById("participants").value, 10);
+			const total = count * 10000;
+			document.getElementById("price").innerHTML = `금액: \${total.toLocaleString()}원 (인당 10,000원)`;
+		}
 
-			const priceTd = document.getElementById("price");
-			priceTd.innerHTML = `금액: \${totalPrice.toLocaleString()}원 (인당 10,000원)`;
+		function validateForm() {
+			const agree = document.querySelector('input[name="agree"]');
+			if (!agree.checked) {
+				alert("개인정보취급방침에 동의하셔야 예약이 가능합니다.");
+				return false;
+			}
+			return true;
 		}
 	</script>
 </body>

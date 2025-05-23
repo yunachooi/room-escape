@@ -108,24 +108,49 @@ public class ReservationController {
 
 	@GetMapping("/reservationInfo")
 	public String reservationInfo(
-	    @RequestParam("title") String title,
-	    @RequestParam("theme_type") String theme_type,
-	    @RequestParam("time") String time,
-	    @RequestParam(value = "date", required = false) String date,
-	    @RequestParam(value = "branch", required = false) String branch, Model model) {
+	    @RequestParam("TITLE") String title,
+	    @RequestParam("TYPE_NAME") String themeType,
+	    @RequestParam("TIME_LABEL") String time,
+	    @RequestParam(value = "RESV_DATE", required = false) String date,
+	    @RequestParam(value = "branch", required = false) String branch,
+	    Model model) {
 
 	    if (date == null) date = LocalDate.now().toString();
 	    if (branch == null) branch = "강남점";
 
-	    System.out.println("reservationInfo..." + title + "..." + date + "..." + branch + "..." + theme_type + "..." + time);
-	    
+	    System.out.println("reservationInfo..." + title + "..." + date + "..." + branch + "..." + themeType + "..." + time);
+
 	    model.addAttribute("title", title);
-	    model.addAttribute("theme_type", theme_type);
+	    model.addAttribute("theme_type", themeType);
 	    model.addAttribute("time", time);
 	    model.addAttribute("date", date);
 	    model.addAttribute("branch", branch);
 
 	    return "/user/reservation/reservationInfo";
+	}
+
+	@PostMapping("/reservation/submit")
+	public String submitReservation(
+	        @RequestParam("name") String NAME,
+	        @RequestParam("MEMBER_ID") String MEMBER_ID,
+	        @RequestParam("participants") int NUM_PEOPLE,
+	        @RequestParam("msg") String REQUEST_MSG,
+	        @RequestParam("date") String RESV_DATE,
+	        @RequestParam("time") String TIME_LABEL,
+	        @RequestParam("branch") String BRANCH_NAME,
+	        @RequestParam("title") String THEME_TITLE,
+	        @RequestParam("theme_type") String THEME_TYPE,
+	        @RequestParam("PHONE") String PHONE) {
+
+		int SCHEDULE_ID = reservationDao.findScheduleId(RESV_DATE, TIME_LABEL, THEME_TITLE, BRANCH_NAME, THEME_TYPE);
+	    System.out.println("SCHEDULE_ID..." + SCHEDULE_ID);
+
+	    reservationDao.insertReservation(NUM_PEOPLE, REQUEST_MSG, RESV_DATE, MEMBER_ID, SCHEDULE_ID);
+	    reservationDao.updateScheduleBooked(SCHEDULE_ID);
+
+	    System.out.println("예약 등록 완료: " + MEMBER_ID +"..." + PHONE);
+
+	    return "/user/reservation/reservationStatus";
 	}
 	
 	@GetMapping("/reservationStatus")
@@ -133,4 +158,5 @@ public class ReservationController {
 		System.out.println("reservationStatus...");
 		return "/user/reservation/reservationStatus";
 	}
+
 }
