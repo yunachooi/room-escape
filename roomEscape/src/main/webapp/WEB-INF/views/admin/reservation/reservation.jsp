@@ -48,12 +48,12 @@
 						<c:forEach var="reservation" items="${list}" varStatus="status">
 							<tr>
 								<td>${status.index + 1}</td>
-								<td>${reservation.member_name}(${reservation.member_id})</td>
-								<td>${reservation.branch_name}</td>
-								<td>${reservation.resv_date}</td>
-								<td>${reservation.time_label}</td>
-								<td>${reservation.num_people}</td>
-								<td>${reservation.request_msg}</td>
+								<td>${reservation.MEMBER_NAME}(${reservation.MEMBER_ID})</td>
+								<td>${reservation.BRANCH_NAME}</td>
+								<td>${reservation.RESV_DATE}</td>
+								<td>${reservation.TIME_LABEL}</td>
+								<td>${reservation.NUM_PEOPLE}</td>
+								<td>${reservation.REQUEST_MSG}</td>
 							</tr>
 						</c:forEach>
 					</c:when>

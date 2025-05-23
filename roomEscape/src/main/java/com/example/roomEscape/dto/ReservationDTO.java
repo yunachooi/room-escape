@@ -15,4 +15,5 @@ public class ReservationDTO {
 	private String THEME_TYPE;
 	private Integer SCHEDULE_ID;
 	private Integer RESV_ID;
+	private String PHONE;
 }
