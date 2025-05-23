@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.roomEscape.dao.IEventDAO">
+
+    <insert id="insert">
+        INSERT INTO EVENT (
+            EVENT_ID, TITLE, CONTENT, START_DATE, END_DATE, IS_ACTIVE, REG_DATE
+        ) VALUES (
+            EVENT_ID_SEQ.NEXTVAL, #{title}, #{content}, TO_DATE(#{start_date}, 'YYYY-MM-DD'), TO_DATE(#{end_date}, 'YYYY-MM-DD'), #{is_active}, SYSDATE
+        )
+    </insert>
+
+    <select id="selectAll" resultType="com.example.roomEscape.dto.EventDTO">
+        SELECT * FROM EVENT ORDER BY EVENT_ID DESC
+    </select>
+
+    <select id="selectById" resultType="com.example.roomEscape.dto.EventDTO">
+        SELECT * FROM EVENT WHERE EVENT_ID = #{event_id}
+    </select>
+
+    <update id="update">
+        UPDATE EVENT
+        SET TITLE = #{title},
+            CONTENT = #{content},
+            START_DATE = #{start_date},
+            END_DATE = #{end_date},
+            IS_ACTIVE = #{is_active}
+        WHERE EVENT_ID = #{event_id}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM EVENT WHERE EVENT_ID = #{event_id}
+    </delete>
+
+</mapper>
