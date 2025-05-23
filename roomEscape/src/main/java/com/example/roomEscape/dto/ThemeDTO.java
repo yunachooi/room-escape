@@ -14,4 +14,7 @@ public class ThemeDTO {
 	private String is_active;
 	private Integer branch_id;
 	private Integer type_id;
+	private String branch_name; // 지점 이름
+	private String type_name;
+
 }

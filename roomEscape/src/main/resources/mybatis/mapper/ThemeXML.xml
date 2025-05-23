@@ -3,35 +3,78 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.roomEscape.dao.IThemeDAO">
 
-	<select id="selectAll"
-		resultType="com.example.roomEscape.dto.ThemeDTO">
-		SELECT * FROM THEME ORDER BY THEME_ID
+    <select id="selectAll"
+        resultType="com.example.roomEscape.dto.ThemeDTO">
+        SELECT * FROM THEME ORDER BY THEME_ID
+    </select>
+
+	<!--수정됨 -->
+    <select id="selectById" parameterType="int"
+	    resultType="com.example.roomEscape.dto.ThemeDTO">
+	    SELECT 
+	        T.*, 
+	        B.NAME AS branch_name, 
+	        TT.TYPE_NAME AS type_name
+	    FROM THEME T
+	    LEFT JOIN BRANCH B ON T.BRANCH_ID = B.BRANCH_ID
+	    LEFT JOIN THEME_TYPE TT ON T.TYPE_ID = TT.TYPE_ID
+	    WHERE T.THEME_ID = #{theme_id}
 	</select>
 
-	<select id="selectById" parameterType="int"
-		resultType="com.example.roomEscape.dto.ThemeDTO">
-		SELECT * FROM THEME WHERE THEME_ID = #{theme_id}
-	</select>
+    <!-- 수정됨 -->
+    <insert id="insert" 
+        parameterType="com.example.roomEscape.dto.ThemeDTO">
+        INSERT INTO THEME (
+            THEME_ID, TITLE, DESCRIPTION, THEME_LEVEL, DURATION,
+            CAPACITY_MIN, CAPACITY_MAX, IS_ACTIVE, BRANCH_ID, TYPE_ID
+        )
+        VALUES (
+            THEME_ID_SEQ.NEXTVAL, #{title}, #{description}, #{theme_level}, #{duration},
+            #{capacity_min}, #{capacity_max}, #{is_active}, #{branch_id}, #{type_id}
+        )
+    </insert>
 
-	<insert id="insert"
-		parameterType="com.example.roomEscape.dto.ThemeDTO">
-		INSERT INTO THEME ( THEME_ID, TITLE, DESCRIPTION, THEME_LEVEL, DURATION,
-		CAPACITY_MIN, CAPACITY_MAX, IS_ACTIVE )
-		VALUES ( THEME_ID_SEQ.NEXTVAL, #{title}, #{description}, #{theme_level},
-		#{duration}, #{capacity_min}, #{capacity_max}, #{is_active})
-	</insert>
+    <update id="update"
+        parameterType="com.example.roomEscape.dto.ThemeDTO">
+        UPDATE THEME
+        SET TITLE = #{title}, 
+            DESCRIPTION = #{description}, 
+            THEME_LEVEL = #{theme_level}, 
+            DURATION = #{duration}, 
+            CAPACITY_MIN = #{capacity_min}, 
+            CAPACITY_MAX = #{capacity_max}, 
+            IS_ACTIVE = #{is_active}, 
+            BRANCH_ID = #{branch_id}, 
+            TYPE_ID = #{type_id}
+        WHERE THEME_ID = #{theme_id}
+    </update>
 
-	<update id="update"
-		parameterType="com.example.roomEscape.dto.ThemeDTO">
-		UPDATE THEME
-		SET TITLE = #{title}, DESCRIPTION = #{description}, THEME_LEVEL =
-		#{theme_level}, DURATION = #{duration}, CAPACITY_MIN =
-		#{capacity_min}, CAPACITY_MAX = #{capacity_max}, IS_ACTIVE =
-		#{is_active}, BRANCH_ID = #{branch_id}, TYPE_ID = #{type_id}
-		WHERE THEME_ID = #{theme_id}
-	</update>
+    <delete id="delete" parameterType="int">
+        DELETE FROM THEME WHERE THEME_ID = #{theme_id}
+    </delete>
 
-	<delete id="delete" parameterType="int">
-		DELETE FROM THEME WHERE THEME_ID = #{theme_id}
-	</delete>
+    <select id="getFilteredThemes" resultType="com.example.roomEscape.dto.ThemeDTO">
+    SELECT 
+        T.*, 
+        B.NAME AS branch_name
+    FROM THEME T
+    LEFT JOIN BRANCH B ON T.BRANCH_ID = B.BRANCH_ID
+    WHERE T.IS_ACTIVE = 'Y'
+    <if test="branch_id != null and branch_id != ''">
+        AND T.BRANCH_ID = #{branch_id}
+    </if>
+    <if test="type_id != null and type_id != ''">
+        AND T.TYPE_ID = #{type_id}
+    </if>
+    <if test="theme_level != null and theme_level != ''">
+        AND T.THEME_LEVEL = #{theme_level}
+    </if>
+    <if test="people != null and people != ''">
+        AND T.CAPACITY_MIN &lt;= #{people} AND T.CAPACITY_MAX &gt;= #{people}
+    </if>
+    ORDER BY T.THEME_ID DESC
+</select>
+
+
+
 </mapper>

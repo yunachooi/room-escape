@@ -3,6 +3,7 @@ package com.example.roomEscape.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.example.roomEscape.dto.ThemeDTO;
 
@@ -19,4 +20,10 @@ public interface IThemeDAO {
     
     void delete(int theme_id);
     
+    List<ThemeDTO> getFilteredThemes(
+    	    @Param("branch_id") Integer branch_id,
+    	    @Param("type_id") Integer type_id,
+    	    @Param("theme_level") String theme_level,
+    	    @Param("people") Integer people
+    	);
 }
