@@ -18,7 +18,7 @@
 			time.TIME_LABEL,
 			br.BRANCH_ID,
 			br.NAME AS BRANCH_NAME,
-			mem.PHONE_NUMBER,
+			mem.PHONE,
 			theme.TITLE AS THEME_TITLE,
 			tt.TYPE_NAME AS THEME_TYPE
 		FROM RESERVATION res
@@ -43,7 +43,7 @@
 			time.TIME_LABEL,
 			br.BRANCH_ID,
 			br.NAME AS BRANCH_NAME,
-			mem.PHONE_NUMBER,
+			mem.PHONE,
 			theme.TITLE AS THEME_TITLE,
 			tt.TYPE_NAME AS THEME_TYPE
 		FROM RESERVATION res
@@ -53,7 +53,7 @@
 		JOIN THEME theme ON sche.THEME_ID = theme.THEME_ID
 		JOIN BRANCH br ON theme.BRANCH_ID = br.BRANCH_ID
 		JOIN THEME_TYPE tt ON theme.TYPE_ID = tt.TYPE_ID
-		WHERE mem.NAME = #{NAME}
+		WHERE mem.NAME = #{name}
 	</select>
 
 	<!-- schedule_id 조회 -->
