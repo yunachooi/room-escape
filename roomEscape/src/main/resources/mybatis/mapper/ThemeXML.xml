@@ -34,4 +34,18 @@
 	<delete id="delete" parameterType="int">
 		DELETE FROM THEME WHERE THEME_ID = #{theme_id}
 	</delete>
+	
+	<select id="getThemesFlat" resultType="com.example.roomEscape.dto.ThemeFlatDTO">
+	     SELECT 
+	        t.TITLE,
+	        tt.TYPE_NAME,
+	        s.IS_BOOKED,
+	        sl.TIME_LABEL
+	    FROM theme t
+		    JOIN THEME_TYPE tt ON t.TYPE_ID = tt.TYPE_ID
+		    JOIN THEME_SCHEDULE s ON t.THEME_ID = s.THEME_ID
+		    JOIN TIME_SLOT sl ON s.SLOT_ID = sl.SLOT_ID
+	    WHERE s.RESV_DATE = TO_DATE(#{date}, 'YYYY-MM-DD')
+	    ORDER BY t.THEME_ID, sl.SLOT_ID;
+	</select>
 </mapper>
