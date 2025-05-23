@@ -51,8 +51,6 @@
 	</select>
 	    
 
-	<delete id="delete">
-		DELETE FROM NOTICE WHERE NOTICE_ID = #{noticeId}
-  </delete>
+	
 
 </mapper>
