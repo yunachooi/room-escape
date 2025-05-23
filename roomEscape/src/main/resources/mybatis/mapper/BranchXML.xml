@@ -16,7 +16,7 @@
 		FROM BRANCH
 		ORDER BY BRANCH_ID
 	</select>
-
+  
 	<select id="getOne"
 		resultType="com.example.roomEscape.dto.BranchDTO">
 		SELECT
@@ -43,5 +43,5 @@
 	<delete id="delete">
 		DELETE FROM BRANCH WHERE BRANCH_ID = #{branchId}
 	</delete>
-
+  
 </mapper>
