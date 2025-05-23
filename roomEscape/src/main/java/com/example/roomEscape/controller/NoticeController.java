@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,11 +26,22 @@ public class NoticeController {
     private final INoticeDAO noticeDao;
 
     @GetMapping("/list")
-    public String list(Model model) {
-        List<NoticeDTO> list = noticeDao.getAll();
+    public String list(@RequestParam(name = "page", defaultValue = "1") int page, Model model) {
+        int pageSize = 10;
+        int offset = (page - 1) * pageSize;
+
+        List<NoticeDTO> list = noticeDao.getPaged(offset, pageSize);
+        int totalCount = noticeDao.getTotalCount();
+        int totalPages = (int) Math.ceil((double) totalCount / pageSize);
+
         model.addAttribute("noticeList", list);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", totalPages);
+
         return "admin/notice/list";
     }
+
+
 
     @GetMapping("/form")
     public String form() {
@@ -39,18 +49,29 @@ public class NoticeController {
     }
 
     @PostMapping("/insert")
-    public String insert(HttpServletRequest request, @ModelAttribute NoticeDTO dto) {
-        // 제목 앞에 prefix 붙이기
-        String prefix = request.getParameter("prefix");
-        String title = request.getParameter("title");
+    public String insert(@RequestParam("branch") String branch,
+		            	 @RequestParam("prefix") String prefix,
+			             @RequestParam("title") String title,
+			             @RequestParam("content") String content) {
 
-        dto.setTitle(prefix + " " + title);  // "[공지] 제목입니다" 또는 "[이벤트] 제목입니다"
+        NoticeDTO dto = new NoticeDTO();
+
+        // ✅ 제목에 [지점][구분] 붙이기
+        dto.setTitle("[" + branch + "]" + prefix + " " + title);
+
+        // ✅ 내용 저장
+        dto.setContent(content);
+
+        // ✅ 추가 필드들
         dto.setRegDate(new Date());
-        dto.setAdminId("admin");  // 테스트용
+        dto.setAdminId("admin");  // 추후 세션에서 불러오도록 개선 가능
 
         noticeDao.insert(dto);
+
         return "redirect:/admin/notice/list";
     }
+
+
     
     @PostMapping("/enter")
     @ResponseBody

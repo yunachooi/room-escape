@@ -44,7 +44,7 @@
 
 <table>
   <tr>
-    <th>ID</th>
+    <th>글번호</th>
     <th>제목</th>
     <th>내용</th>
     <th>작성일</th>
@@ -96,6 +96,20 @@
     });
   });
 </script>
+
+<div style="text-align:center; margin-top:20px; font-size:16px;">
+  <c:forEach begin="1" end="${totalPages}" var="i">
+    <c:choose>
+      <c:when test="${i eq currentPage}">
+        <span style="font-weight:bold; color:#d9534f; margin:0 8px;">${i}</span>
+      </c:when>
+      <c:otherwise>
+        <a href="?page=${i}" style="text-decoration:none; color:#337ab7; margin:0 8px;">${i}</a>
+      </c:otherwise>
+    </c:choose>
+  </c:forEach>
+</div>
+
 
 </body>
 </html>
