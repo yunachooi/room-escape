@@ -1,21 +1,14 @@
-
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.roomEscape.dao.IBranchDAO">
+
 	<select id="selectAll" resultType="com.example.roomEscape.dto.BranchDTO">
         SELECT * FROM BRANCH ORDER BY BRANCH_ID
     </select>
-</mapper>
-
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
-<mapper namespace="com.example.roomEscape.dao.IBranchDAO">
-
+    
     <select id="getAll" resultType="com.example.roomEscape.dto.BranchDTO">
     	SELECT 
 	        BRANCH_ID AS branchId, 
@@ -33,7 +26,6 @@
     		FROM BRANCH
     	WHERE BRANCH_ID = #{branchId}
 	</select>
-
 
     <insert id="insert" parameterType="com.example.roomEscape.dto.BranchDTO">
         INSERT INTO BRANCH (BRANCH_ID, NAME, ADDRESS)
