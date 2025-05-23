@@ -19,7 +19,7 @@ public interface IThemeDAO {
     void update(ThemeDTO theme);
     
     void delete(int theme_id);
-    
+
     List<ThemeDTO> getFilteredThemes(
     	    @Param("branch_id") Integer branch_id,
     	    @Param("type_id") Integer type_id,
@@ -27,3 +27,4 @@ public interface IThemeDAO {
     	    @Param("people") Integer people
     	);
 }
+

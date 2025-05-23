@@ -7,8 +7,8 @@
     <title>테마 등록</title>
 </head>
 <body>
-    <h2>테마 등록</h2>
-    <form method="post" action="${empty theme.theme_id ? '/admin/theme/insert' : '/admin/theme/update'}">
+    <h2>${mode == 'edit' ? '테마 수정' : '테마 등록'}</h2>
+    <form method="post" action="${mode == 'edit' ? '/theme/update' : '/theme/insert'}" onsubmit="return confirmUpdate();">
 	    <c:if test="${not empty theme.theme_id}">
 	        <input type="hidden" name="theme_id" value="${theme.theme_id}">
 	    </c:if>
@@ -47,7 +47,8 @@
 		    </c:forEach>
 		</select>
 		<br>
-	    <button type="submit">${empty theme.theme_id ? '등록' : '수정'}</button>
+	    <button type="submit">${mode == 'edit' ? '수정' : '등록'}</button>
 	</form>
+	
 </body>
 </html>

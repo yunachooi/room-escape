@@ -32,6 +32,8 @@ public class FaqController {
 		return "/admin/board/index";
 	}
 	
+	//--------------------------------------------------
+	//관리자용
 	@GetMapping("/show_list")
 	public String showlist(Model model) {
 		List<FaqDTO> faqList = faqService.getAll();
@@ -66,4 +68,13 @@ public class FaqController {
 		return "/admin/board/show_detail_faq";
 	}
 	
+	//--------------------------------------------------
+	// 사용자용
+	
+	@GetMapping("/show_list_user")
+	public String show_list_user(Model model) {
+		List<FaqDTO> faqList = faqService.getAll();
+		model.addAttribute("faqList", faqList);
+		return "/user/board/faq/show_faq_list"; 
+	}
 }
