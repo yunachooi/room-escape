@@ -25,7 +25,8 @@
 				</select> <input type="date" name="find_date" id="find_date"
 					value="${selectedDate}" />
 			</form><br />
-
+			
+			<div id="theme-wrap">
 			<c:forEach var="entry" items="${groupedThemes}">
 				<div class="reservation_theme">
 					<img src="./images/image.jpg" alt="${entry.key}" width="300" height="230">
@@ -47,6 +48,7 @@
 					</div>
 				</div>
 			</c:forEach>
+			</div>
 
 		</div>
 	</div>
