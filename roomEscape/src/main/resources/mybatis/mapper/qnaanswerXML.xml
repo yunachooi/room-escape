@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.roomEscape.dao.IQnaAnswerDAO">
+
+	<!-- <select id="getAll" resultType="com.example.roomEscape.dto.QnaAnswerDTO"> 
+		SELECT * FROM QNA WHERE IS_ANSWERED = 'N'
+	</select> -->
+	
+	<insert id="upload_answer">
+		INSERT INTO QNA_ANSWER VALUES(#{ans.qna_id}, #{ans.answer}, SYSDATE , 'admin01')
+	</insert>
+	
+	<select id="get_one_by_qna_id" resultType="com.example.roomEscape.dto.QnaAnswerDTO">
+		SELECT * FROM QNA_ANSWER WHERE QNA_ID = #{qna_id}
+	</select>
+</mapper>
