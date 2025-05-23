@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.roomEscape.dao.ILoginDAO">
+
+	<select id="loginCheck" resultType="com.example.roomEscape.dto.MemberDTO"> 
+		SELECT * FROM MEMBER WHERE MEMBER_ID = #{member_id}
+	</select>
+	
+</mapper>
