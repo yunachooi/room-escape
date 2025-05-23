@@ -37,7 +37,7 @@
 						<c:forEach var="theme" items="${entry.value}">
 							<c:if test="${!theme.IS_BOOKED}">
 								<a
-									href="/reservationInfo?title=${theme.TITLE}&date=${selectedDate}&branch=${selectedBranch}&theme_type=${theme.TYPE_NAME}&time=${theme.TIME_LABEL}">
+									href="/reservationInfo?TITLE=${theme.TITLE}&RESV_DATE=${selectedDate}&branch=${selectedBranch}&TYPE_NAME=${theme.TYPE_NAME}&TIME_LABEL=${theme.TIME_LABEL}">
 									<div class="time_available">${theme.TIME_LABEL}<br /> 예약가능</div>
 								</a>
 							</c:if>
@@ -49,7 +49,6 @@
 				</div>
 			</c:forEach>
 			</div>
-
 		</div>
 	</div>
 
@@ -75,8 +74,11 @@
             dateInput.value = today;
         }
         
+        function realTimeReservation(){
+        	location.href="/userReservation";
+        }
         function reservationStatus(){
-        	local.href="reservationStatus";
+        	location.href="/reservationStatus";
         }
     </script>
 </body>
