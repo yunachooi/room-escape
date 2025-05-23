@@ -36,7 +36,7 @@
 				    </form>
 				    <form method="post" action="${pageContext.request.contextPath}/admin/theme/delete">
 				        <input type="hidden" name="theme_id" value="${theme.theme_id}">
-				        <button type="submit">삭제</button>
+				        <button type="submit" onclick="confirmDelete(${theme_id})">삭제</button>
 				    </form>
 				</td>
             </tr>

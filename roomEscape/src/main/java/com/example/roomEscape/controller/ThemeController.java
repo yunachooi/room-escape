@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.roomEscape.dao.IBranchDAO;
 import com.example.roomEscape.dao.IThemeDAO;
@@ -37,6 +39,10 @@ public class ThemeController {
         if (theme_id != null) {
             ThemeDTO theme = themeDAO.selectById(theme_id);
             model.addAttribute("theme", theme);
+            model.addAttribute("mode", "edit");
+        } else {
+            model.addAttribute("theme", new ThemeDTO());
+            model.addAttribute("mode", "create");
         }
 
         // 지점 목록, 유형 목록 불러오기
@@ -48,14 +54,14 @@ public class ThemeController {
 
     // 테마 등록
     @PostMapping("/insert")
-    public String insertTheme(ThemeDTO theme) {
+    public String insertTheme(@ModelAttribute ThemeDTO theme) {
     	themeDAO.insert(theme);
         return "redirect:/admin/theme/list";
     }
 
     // 테마 수정
     @PostMapping("/update")
-    public String updateTheme(ThemeDTO theme) {
+    public String updateTheme(@ModelAttribute ThemeDTO theme) {
     	themeDAO.update(theme);
         return "redirect:/admin/theme/list";
     }
