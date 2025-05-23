@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.example.roomEscape.dao.INoticeDAO">
+
+    <select id="getAll" resultType="com.example.roomEscape.dto.NoticeDTO">
+	    SELECT
+	        NOTICE_ID AS noticeId,
+	        TITLE,
+	        CONTENT,
+	        REG_DATE AS regDate,
+	        ADMIN_ID AS adminId
+	    FROM NOTICE
+	    ORDER BY REG_DATE DESC
+	    
+	</select>
+
+
+    <insert id="insert">
+   	    INSERT INTO NOTICE (NOTICE_ID, TITLE, CONTENT, REG_DATE)
+		    VALUES (
+		        NOTICE_ID_SEQ.NEXTVAL,
+		        #{title},
+		        #{content},
+		        #{regDate}
+		    )
+	</insert>
+
+    <delete id="delete">
+        DELETE FROM NOTICE WHERE NOTICE_ID = #{noticeId}
+    </delete>
+
+</mapper>

@@ -4,10 +4,12 @@ import lombok.Data;
 
 @Data
 public class ReservationDTO {
-	private int resv_id;
+	private String member_name;
+	private String branch_name;
+	private String resv_date;
+	private String time_label;
 	private int num_people;
 	private String request_msg;
-	private String resv_date;
-	private String member_id;
-	private int schedule_id;
+	private String member_id; 
+
 }

@@ -10,5 +10,10 @@ import com.example.roomEscape.dto.BranchDTO;
 public interface IBranchDAO {
 
 	List<BranchDTO> selectAll();
-	
+
+    List<BranchDTO> getAll();
+    BranchDTO getOne(int branchId);
+    void insert(BranchDTO branch);
+    void update(BranchDTO branch);
+    void delete(int branchId);
 }

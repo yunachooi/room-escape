@@ -1,3 +1,4 @@
+
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
@@ -7,4 +8,46 @@
 	<select id="selectAll" resultType="com.example.roomEscape.dto.BranchDTO">
         SELECT * FROM BRANCH ORDER BY BRANCH_ID
     </select>
+</mapper>
+
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.roomEscape.dao.IBranchDAO">
+
+    <select id="getAll" resultType="com.example.roomEscape.dto.BranchDTO">
+    	SELECT 
+	        BRANCH_ID AS branchId, 
+	        NAME AS name, 
+	        ADDRESS AS address
+	    	FROM BRANCH
+    	ORDER BY BRANCH_ID
+	</select>
+
+	<select id="getOne" resultType="com.example.roomEscape.dto.BranchDTO">
+  	    SELECT 
+        	BRANCH_ID AS branchId, 
+        	NAME AS name, 
+        	ADDRESS AS address
+    		FROM BRANCH
+    	WHERE BRANCH_ID = #{branchId}
+	</select>
+
+
+    <insert id="insert" parameterType="com.example.roomEscape.dto.BranchDTO">
+        INSERT INTO BRANCH (BRANCH_ID, NAME, ADDRESS)
+        VALUES (BRANCH_ID_SEQ.NEXTVAL, #{name}, #{address})
+    </insert>
+
+    <update id="update" parameterType="com.example.roomEscape.dto.BranchDTO">
+        UPDATE BRANCH
+        SET NAME = #{name}, ADDRESS = #{address}
+        WHERE BRANCH_ID = #{branchId}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM BRANCH WHERE BRANCH_ID = #{branchId}
+    </delete>
+
 </mapper>
