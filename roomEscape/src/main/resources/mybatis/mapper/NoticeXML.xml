@@ -28,8 +28,31 @@
 		)
 	</insert>
 
+    <delete id="delete">
+        DELETE FROM NOTICE WHERE NOTICE_ID = #{noticeId}
+    </delete>
+    
+	    <!-- 페이징용 공지사항 목록 -->
+	<select id="getPaged" resultType="com.example.roomEscape.dto.NoticeDTO">
+	    SELECT 
+	        NOTICE_ID AS noticeId,
+	        TITLE,
+	        CONTENT,
+	        REG_DATE AS regDate,
+	        ADMIN_ID AS adminId
+	    FROM NOTICE
+	    ORDER BY NOTICE_ID DESC
+	    OFFSET #{offset} ROWS FETCH NEXT #{limit} ROWS ONLY
+	</select>
+	
+	<!-- 전체 개수 -->
+	<select id="getTotalCount" resultType="int">
+	    SELECT COUNT(*) FROM NOTICE
+	</select>
+	    
+
 	<delete id="delete">
 		DELETE FROM NOTICE WHERE NOTICE_ID = #{noticeId}
-	</delete>
+  </delete>
 
 </mapper>
