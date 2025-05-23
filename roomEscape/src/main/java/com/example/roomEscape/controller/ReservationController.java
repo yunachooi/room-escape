@@ -127,4 +127,10 @@ public class ReservationController {
 
 	    return "/user/reservation/reservationInfo";
 	}
+	
+	@GetMapping("/reservationStatus")
+	public String reservationStatus() {
+		System.out.println("reservationStatus...");
+		return "/user/reservation/reservationStatus";
+	}
 }

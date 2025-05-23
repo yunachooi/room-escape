@@ -18,7 +18,7 @@
 		<div class="book">
 			<form id="reservationForm" action="/userReservation" method="GET">
 				<select name="branch" id="branch">
-					<option value="" disabledhidden ${emptyselectedBranch ? 'selected' : ''}>지점선택</option>
+					<option value="" disabled ${empty selectedBranch ? 'selected' : ''}>지점선택</option>
 					<option value="강남점" ${selectedBranch == '강남점' ? 'selected' : ''}>강남점</option>
 					<option value="홍대점" ${selectedBranch == '홍대점' ? 'selected' : ''}>홍대점</option>
 					<option value="잠실점" ${selectedBranch == '잠실점' ? 'selected' : ''}>잠실점</option>
@@ -29,7 +29,7 @@
 			<div id="theme-wrap">
 			<c:forEach var="entry" items="${groupedThemes}">
 				<div class="reservation_theme">
-					<img src="./images/image.jpg" alt="${entry.key}" width="300" height="230">
+					<img src="./images/${entry.value}.jpg" alt="${entry.key}" width="300" height="230">
 					<div class="theme-title">${entry.key}</div>
 					<div class="type">(${entry.value[0].TYPE_NAME})</div>
 
@@ -73,6 +73,10 @@
         if (!dateInput.value) {
             const today = new Date().toISOString().split('T')[0];
             dateInput.value = today;
+        }
+        
+        function reservationStatus(){
+        	local.href="reservationStatus";
         }
     </script>
 </body>
