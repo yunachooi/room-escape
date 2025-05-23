@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.roomEscape.dao.IFaqDAO">
+
+	<select id="getAll" resultType="com.example.roomEscape.dto.FaqDTO"> 
+		SELECT * FROM FAQ
+	</select>
+	
+	<insert id="writeFaq">
+		INSERT INTO FAQ VALUES(FAQ_ID_SEQ.NEXTVAL, #{faq.question}, #{faq.answer}, 'admin01' )
+	</insert>
+	
+	<select id="getFaqByFaqId" resultType="com.example.roomEscape.dto.FaqDTO"> 
+		SELECT * FROM FAQ where faq_Id = #{faq_id} 
+	</select>
+	
+</mapper>

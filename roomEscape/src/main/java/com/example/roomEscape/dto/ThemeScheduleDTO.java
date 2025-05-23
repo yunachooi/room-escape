@@ -6,9 +6,9 @@ import lombok.Data;
 
 @Data
 public class ThemeScheduleDTO {
-	private int scheduleId;
-	private int themeId;
-	private Date resvDate;
-	private int slotId;
-	private String isBooked;
+	private int schedule_id;
+	private int theme_id;
+	private Date resv_date;
+	private int slot_id;
+	private String is_booked;
 }
