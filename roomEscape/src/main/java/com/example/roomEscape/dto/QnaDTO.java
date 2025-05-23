@@ -3,10 +3,9 @@ package com.example.roomEscape.dto;
 import java.util.Date;
 
 import lombok.Data;
-import oracle.sql.DATE;
-
 @Data
 public class QnaDTO {
+
 
 	private int qna_id;
 	private String title;

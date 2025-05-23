@@ -17,5 +17,4 @@ public interface IQnaDAO {
 	QnaDTO getOneNeedToAnswer(@Param("qna_id")int qna_id);
 
 	void update_is_answered(@Param("qna_id") int qna_id);
-
 }

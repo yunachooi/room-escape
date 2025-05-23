@@ -1,5 +1,8 @@
 package com.example.roomEscape.dao;
 
-public class ITimeSlotDAO {
+import org.apache.ibatis.annotations.Mapper;
+
+@Mapper
+public interface ITimeSlotDAO {
 
 }

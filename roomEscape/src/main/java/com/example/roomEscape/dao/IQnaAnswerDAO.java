@@ -1,6 +1,5 @@
 package com.example.roomEscape.dao;
 
-
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -14,5 +13,6 @@ public interface IQnaAnswerDAO {
 	void upload_answer(@Param("ans") QnaAnswerDTO qna_answer);
 
 	QnaAnswerDTO get_one_by_qna_id(@Param("qna_id")int qna_id);
+
 
 }
