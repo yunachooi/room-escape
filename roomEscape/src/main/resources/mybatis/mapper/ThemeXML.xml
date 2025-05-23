@@ -1,31 +1,37 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.roomEscape.dao.IThemeDAO">
 
-	 <select id="selectAll" resultType="com.example.roomEscape.dto.ThemeDTO">
-        SELECT * FROM THEME ORDER BY THEME_ID
-    </select>
+	<select id="selectAll"
+		resultType="com.example.roomEscape.dto.ThemeDTO">
+		SELECT * FROM THEME ORDER BY THEME_ID
+	</select>
 
-    <select id="selectById" parameterType="int" resultType="com.example.roomEscape.dto.ThemeDTO">
-        SELECT * FROM THEME WHERE THEME_ID = #{theme_id}
-    </select>
+	<select id="selectById" parameterType="int"
+		resultType="com.example.roomEscape.dto.ThemeDTO">
+		SELECT * FROM THEME WHERE THEME_ID = #{theme_id}
+	</select>
 
-    <insert id="insert" parameterType="com.example.roomEscape.dto.ThemeDTO">
-	    INSERT INTO THEME ( THEME_ID, TITLE, DESCRIPTION, THEME_LEVEL, DURATION, CAPACITY_MIN, CAPACITY_MAX, IS_ACTIVE ) 
- 		VALUES ( THEME_ID_SEQ.NEXTVAL, #{title}, #{description}, #{theme_level}, #{duration}, #{capacity_min}, #{capacity_max}, #{is_active})
+	<insert id="insert"
+		parameterType="com.example.roomEscape.dto.ThemeDTO">
+		INSERT INTO THEME ( THEME_ID, TITLE, DESCRIPTION, THEME_LEVEL, DURATION,
+		CAPACITY_MIN, CAPACITY_MAX, IS_ACTIVE )
+		VALUES ( THEME_ID_SEQ.NEXTVAL, #{title}, #{description}, #{theme_level},
+		#{duration}, #{capacity_min}, #{capacity_max}, #{is_active})
 	</insert>
 
-    <update id="update" parameterType="com.example.roomEscape.dto.ThemeDTO">
-        UPDATE THEME
-	        SET TITLE = #{title}, DESCRIPTION = #{description}, THEME_LEVEL = #{theme_level}, DURATION = #{duration}, CAPACITY_MIN = #{capacity_min}, CAPACITY_MAX = #{capacity_max}, IS_ACTIVE = #{is_active}, BRANCH_ID = #{branch_id}, TYPE_ID = #{type_id}
-	        WHERE THEME_ID = #{theme_id}
-    </update>
+	<update id="update"
+		parameterType="com.example.roomEscape.dto.ThemeDTO">
+		UPDATE THEME
+		SET TITLE = #{title}, DESCRIPTION = #{description}, THEME_LEVEL =
+		#{theme_level}, DURATION = #{duration}, CAPACITY_MIN =
+		#{capacity_min}, CAPACITY_MAX = #{capacity_max}, IS_ACTIVE =
+		#{is_active}, BRANCH_ID = #{branch_id}, TYPE_ID = #{type_id}
+		WHERE THEME_ID = #{theme_id}
+	</update>
 
-    <delete id="delete" parameterType="int">
-        DELETE FROM THEME WHERE THEME_ID = #{theme_id}
-    </delete>
- 	
-
- </mapper>
+	<delete id="delete" parameterType="int">
+		DELETE FROM THEME WHERE THEME_ID = #{theme_id}
+	</delete>
+</mapper>
