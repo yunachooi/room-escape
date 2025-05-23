@@ -1,6 +1,9 @@
 package com.example.roomEscape.controller;
 
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.roomEscape.dao.IReservationDAO;
 import com.example.roomEscape.dto.ReservationDTO;
@@ -19,11 +23,13 @@ public class ReservationController {
 
 	@GetMapping("/")
 	public String root() {
+		System.out.println("root...");
 		return "index";
 	}
 
 	@GetMapping("/reservation")
 	public String reservation(Model model) {
+		System.out.println("reservation...");
 		List<ReservationDTO> list = reservationDao.reservationSelect();
 		System.out.println(list);
 
@@ -41,4 +47,30 @@ public class ReservationController {
 		model.addAttribute("list", list);
 		return "/admin/reservation/reservation";
 	}
+	
+	@GetMapping("/reservationChart")
+	public String reservationChartPage(Model model) {
+	    System.out.println("reservationChartPage...");
+	    
+	    List<ReservationDTO> list = reservationDao.reservationSelect();
+	    model.addAttribute("list", list);
+	    return "/admin/reservation/reservation";
+	}
+
+	@GetMapping("/chart-data")
+	public @ResponseBody Map<String, Object> getChartData(@RequestParam("find_date") String findDate) {
+	    System.out.println("getChartData...");
+		
+	    List<String> labels = Arrays.asList("강남점", "홍대점", "잠실점");
+	    List<Integer> data = Arrays.asList(12, 19, 7);
+
+	    Map<String, Object> result = new HashMap<>();
+	    result.put("labels", labels);
+	    result.put("data", data);
+
+	    return result;
+	}
+
+	
+
 }
