@@ -1,5 +1,5 @@
 package com.example.roomEscape.dao;
 
-public class IQnaDAO {
+public interface IQnaDAO {
 
 }

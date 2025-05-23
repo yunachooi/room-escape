@@ -8,6 +8,9 @@ import com.example.roomEscape.dto.BranchDTO;
 
 @Mapper
 public interface IBranchDAO {
+
+	List<BranchDTO> selectAll();
+
     List<BranchDTO> getAll();
     BranchDTO getOne(int branchId);
     void insert(BranchDTO branch);

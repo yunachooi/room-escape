@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class TimeSlotDTO {
-	private int slotId;
-	private String timeLavel;
+	private int slot_id;
+	private String time_lavel;
 }

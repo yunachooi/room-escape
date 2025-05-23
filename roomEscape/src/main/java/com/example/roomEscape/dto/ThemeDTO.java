@@ -4,12 +4,14 @@ import lombok.Data;
 
 @Data
 public class ThemeDTO {
-	private int themeId;
+	private int theme_id;
 	private String title;
 	private String description;
-	private String themeLevel;
+	private String theme_level;
 	private int duration;
-	private int capacityMin;
-	private int capacityMax;
-	private String isActive;
+	private int capacity_min;
+	private int capacity_max;
+	private String is_active;
+	private Integer branch_id;
+	private Integer type_id;
 }
