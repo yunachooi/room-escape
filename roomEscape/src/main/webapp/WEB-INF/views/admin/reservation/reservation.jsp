@@ -14,7 +14,6 @@
 		<h2>지점별 예약 통계</h2>
 		<form id="reservationChartForm">
 			<input type="date" name="find_date" id="find_date">
-			<button type="submit">조회</button>
 		</form>
 		<br />
 		<div id="reservationChartContainer">
@@ -72,16 +71,16 @@
 	    function allbtn() {
 	        location.href = "/reservation";
 	    }
-	
+
 	    // 기본값: 오늘 날짜로 설정
 	    const find_date = document.getElementById('find_date');
 	    const today = new Date().toISOString().split('T')[0];
 	    find_date.value = today;
-	
+
 	    // 차트 초기화
 	    const chartDom = document.getElementById('myChart');
 	    const myChart = echarts.init(chartDom);
-	
+
 	    // 기본 빈 차트 옵션 설정
 	    myChart.setOption({
 	        title: { text: '지점별 예약 통계' },
@@ -89,18 +88,16 @@
 	        yAxis: { type: 'value' },
 	        series: [{ type: 'bar', data: [] }]
 	    });
-	
-	    // 날짜 선택 후 조회 버튼 클릭 시 차트 데이터 요청 및 렌더링
-	    document.getElementById('reservationChartForm').addEventListener('submit', function (e) {
-	        e.preventDefault();
-	
-	        const selectedDate = document.getElementById('find_date').value;
-	
+
+	    // 날짜 변경 시 차트 자동 갱신
+	    find_date.addEventListener('change', function () {
+	        const selectedDate = find_date.value;
+
 	        if (!selectedDate) {
 	            alert("날짜를 선택해주세요.");
 	            return;
 	        }
-	
+
 	        fetch('/chart-data?find_date=' + encodeURIComponent(selectedDate))
 	            .then(response => {
 	                if (!response.ok) {
@@ -127,7 +124,7 @@
 	                        data: data.data
 	                    }]
 	                };
-	
+
 	                myChart.setOption(option);
 	            })
 	            .catch(error => {
@@ -135,6 +132,9 @@
 	                alert('데이터를 불러오는 중 문제가 발생했습니다.');
 	            });
 	    });
+
+	    // 페이지 로드시 오늘 날짜로 차트 자동 조회
+	    find_date.dispatchEvent(new Event('change'));
 	</script>
 </body>
 </html>
