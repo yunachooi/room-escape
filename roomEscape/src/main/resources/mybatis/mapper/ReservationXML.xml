@@ -6,53 +6,73 @@
 <mapper namespace="com.example.roomEscape.dao.IReservationDAO">
 
 	<!-- 전체 예약 조회 -->
-	<select id="reservationSelect" resultType="com.example.roomEscape.dto.ReservationDTO">
+	<select id="reservationSelect"
+		resultType="com.example.roomEscape.dto.ReservationDTO">
 		SELECT
-			res.RESV_ID,
-			res.NUM_PEOPLE,
-			res.REQUEST_MSG,
-			res.RESV_DATE,
-			res.MEMBER_ID,
-			res.SCHEDULE_ID,
-			mem.NAME AS MEMBER_NAME,
-			time.TIME_LABEL,
-			br.BRANCH_ID,
-			br.NAME AS BRANCH_NAME,
-			mem.PHONE,
-			theme.TITLE AS THEME_TITLE,
-			tt.TYPE_NAME AS THEME_TYPE
-		FROM RESERVATION res
-		JOIN MEMBER mem ON res.MEMBER_ID = mem.MEMBER_ID
-		JOIN THEME_SCHEDULE sche ON res.SCHEDULE_ID = sche.SCHEDULE_ID
-		JOIN TIME_SLOT time ON sche.SLOT_ID = time.SLOT_ID
-		JOIN THEME theme ON sche.THEME_ID = theme.THEME_ID
-		JOIN BRANCH br ON theme.BRANCH_ID = br.BRANCH_ID
-		JOIN THEME_TYPE tt ON theme.TYPE_ID = tt.TYPE_ID
+		res.RESV_ID,
+		res.NUM_PEOPLE,
+		res.REQUEST_MSG,
+		res.RESV_DATE,
+		res.MEMBER_ID,
+		res.SCHEDULE_ID,
+		mem.NAME AS MEMBER_NAME,
+		time.TIME_LABEL,
+		br.BRANCH_ID,
+		br.NAME AS BRANCH_NAME,
+		mem.PHONE,
+		theme.TITLE AS THEME_TITLE,
+		tt.TYPE_NAME AS THEME_TYPE
+		FROM RESERVATION
+		res
+		JOIN MEMBER mem ON res.MEMBER_ID =
+		mem.MEMBER_ID
+		JOIN THEME_SCHEDULE
+		sche ON res.SCHEDULE_ID =
+		sche.SCHEDULE_ID
+		JOIN TIME_SLOT time ON
+		sche.SLOT_ID = time.SLOT_ID
+		JOIN THEME theme ON sche.THEME_ID =
+		theme.THEME_ID
+		JOIN BRANCH br ON
+		theme.BRANCH_ID = br.BRANCH_ID
+		JOIN
+		THEME_TYPE tt ON theme.TYPE_ID =
+		tt.TYPE_ID
 	</select>
 
 	<!-- 이름으로 예약 조회 -->
-	<select id="findReservationName" resultType="com.example.roomEscape.dto.ReservationDTO">
+	<select id="findReservationName"
+		resultType="com.example.roomEscape.dto.ReservationDTO">
 		SELECT
-			res.RESV_ID,
-			res.NUM_PEOPLE,
-			res.REQUEST_MSG,
-			res.RESV_DATE,
-			res.MEMBER_ID,
-			res.SCHEDULE_ID,
-			mem.NAME AS MEMBER_NAME,
-			time.TIME_LABEL,
-			br.BRANCH_ID,
-			br.NAME AS BRANCH_NAME,
-			mem.PHONE,
-			theme.TITLE AS THEME_TITLE,
-			tt.TYPE_NAME AS THEME_TYPE
-		FROM RESERVATION res
-		JOIN MEMBER mem ON res.MEMBER_ID = mem.MEMBER_ID
-		JOIN THEME_SCHEDULE sche ON res.SCHEDULE_ID = sche.SCHEDULE_ID
-		JOIN TIME_SLOT time ON sche.SLOT_ID = time.SLOT_ID
-		JOIN THEME theme ON sche.THEME_ID = theme.THEME_ID
-		JOIN BRANCH br ON theme.BRANCH_ID = br.BRANCH_ID
-		JOIN THEME_TYPE tt ON theme.TYPE_ID = tt.TYPE_ID
+		res.RESV_ID,
+		res.NUM_PEOPLE,
+		res.REQUEST_MSG,
+		res.RESV_DATE,
+		res.MEMBER_ID,
+		res.SCHEDULE_ID,
+		mem.NAME AS MEMBER_NAME,
+		time.TIME_LABEL,
+		br.BRANCH_ID,
+		br.NAME AS BRANCH_NAME,
+		mem.PHONE,
+		theme.TITLE AS THEME_TITLE,
+		tt.TYPE_NAME AS THEME_TYPE
+		FROM RESERVATION
+		res
+		JOIN MEMBER mem ON res.MEMBER_ID =
+		mem.MEMBER_ID
+		JOIN THEME_SCHEDULE
+		sche ON res.SCHEDULE_ID =
+		sche.SCHEDULE_ID
+		JOIN TIME_SLOT time ON
+		sche.SLOT_ID = time.SLOT_ID
+		JOIN THEME theme ON sche.THEME_ID =
+		theme.THEME_ID
+		JOIN BRANCH br ON
+		theme.BRANCH_ID = br.BRANCH_ID
+		JOIN
+		THEME_TYPE tt ON theme.TYPE_ID =
+		tt.TYPE_ID
 		WHERE mem.NAME = #{name}
 	</select>
 
@@ -60,26 +80,31 @@
 	<select id="findScheduleId" resultType="int">
 		SELECT TS.SCHEDULE_ID
 		FROM THEME_SCHEDULE TS
-			JOIN TIME_SLOT T ON TS.SLOT_ID = T.SLOT_ID
-			JOIN THEME TH ON TS.THEME_ID = TH.THEME_ID
-			JOIN BRANCH B ON TH.BRANCH_ID = B.BRANCH_ID
-			JOIN THEME_TYPE TT ON TH.TYPE_ID = TT.TYPE_ID
-		WHERE TS.RESV_DATE = #{RESV_DATE}
-			AND T.TIME_LABEL = #{TIME_LABEL}
-			AND TH.TITLE = #{TITLE}
-			AND B.NAME = #{NAME}
-			AND TT.TYPE_NAME = #{TYPE_NAME}
+		JOIN TIME_SLOT T ON TS.SLOT_ID = T.SLOT_ID
+		JOIN
+		THEME TH ON TS.THEME_ID = TH.THEME_ID
+		JOIN BRANCH B ON TH.BRANCH_ID =
+		B.BRANCH_ID
+		JOIN THEME_TYPE TT ON TH.TYPE_ID = TT.TYPE_ID
+		WHERE
+		TS.RESV_DATE =
+		#{RESV_DATE}
+		AND T.TIME_LABEL = #{TIME_LABEL}
+		AND TH.TITLE
+		= #{TITLE}
+		AND B.NAME = #{NAME}
+		AND TT.TYPE_NAME = #{TYPE_NAME}
 	</select>
 
 	<!-- 예약 등록 -->
 	<insert id="insertReservation">
 		INSERT INTO RESERVATION VALUES (
-			RESERVATION_ID_SEQ.NEXTVAL,
-			#{NUM_PEOPLE},
-			#{REQUEST_MSG},
-			#{RESV_DATE},
-			#{MEMBER_ID},
-			#{SCHEDULE_ID}
+		RESERVATION_ID_SEQ.NEXTVAL,
+		#{NUM_PEOPLE},
+		#{REQUEST_MSG},
+		#{RESV_DATE},
+		#{MEMBER_ID},
+		#{SCHEDULE_ID}
 		)
 	</insert>
 
@@ -87,7 +112,47 @@
 	<update id="updateScheduleBooked">
 		UPDATE THEME_SCHEDULE
 		SET IS_BOOKED = 'Y'
+		WHERE
+		SCHEDULE_ID = #{SCHEDULE_ID}
+	</update>
+
+	<!-- 예약 확인 -->
+	<select id="reservationCheck"
+		resultType="com.example.roomEscape.dto.ReservationDTO">
+		SELECT
+		res.NUM_PEOPLE,
+		res.RESV_DATE,
+		time.TIME_LABEL,
+		b.NAME AS BRANCH_NAME,
+		th.TITLE AS THEME_TITLE,
+		res.RESV_ID
+		FROM RESERVATION res
+		JOIN MEMBER mem ON mem.MEMBER_ID = res.MEMBER_ID
+		JOIN THEME_SCHEDULE ts ON ts.SCHEDULE_ID = res.SCHEDULE_ID
+		JOIN THEME th ON th.THEME_ID = ts.THEME_ID
+		JOIN TIME_SLOT time ON time.SLOT_ID = ts.SLOT_ID
+		JOIN BRANCH b ON b.BRANCH_ID = th.BRANCH_ID
+		WHERE mem.MEMBER_ID =
+		#{MEMBER_ID}
+		ORDER BY res.RESV_DATE, time.TIME_LABEL
+	</select>
+
+	<!-- 예약 삭제 -->
+	<delete id="deleteReservationById">
+		DELETE FROM RESERVATION
+		WHERE RESV_ID = #{RESV_ID}
+	</delete>
+
+	<!-- 예약 해제 -->
+	<update id="updateScheduleUnbooked">
+		UPDATE THEME_SCHEDULE
+		SET IS_BOOKED = 'N'
 		WHERE SCHEDULE_ID = #{SCHEDULE_ID}
 	</update>
+	
+	<!-- schedule_id 조회 -->
+	<select id="findScheduleIdByResvId" resultType="int">
+	    SELECT SCHEDULE_ID FROM RESERVATION WHERE RESV_ID = #{RESV_ID}
+	</select>
 
 </mapper>

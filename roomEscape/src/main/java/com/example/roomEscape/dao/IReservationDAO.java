@@ -26,4 +26,12 @@ public interface IReservationDAO {
 	                       @Param("SCHEDULE_ID") int SCHEDULE_ID);
 
 	void updateScheduleBooked(@Param("SCHEDULE_ID") int SCHEDULE_ID);
+	
+	List<ReservationDTO> reservationCheck(@Param("MEMBER_ID") String MEMBER_ID);
+
+	int findScheduleIdByResvId(@Param("RESV_ID") int RESV_ID);
+
+	void deleteReservationById(@Param("RESV_ID") int RESV_ID);
+
+	void updateScheduleUnbooked(@Param("SCHEDULE_ID") int SCHEDULE_ID);
 }

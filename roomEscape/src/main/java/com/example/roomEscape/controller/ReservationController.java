@@ -13,21 +13,25 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.roomEscape.dao.IReservationDAO;
 import com.example.roomEscape.dao.IThemeFlatDAO;
+import com.example.roomEscape.dto.MemberDTO;
 import com.example.roomEscape.dto.ReservationDTO;
 import com.example.roomEscape.dto.ThemeFlatDTO;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
+@RequestMapping("/user/res")
 public class ReservationController {
 	@Autowired
 	IReservationDAO reservationDao;
 	@Autowired
     private IThemeFlatDAO themeFlatDAO;
-
 
 	@GetMapping("/")
 	public String root() {
@@ -85,7 +89,7 @@ public class ReservationController {
 	        @RequestParam(value="branch", required = false) String branch,
 	        Model model) {
 
-	    System.out.println("userReservation called with find_date=" + find_date + ", branch=" + branch);
+	    System.out.println("find_date..." + find_date + "...branch..." + branch);
 
 	    if (find_date == null) {
 	        find_date = LocalDate.now();
@@ -113,7 +117,13 @@ public class ReservationController {
 	    @RequestParam("TIME_LABEL") String time,
 	    @RequestParam(value = "RESV_DATE", required = false) String date,
 	    @RequestParam(value = "branch", required = false) String branch,
-	    Model model) {
+	    Model model, HttpSession session) {
+		
+		Object loginInfo = session.getAttribute("loginInfo");
+		
+		if (loginInfo == null) {
+            return "redirect:/user/to_login";
+        }
 
 	    if (date == null) date = LocalDate.now().toString();
 	    if (branch == null) branch = "강남점";
@@ -140,23 +150,46 @@ public class ReservationController {
 	        @RequestParam("branch") String BRANCH_NAME,
 	        @RequestParam("title") String THEME_TITLE,
 	        @RequestParam("theme_type") String THEME_TYPE,
-	        @RequestParam("PHONE") String PHONE) {
+	        @RequestParam("PHONE") String PHONE,
+	        HttpSession session,
+	        Model model) {
 
-		int SCHEDULE_ID = reservationDao.findScheduleId(RESV_DATE, TIME_LABEL, THEME_TITLE, BRANCH_NAME, THEME_TYPE);
-	    System.out.println("SCHEDULE_ID..." + SCHEDULE_ID);
-
+	    int SCHEDULE_ID = reservationDao.findScheduleId(RESV_DATE, TIME_LABEL, THEME_TITLE, BRANCH_NAME, THEME_TYPE);
 	    reservationDao.insertReservation(NUM_PEOPLE, REQUEST_MSG, RESV_DATE, MEMBER_ID, SCHEDULE_ID);
 	    reservationDao.updateScheduleBooked(SCHEDULE_ID);
 
-	    System.out.println("예약 등록 완료: " + MEMBER_ID +"..." + PHONE);
+	    MemberDTO member = (MemberDTO) session.getAttribute("loginInfo");
+	    List<ReservationDTO> list = reservationDao.reservationCheck(member.getMember_id());
+	    model.addAttribute("list", list);
 
 	    return "/user/reservation/reservationStatus";
 	}
 	
 	@GetMapping("/reservationStatus")
-	public String reservationStatus() {
-		System.out.println("reservationStatus...");
-		return "/user/reservation/reservationStatus";
-	}
+    public String reservationStatus(HttpSession session, Model model) {
+        System.out.println("reservationStatus...");
+        Object loginInfo = session.getAttribute("loginInfo");
 
+        if (loginInfo == null) {
+            return "redirect:/user/to_login";
+        }
+
+        MemberDTO member = (MemberDTO) loginInfo;
+        System.out.println("user id..." + member.getMember_id());
+        
+        List<ReservationDTO> list = reservationDao.reservationCheck(member.getMember_id());
+        model.addAttribute("list", list);
+        
+        return "/user/reservation/reservationStatus";
+    }
+	
+	@GetMapping("/reservation/cancel")
+	public String reservationCancel(@RequestParam("RESV_ID") int RESV_ID) {
+		System.out.println("cancel..." + RESV_ID);
+	    int SCHEDULE_ID = reservationDao.findScheduleIdByResvId(RESV_ID);
+	    System.out.println("SCHEDULE_ID..." + SCHEDULE_ID);
+	    reservationDao.deleteReservationById(RESV_ID);
+	    reservationDao.updateScheduleUnbooked(SCHEDULE_ID);
+	    return "redirect:/user/res/reservationStatus";
+	}
 }
