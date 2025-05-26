@@ -4,9 +4,8 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <%
-    // 현재 날짜와 시간 → 문자열로 request에 전달 (ISO-8601 형식)
     LocalDateTime now = LocalDateTime.now();
-    request.setAttribute("now", now.toString()); // "yyyy-MM-ddTHH:mm:ss"
+    request.setAttribute("now", now.toString());
 %>
 
 <!DOCTYPE html>
@@ -34,13 +33,16 @@
 
         <div id="theme-wrap">
             <c:forEach var="entry" items="${groupedThemes}">
+                <c:set var="themeList" value="${entry.value}" />
+                <c:set var="firstTheme" value="${themeList[0]}" />
+
                 <div class="reservation_theme">
-                    <img src="/images/themes/1.jpeg" alt="${entry.key}" width="300" height="230">
-                    <div class="theme-title">${entry.key}</div>
-                    <div class="type">(${entry.value[0].TYPE_NAME})</div>
+                    <img src="/images/themes/${firstTheme.THEME_ID}.jpeg" alt="${firstTheme.TITLE}" width="300" height="230">
+                    <div class="theme-title">${firstTheme.TITLE}</div>
+                    <div class="type">(${firstTheme.TYPE_NAME})</div>
 
                     <div class="times">
-                        <c:forEach var="theme" items="${entry.value}">
+                        <c:forEach var="theme" items="${themeList}">
                             <c:set var="resvDateTime" value="${theme.RESV_DATE}T${theme.TIME_LABEL}:00" />
                             <c:choose>
                                 <c:when test="${!theme.IS_BOOKED and resvDateTime > now}">
@@ -64,7 +66,6 @@
         const branchSelect = document.getElementById('branch');
         const dateInput = document.getElementById('find_date');
 
-        // 자동 제출
         branchSelect.addEventListener('change', () => {
             if (branchSelect.value && dateInput.value) form.submit();
         });
@@ -72,7 +73,6 @@
             if (branchSelect.value && dateInput.value) form.submit();
         });
 
-        // 오늘 날짜 기본값
         if (!dateInput.value) {
             const today = new Date().toISOString().split('T')[0];
             dateInput.value = today;

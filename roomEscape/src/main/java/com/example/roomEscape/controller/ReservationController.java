@@ -32,56 +32,6 @@ public class ReservationController {
 	IReservationDAO reservationDao;
 	@Autowired
     private IThemeFlatDAO themeFlatDAO;
-
-	@GetMapping("/")
-	public String root() {
-		System.out.println("root...");
-		return "index";
-	}
-
-	@GetMapping("/reservation")
-	public String reservation(Model model) {
-		System.out.println("reservation...");
-		List<ReservationDTO> list = reservationDao.reservationSelect();
-		System.out.println(list);
-
-		model.addAttribute("list", list);
-		return "/admin/reservation/reservation";
-	}
-
-	@PostMapping("/reservation")
-	public String findTheReservation(@RequestParam("NAME") String NAME, Model model) {
-		System.out.println("FindTheReservation... " + NAME);
-
-		List<ReservationDTO> list = reservationDao.findReservationName(NAME);
-		System.out.println("FindReservationName... " + list);
-
-		model.addAttribute("list", list);
-		return "/admin/reservation/reservation";
-	}
-	
-	@GetMapping("/reservationChart")
-	public String reservationChartPage(Model model) {
-	    System.out.println("reservationChartPage...");
-	    
-	    List<ReservationDTO> list = reservationDao.reservationSelect();
-	    model.addAttribute("list", list);
-	    return "/admin/reservation/reservation";
-	}
-
-	@GetMapping("/chart-data")
-	public @ResponseBody Map<String, Object> getChartData(@RequestParam("find_date") String findDate) {
-	    System.out.println("getChartData...");
-		
-	    List<String> labels = Arrays.asList("강남점", "홍대점", "잠실점");
-	    List<Integer> data = Arrays.asList(12, 19, 7);
-
-	    Map<String, Object> result = new HashMap<>();
-	    result.put("labels", labels);
-	    result.put("data", data);
-
-	    return result;
-	}
 	
 	@GetMapping("/userReservation")
 	public String userReservation(

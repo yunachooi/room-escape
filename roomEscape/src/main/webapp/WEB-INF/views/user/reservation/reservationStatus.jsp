@@ -27,7 +27,8 @@ request.setAttribute("today", today.toString());
 				<td>예약일정</td>
 				<td>예약지점</td>
 				<td>예약인원</td>
-				<td>비고</td>
+				<td>예약취소</td>
+				<td>리뷰</td>
 			</tr>
 		</thead>
 		<tbody>
@@ -46,6 +47,14 @@ request.setAttribute("today", today.toString());
 					    	취소불가
 					  	</c:if>
 					</td>
+					<td>
+						<c:if test="${item.RESV_DATE <= today}">
+							<button type="button" onclick="review()">리뷰작성</button>
+						</c:if>
+						<c:if test="${item.RESV_DATE > today}">
+					    	작성불가
+					  	</c:if>
+					</td>
 				</tr>
 			</c:forEach>
 		</tbody>
@@ -62,6 +71,9 @@ request.setAttribute("today", today.toString());
 	    	if (confirm("예약을 취소하시겠습니까?")) {
 	        	location.href = "/user/res/reservation/cancel?RESV_ID=" + (RESV_ID);
 	        }
+	    }
+	    function review(){
+	    	location.href ="";
 	    }
 	</script>
 </body>
