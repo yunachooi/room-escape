@@ -50,7 +50,7 @@
 <h2>테마 목록</h2>
 
 <!-- ✅ 로그인 여부 전달용 hidden 값 -->
-<input type="hidden" id="isLoggedIn" value="${not empty sessionScope.loginUser}" />
+<input type="hidden" id="isLoggedIn" value="${not empty sessionScope.loginInfo}" />
 
 <!-- ✅ 필터 검색폼 유지 -->
 <form method="get" action="/user/theme/list">
@@ -105,7 +105,9 @@
             <button onclick="location.href='/review/show_review?themeId=${theme.theme_id}'">리뷰 보기</button>
           
           
-            <button onclick="handleReservation(${theme.theme_id})">예약하기</button>
+           <button onclick="handleReservation(${theme.branch_id})">예약하기</button>
+
+
 
             <p>평점: ⭐ ${theme.avgRating} / 5.0</p>
             <p>리뷰 수: ${theme.reviewCount}개</p>
@@ -133,6 +135,9 @@
     <button onclick="closeModal()">닫기</button>
 
     <input type="hidden" id="modalThemeId" />
+  <!-- 모달브랜치아이디받기 -->
+<input type="hidden" id="modalBranchId" />
+    
 </div>
 
 <script>
@@ -148,7 +153,8 @@
 	            document.getElementById('modalDuration').textContent = data.duration;
 	            document.getElementById('modalBranch').textContent = data.branch_name;
 	            document.getElementById('modalThemeId').value = themeId;
-	
+	            document.getElementById('modalBranchId').value = data.branch_id;
+	            
 	            document.getElementById('themeModal').style.display = 'block';
 	        });
 	}
@@ -172,20 +178,20 @@
 	function handleWrite(themeId) {
 	    const isLoggedIn = document.getElementById("isLoggedIn").value === "true";
 	    if (isLoggedIn) {
-	        location.href = "/user/review/write?themeId=" + themeId;
+	        location.href = "/user/board/review/show_review_list?themeId=" + themeId;
 	    } else {
 	        alert("로그인이 필요한 기능입니다.");
 	    }
 	}
 	// ✅ 공통 예약 처리 함수 (카드/모달 모두에서 사용)
 	function handleReservation(themeId) {
-	    const isLoggedIn = document.getElementById("isLoggedIn").value === "true";
-	    if (isLoggedIn) {
-	        location.href = "/user/res/userReservation";
-	    } else {
-	        alert("로그인이 필요한 기능입니다.");
-	    }
-	}
+    const isLoggedIn = document.getElementById("isLoggedIn").value === "true";
+    if (isLoggedIn) {
+        location.href = "/user/reservation/userReservation?branch=" + branchId; // 브랜치id 파라미터 넘겨주기
+    } else { 
+        alert("로그인이 필요한 기능입니다.");
+    }
+}
 
 	// ✅ 모달 안 버튼도 같은 로직으로 처리
 	document.addEventListener("DOMContentLoaded", function () {
@@ -196,14 +202,20 @@
 	        handleWrite(themeId);
 	    });
 	    
-	 	// 예약하기
+	 // 예약하기
 	    const reserveBtn = document.getElementById("reservationBtn");
 	    if (reserveBtn) {
 	        reserveBtn.addEventListener("click", function () {
-	            const themeId = document.getElementById("modalThemeId").value;
-	            handleReservation(themeId);
+	            const branchIdInput = document.getElementById("modalBranchId");
+	            if (branchIdInput) {
+	                const branchId = branchIdInput.value;
+	                handleReservation(branchId);
+	            } else {
+	                alert("지점 정보가 없습니다.");
+	            }
 	        });
 	    }
+
 	});
 </script>
 
