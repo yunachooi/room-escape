@@ -184,10 +184,10 @@
 	    }
 	}
 	// ✅ 공통 예약 처리 함수 (카드/모달 모두에서 사용)
-	function handleReservation(themeId) {
+	function handleReservation(branchId) {
     const isLoggedIn = document.getElementById("isLoggedIn").value === "true";
     if (isLoggedIn) {
-        location.href = "/user/reservation/userReservation?branch=" + branchId; // 브랜치id 파라미터 넘겨주기
+        location.href = "/user/res/userReservation?branch=" + branchId; // 브랜치id 파라미터 넘겨주기
     } else { 
         alert("로그인이 필요한 기능입니다.");
     }
