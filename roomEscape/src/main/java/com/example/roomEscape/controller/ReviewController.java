@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.roomEscape.dao.IReviewDAO;
+import com.example.roomEscape.dto.MemberDTO;
 import com.example.roomEscape.dto.ReviewDTO;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/review")
@@ -57,11 +60,14 @@ public class ReviewController {
 	}
 	
 	@GetMapping("/write_review")// id 세션값으로 받기 
-	public String write_review(@RequestParam("member_id")String member_id,
-							  @RequestParam("title")String title,
+	public String write_review(@RequestParam("title")String title,
+								@RequestParam("theme_id")String theme_id,
+								HttpSession session,
 							  Model model) {
+		MemberDTO loginInfo = (MemberDTO)session.getAttribute("loginInfo");
+		
 		// 예약 내역이 있는지 확인 필요.
-		int check_result = reviewDao.check_reservation();
+		int check_result = reviewDao.check_reservation(loginInfo.getMember_id(),title);
 		// 있다면 리뷰 작성
 		if(check_result == 1 ) {
 			reviewDao.write_review();
