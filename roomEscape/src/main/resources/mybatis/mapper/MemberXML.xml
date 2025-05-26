@@ -12,4 +12,9 @@
 	<select id="selectById" parameterType="String" resultType="com.example.roomEscape.dto.MemberDTO">
 	    SELECT * FROM MEMBER WHERE MEMBER_ID = #{member_id}
 	</select>
+	<select id="show_info" resultType="com.example.roomEscape.dto.MemberDTO"> 
+		SELECT * 
+		FROM MEMBER 
+		WHERE MEMBER_ID = #{user.member_id} 
+	</select>
 </mapper>

@@ -1,6 +1,7 @@
 package com.example.roomEscape.dao;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.example.roomEscape.dto.MemberDTO;
 
@@ -11,4 +12,5 @@ public interface IMemberDAO {
 
 	Object selectById(String member_id);
 	
+	MemberDTO show_info(@Param("user") MemberDTO loginInfo);
 }
