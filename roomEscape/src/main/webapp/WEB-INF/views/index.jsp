@@ -13,5 +13,7 @@
 	
 	<a href="/admin/branch/form"> 브렌치 폼보러가기</a>
 	<a href="/admin/branch/list"> 브렌치 리스트보러가기</a>
+	
+	<a href="/user/theme/list"> 테마 보러가기</a>
 </body>
 </html>
