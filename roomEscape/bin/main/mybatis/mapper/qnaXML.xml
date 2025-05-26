@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.roomEscape.dao.IQnaDAO">
+
+	<select id="getAllQna" resultType="com.example.roomEscape.dto.QnaDTO"> 
+		SELECT * FROM QNA 
+	</select>
+	
+	<select id="getAllQna_desc" resultType="com.example.roomEscape.dto.QnaDTO"> 
+		SELECT * FROM QNA ORDER BY REG_DATE DESC
+	</select>
+
+	<select id="getOneNeedToAnswer" resultType="com.example.roomEscape.dto.QnaDTO"> 
+		SELECT * FROM QNA WHERE QNA_ID = #{qna_id}
+	</select>
+	
+	<update id="update_is_answered">
+		UPDATE QNA SET IS_ANSWERED = 'Y' WHERE QNA_ID = #{qna_id}		
+	</update>
+	
+	<insert id="write_qna">
+		INSERT INTO QNA VALUES 
+		( QNA_ID_SEQ.NEXTVAL, #{qna.title }, #{qna.content }, #{qna.password }, SYSDATE, #{qna.member_id } ,'N')
+	</insert>
+	
+	<select id="get_one_qna_by_qna_id" resultType="com.example.roomEscape.dto.QnaDTO"> 
+		SELECT * FROM QNA WHERE QNA_ID = #{qna_id}
+	</select>
+	
+	<update id="update_qna">
+		UPDATE QNA SET TITLE = #{qna.title}, CONTENT = #{qna.content}, REG_DATE = SYSDATE WHERE QNA_ID = #{qna.qna_id}
+	</update>
+	
+	<delete id="delete_qna">
+		DELETE FROM QNA WHERE qna_id = #{qna.qna_id}
+	</delete>
+</mapper>

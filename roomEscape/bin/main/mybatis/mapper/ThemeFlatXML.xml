@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.roomEscape.dao.IThemeFlatDAO">
+	<select id="getThemesFlat" resultType="com.example.roomEscape.dto.ThemeFlatDTO">
+		SELECT 
+	        t.TITLE,
+	        tt.TYPE_NAME,
+	        s.IS_BOOKED,
+	        sl.TIME_LABEL
+	    FROM theme t
+		    JOIN THEME_TYPE tt ON t.TYPE_ID = tt.TYPE_ID
+		    JOIN THEME_SCHEDULE s ON t.THEME_ID = s.THEME_ID
+		    JOIN TIME_SLOT sl ON s.SLOT_ID = sl.SLOT_ID
+		    JOIN BRANCH b ON t.BRANCH_ID = b.BRANCH_ID
+	    WHERE s.RESV_DATE = TO_DATE(#{find_date}, 'YYYY-MM-DD') AND b.NAME = #{branch}
+	    ORDER BY t.THEME_ID, sl.SLOT_ID
+	</select>
+</mapper>
