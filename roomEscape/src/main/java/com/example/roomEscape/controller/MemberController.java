@@ -23,11 +23,14 @@ public class MemberController {
 	public String show_info(HttpSession session,
 							Model model) {
 		MemberDTO loginInfo = (MemberDTO) session.getAttribute("loginInfo");
-		MemberDTO userInfo = memberDao.show_info(loginInfo);
-		System.out.println("유저정보:"+userInfo);
 		
-		
-		model.addAttribute("userInfo", userInfo);
-		return "/user/login/user_info";
+		if(loginInfo == null ) {
+			return "redirect:/user/to_login";
+		}else {
+			
+//			MemberDTO userInfo = memberDao.show_info(loginInfo);
+			model.addAttribute("loginInfo", loginInfo);
+			return "/user/login/user_info";
+		}
 	}
 }

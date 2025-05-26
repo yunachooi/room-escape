@@ -14,33 +14,33 @@
 		<thead >
 			<tr>
 				<th>아아디</th>
-				<th><input type="text" name="id" value="${userInfo.member_id }" readonly></th>
+				<th><input type="text" name="id" value="${loginInfo.member_id }" readonly></th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr>
 				<td>비밀번호</td>
-				<td><input type="text" name="pw" value="${userInfo.password }" required> </td>
+				<td><input type="text" name="pw" value="${loginInfo.password }" required> </td>
 			</tr>
 			<tr>
 				<td>비밀번호 확인</td>
-				<td><input type="text" name="pwcheck" value="${userInfo.password }" required> </td>
+				<td><input type="text" name="pwcheck" value="${loginInfo.password }" required> </td>
 			</tr>
 			<tr>
 				<td>이름</td>
-				<td><input type="text" name="pw" value="${userInfo.name }" required></td>
+				<td><input type="text" name="pw" value="${loginInfo.name }" required></td>
 			</tr>
 			<tr>
 				<td>전화번호</td>
-				<td><input type="text" name="pw" value="${userInfo.phone }"></td>
+				<td><input type="text" name="pw" value="${loginInfo.phone }"></td>
 			</tr>
 			<tr>
 				<td>이메일</td>
-				<td><input type="text" name="pw" value="${userInfo.email }"></td>
+				<td><input type="text" name="pw" value="${loginInfo.email }"></td>
 			</tr>
 			<tr>
 				<td>가입일</td>
-				<td><input type="text" name="pw" value="${userInfo.reg_date }" readonly></td>
+				<td><input type="text" name="pw" value="${loginInfo.reg_date }" readonly></td>
 			</tr>
 			<tr>
 				<td colspan="2"><input type="submit" value="수정"></td>
