@@ -44,8 +44,25 @@ public class ReservationController {
 	    if (find_date == null) {
 	        find_date = LocalDate.now();
 	    }
+
+	    // 1 → 강남점, 2 → 잠실점, 3 → 홍대점 변환
 	    if (branch == null || branch.isEmpty()) {
-	        branch = "강남점";
+	        branch = "강남점"; // 기본값
+	    } else {
+	        switch (branch) {
+	            case "1":
+	                branch = "강남점";
+	                break;
+	            case "2":
+	                branch = "잠실점";
+	                break;
+	            case "3":
+	                branch = "홍대점";
+	                break;
+	            default:
+	                // 유효하지 않은 값 처리
+	                branch = "강남점";
+	        }
 	    }
 
 	    List<ThemeFlatDTO> list = themeFlatDAO.getThemesFlat(find_date.toString(), branch);
