@@ -34,4 +34,6 @@ public interface IReservationDAO {
 	void deleteReservationById(@Param("RESV_ID") int RESV_ID);
 
 	void updateScheduleUnbooked(@Param("SCHEDULE_ID") int SCHEDULE_ID);
+
+	List<ReservationDTO> getMonthlyBranchReservationCount(@Param("find_date") String find_date);
 }

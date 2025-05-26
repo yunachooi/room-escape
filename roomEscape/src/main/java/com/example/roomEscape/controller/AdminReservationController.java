@@ -1,6 +1,6 @@
 package com.example.roomEscape.controller;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -63,11 +63,20 @@ public class AdminReservationController {
 	}
 
 	@GetMapping("/chart-data")
-	public @ResponseBody Map<String, Object> getChartData(@RequestParam("find_date") String findDate) {
-	    System.out.println("getChartData...");
-		
-	    List<String> labels = Arrays.asList("강남점", "홍대점", "잠실점");
-	    List<Integer> data = Arrays.asList(12, 19, 7);
+	@ResponseBody
+	public Map<String, Object> getChartData(@RequestParam("find_date") String findDate) {
+	    System.out.println("find_date..." + findDate);
+
+	    List<ReservationDTO> list = reservationDao.getMonthlyBranchReservationCount(findDate);
+	    System.out.println(list);
+
+	    List<String> labels = new ArrayList<>();
+	    List<Integer> data = new ArrayList<>();
+
+	    for (ReservationDTO dto : list) {
+	        labels.add(dto.getBRANCH_NAME());
+	        data.add(dto.getRESERVATION_COUNT());
+	    }
 
 	    Map<String, Object> result = new HashMap<>();
 	    result.put("labels", labels);
@@ -75,4 +84,5 @@ public class AdminReservationController {
 
 	    return result;
 	}
+
 }

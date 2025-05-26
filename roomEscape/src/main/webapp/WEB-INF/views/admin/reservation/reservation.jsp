@@ -4,16 +4,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>[관리자페이지] 예약 조회</title>
-<script
-	src="https://cdn.jsdelivr.net/npm/echarts@5.6.0/dist/echarts.min.js"></script>
+	<meta charset="UTF-8">
+	<title>[관리자페이지] 예약 조회</title>
+	<script src="https://cdn.jsdelivr.net/npm/echarts@5.6.0/dist/echarts.min.js"></script>
 </head>
 <body>
 	<div class="reservationChart">
 		<h2>지점별 예약 통계</h2>
 		<form id="reservationChartForm">
-			<input type="date" name="find_date" id="find_date">
+			<input type="month" name="find_date" id="find_date">
 		</form>
 		<br />
 		<div id="reservationChartContainer">
@@ -67,21 +66,18 @@
 	</div>
 
 	<script>
-	    // 전체보기 버튼 클릭 시 예약현황 페이지로 이동
 	    function allbtn() {
 	        location.href = "/admin/res/reservation";
 	    }
 
-	    // 기본값: 오늘 날짜로 설정
 	    const find_date = document.getElementById('find_date');
-	    const today = new Date().toISOString().split('T')[0];
-	    find_date.value = today;
+	    const today = new Date();
+	    const monthValue = today.toISOString().slice(0, 7);
+	    find_date.value = monthValue;
 
-	    // 차트 초기화
 	    const chartDom = document.getElementById('myChart');
 	    const myChart = echarts.init(chartDom);
 
-	    // 기본 빈 차트 옵션 설정
 	    myChart.setOption({
 	        title: { text: '지점별 예약 통계' },
 	        xAxis: { type: 'category', data: [] },
@@ -89,7 +85,6 @@
 	        series: [{ type: 'bar', data: [] }]
 	    });
 
-	    // 날짜 변경 시 차트 자동 갱신
 	    find_date.addEventListener('change', function () {
 	        const selectedDate = find_date.value;
 
@@ -133,7 +128,6 @@
 	            });
 	    });
 
-	    // 페이지 로드시 오늘 날짜로 차트 자동 조회
 	    find_date.dispatchEvent(new Event('change'));
 	</script>
 </body>

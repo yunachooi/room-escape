@@ -21,12 +21,12 @@
         <button type="button" onclick="reservationStatus()">예약확인/취소</button>
 
         <form id="reservationForm" action="/user/res/userReservation" method="GET">
-            <select name="branch" id="branch">
-                <option value="" disabled ${empty selectedBranch ? 'selected' : ''}>지점선택</option>
-                <option value="강남점" ${selectedBranch == '강남점' ? 'selected' : ''}>강남점</option>
-                <option value="홍대점" ${selectedBranch == '홍대점' ? 'selected' : ''}>홍대점</option>
-                <option value="잠실점" ${selectedBranch == '잠실점' ? 'selected' : ''}>잠실점</option>
-            </select>
+        	<select name="branch" id="branch">
+				<option value="" disabled ${empty selectedBranch ? 'selected' : ''}>지점선택</option>
+				<option value="1" ${selectedBranch == '강남점' ? 'selected' : ''}>강남점</option>
+				<option value="3" ${selectedBranch == '홍대점' ? 'selected' : ''}>홍대점</option>
+				 <option value="2" ${selectedBranch == '잠실점' ? 'selected' : ''}>잠실점</option>
+			</select>
             <input type="date" name="find_date" id="find_date" value="${selectedDate}" />
         </form>
         <br />
