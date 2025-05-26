@@ -12,4 +12,5 @@ public class ThemeFlatDTO {
     private String TIME_LABEL;
     private LocalDate RESV_DATE;
     private int RESV_ID;
+    private int THEME_ID;
 }

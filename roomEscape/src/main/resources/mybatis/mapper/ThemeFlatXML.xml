@@ -8,7 +8,8 @@
 	        t.TITLE,
 	        tt.TYPE_NAME,
 	        s.IS_BOOKED,
-	        sl.TIME_LABEL
+	        sl.TIME_LABEL,
+	        t.THEME_ID
 	    FROM theme t
 		    JOIN THEME_TYPE tt ON t.TYPE_ID = tt.TYPE_ID
 		    JOIN THEME_SCHEDULE s ON t.THEME_ID = s.THEME_ID

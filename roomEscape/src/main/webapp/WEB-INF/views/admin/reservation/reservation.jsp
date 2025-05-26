@@ -69,7 +69,7 @@
 	<script>
 	    // 전체보기 버튼 클릭 시 예약현황 페이지로 이동
 	    function allbtn() {
-	        location.href = "/reservation";
+	        location.href = "/admin/res/reservation";
 	    }
 
 	    // 기본값: 오늘 날짜로 설정
@@ -98,7 +98,7 @@
 	            return;
 	        }
 
-	        fetch('/chart-data?find_date=' + encodeURIComponent(selectedDate))
+	        fetch('/admin/res/chart-data?find_date=' + encodeURIComponent(selectedDate))
 	            .then(response => {
 	                if (!response.ok) {
 	                    throw new Error('서버 응답 실패');
