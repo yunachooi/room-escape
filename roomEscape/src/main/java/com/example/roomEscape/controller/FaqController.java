@@ -51,9 +51,7 @@ public class FaqController {
 	public String writefaq(FaqDTO faq,
 						Model model,
 						HttpSession session) {
-		System.out.println("......."+faq);
 		// service 호출하여 관리자인지 아닌지 확인 필요함 . 
-		System.out.println("test::::::::::::"+faq);
 		faqDao.writeFaq(faq);
 		
 		return "redirect:/faq/show_list";

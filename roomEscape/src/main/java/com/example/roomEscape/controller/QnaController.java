@@ -17,7 +17,7 @@ import com.example.roomEscape.dto.QnaAnswerDTO;
 import com.example.roomEscape.dto.QnaDTO;
 
 @Controller
-@RequestMapping("qna")
+@RequestMapping("/qna")
 public class QnaController {
 
 	@Autowired
