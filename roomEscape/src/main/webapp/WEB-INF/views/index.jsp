@@ -7,13 +7,16 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>Index Page</h1>
-	<a href="/admin/notice/form"> 공지 폼보러가기</a>
-	<a href="/admin/notice/list"> 공지 리스트보러가기</a>
-	
-	<a href="/admin/branch/form"> 브렌치 폼보러가기</a>
-	<a href="/admin/branch/list"> 브렌치 리스트보러가기</a>
-	
-	<a href="/user/theme/list"> 테마 보러가기</a>
+	<header>
+		<h1>Room Escape</h1>
+		<a href="/user/to_login">로그인</a>
+		<a href="/user/regist">회원가입</a>
+	</header>
+	<nav>
+		<a href="/user/theme/list">테마</a>
+		<a href="/user/res/userReservation">예약하기</a>
+		<a href="/user/notice/list">공지사항 & 이벤트</a>
+		<a href="/user/">게시판</a>
+	</nav>
 </body>
 </html>

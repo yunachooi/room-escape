@@ -32,7 +32,7 @@ public class RegistController {
         member.setRole("USER");
         memberDAO.insert(member); // ③ 암호화된 비밀번호 저장
 
-        return "redirect:/admin/user/login";
+        return "redirect:/user/to_login";
     }
 
 
