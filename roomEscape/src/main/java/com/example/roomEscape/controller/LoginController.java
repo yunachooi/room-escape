@@ -25,7 +25,7 @@ public class LoginController {
 	
 	@GetMapping("/")
 	public String root() {
-		return "/user/login/index"; 
+		return "index"; 
 	}
 	
 	@GetMapping("/to_login")

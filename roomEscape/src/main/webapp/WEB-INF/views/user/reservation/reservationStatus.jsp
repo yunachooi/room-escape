@@ -49,7 +49,7 @@ request.setAttribute("today", today.toString());
 					</td>
 					<td>
 						<c:if test="${item.RESV_DATE <= today}">
-							<button type="button" onclick="review()">리뷰작성</button>
+							<button type="button" onclick="review(${item.THEME_TITLE})">리뷰작성</button>
 						</c:if>
 						<c:if test="${item.RESV_DATE > today}">
 					    	작성불가
@@ -72,8 +72,8 @@ request.setAttribute("today", today.toString());
 	        	location.href = "/user/res/reservation/cancel?RESV_ID=" + (RESV_ID);
 	        }
 	    }
-	    function review(){
-	    	location.href ="";
+	    function review(title){
+	    	location.href ="/review/write_review?title=" + (title);
 	    }
 	</script>
 </body>

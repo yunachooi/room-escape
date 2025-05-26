@@ -102,7 +102,7 @@
             <img src="/images/themes/${theme.theme_id}.jpeg" alt="${theme.title}" style="width:250px; height:350px;">
             <div>${theme.title}</div>
             <button onclick="showDetail(${theme.theme_id})">상세보기</button>
-            <button onclick="location.href='/user/review/list?themeId=${theme.theme_id}'">리뷰 보기</button>
+            <button onclick="location.href='/review/show_review?themeId=${theme.theme_id}'">리뷰 보기</button>
           
           
             <button onclick="handleReservation(${theme.theme_id})">예약하기</button>
@@ -181,7 +181,7 @@
 	function handleReservation(themeId) {
 	    const isLoggedIn = document.getElementById("isLoggedIn").value === "true";
 	    if (isLoggedIn) {
-	        location.href = "/user/reservation/form?themeId=" + themeId;
+	        location.href = "/user/res/userReservation";
 	    } else {
 	        alert("로그인이 필요한 기능입니다.");
 	    }

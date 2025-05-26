@@ -8,7 +8,7 @@
 </head>
 <body>
     <h2>${mode == 'edit' ? '테마 수정' : '테마 등록'}</h2>
-    <form method="post" action="${mode == 'edit' ? '/theme/update' : '/theme/insert'}" onsubmit="return confirmUpdate();">
+    <form method="post" action="${mode == 'edit' ? '/admin/theme/update' : '/admin/theme/insert'}" onsubmit="return confirmUpdate()">
 	    <c:if test="${not empty theme.theme_id}">
 	        <input type="hidden" name="theme_id" value="${theme.theme_id}">
 	    </c:if>
