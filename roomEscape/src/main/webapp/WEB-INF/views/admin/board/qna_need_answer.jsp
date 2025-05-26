@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>QNA Nedd to Answer Page</h1>
+	<h1>QNA Need to Answer Page</h1>
 	<hr>
 	<table border = "1">
 		<thead>

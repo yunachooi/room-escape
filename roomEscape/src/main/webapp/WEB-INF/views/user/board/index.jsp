@@ -16,8 +16,6 @@
 	</c:if>
 		
 	
-	<a href="/user/to_login">로그인 하러가기</a><br>
-	<hr>
 	<a href="/qna/show_qna_user">QnA 보러가기</a><br>
 	<a href="/qna/to_write_qna_user">QnA 작성하기</a><br>
 	<hr>
@@ -27,6 +25,6 @@
 	<a href="">리뷰 작성하기</a>
 	
 	<hr>
-	<a href="/user_info/show_info">마이페이지</a>
+	<!-- <a href="/user_info/show_info">마이페이지</a> -->
 </body>
 </html>
