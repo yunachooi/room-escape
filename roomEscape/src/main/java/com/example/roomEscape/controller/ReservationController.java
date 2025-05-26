@@ -45,9 +45,8 @@ public class ReservationController {
 	        find_date = LocalDate.now();
 	    }
 
-	    // 1 → 강남점, 2 → 잠실점, 3 → 홍대점 변환
 	    if (branch == null || branch.isEmpty()) {
-	        branch = "강남점"; // 기본값
+	        branch = "강남점";
 	    } else {
 	        switch (branch) {
 	            case "1":
@@ -60,7 +59,6 @@ public class ReservationController {
 	                branch = "홍대점";
 	                break;
 	            default:
-	                // 유효하지 않은 값 처리
 	                branch = "강남점";
 	        }
 	    }

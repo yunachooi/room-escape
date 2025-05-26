@@ -156,4 +156,17 @@
 	    SELECT SCHEDULE_ID FROM RESERVATION WHERE RESV_ID = #{RESV_ID}
 	</select>
 
+	<!-- chart 값 조회 -->
+	<select id="getMonthlyBranchReservationCount" parameterType="string" resultType="com.example.roomEscape.dto.ReservationDTO">
+	    SELECT
+		    b.NAME AS BRANCH_NAME,
+			COUNT(*) AS RESERVATION_COUNT
+		FROM RESERVATION r
+			JOIN THEME_SCHEDULE ts ON r.SCHEDULE_ID = ts.SCHEDULE_ID
+			JOIN THEME t ON ts.THEME_ID = t.THEME_ID
+			JOIN BRANCH b ON t.BRANCH_ID = b.BRANCH_ID
+		WHERE TO_CHAR(r.RESV_DATE, 'YYYY-MM') = #{find_date}
+		    GROUP BY b.NAME
+		    ORDER BY b.NAME
+	  </select>
 </mapper>
