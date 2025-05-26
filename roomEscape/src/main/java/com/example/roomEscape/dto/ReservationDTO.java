@@ -1,15 +1,21 @@
 package com.example.roomEscape.dto;
 
+import java.sql.Date;
+
 import lombok.Data;
 
 @Data
 public class ReservationDTO {
-	private String member_name;
-	private String branch_name;
-	private String resv_date;
-	private String time_label;
-	private int num_people;
-	private String request_msg;
-	private String member_id; 
-
+	private String MEMBER_NAME;
+	private String BRANCH_NAME;
+	private Date RESV_DATE;
+	private String TIME_LABEL;
+	private int NUM_PEOPLE;
+	private String REQUEST_MSG;
+	private String MEMBER_ID;
+	private String THEME_TITLE;
+	private String THEME_TYPE;
+	private Integer SCHEDULE_ID;
+	private Integer RESV_ID;
+	private String PHONE;
 }
