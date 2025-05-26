@@ -30,7 +30,7 @@ public class LoginController {
 	
 	@GetMapping("/to_login")
 	public String login() {
-		return "/user/login/login";
+		return "/admin/user/login";
 	}
 
 	// 로그인 ID,PW 확인 및 로그인 정보 저장
@@ -43,7 +43,7 @@ public class LoginController {
 		
 		if( member_id == null || password == null ) {
 			rttr.addFlashAttribute("login_error1", true);
-			return "redirect:/user/to_login";
+			return "redirect:/user/admin/user/to_login";
 		}
 		
 		MemberDTO member = loginDao.loginCheck(member_id);
@@ -58,6 +58,6 @@ public class LoginController {
 			}
 		}
 		rttr.addFlashAttribute("login_error2", true);
-		return "redirect:/user/to_login";
+		return "redirect:/user/admin/user/to_login";
 	}
 }

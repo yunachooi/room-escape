@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.roomEscape.dao.IReviewDAO">
+
+	<select id="getAll" resultType="com.example.roomEscape.dto.ReviewDTO">
+		 SELECT * FROM REVIEW 
+	 </select>
+	 
+	<select id="get_review_ratingDESC" resultType="com.example.roomEscape.dto.ReviewDTO">
+		 SELECT * FROM REVIEW ORDER BY RATING DESC 
+	 </select>
+	 
+	<select id="get_review_rating" resultType="com.example.roomEscape.dto.ReviewDTO">
+		 SELECT * FROM REVIEW ORDER BY RATING 
+	 </select>
+	 
+	<select id="get_review_reg_date" resultType="com.example.roomEscape.dto.ReviewDTO">
+	 	SELECT * FROM REVIEW ORDER BY REG_DATE DESC 
+	 </select>
+	 
+	<select id="check_reservation" resultType="int">
+		 SELECT COUNT(*) 
+		 FROM RESERVATION RES 
+		 JOIN THEME_SCHEDULE TS 
+		 ON RES.SCHEDULE_ID = TS.SCHEDULE_ID 
+		 WHERE RES.MEMBER_ID = 'member01' AND TS.THEME_ID = 1; 
+	 </select>
+	 
+</mapper>
