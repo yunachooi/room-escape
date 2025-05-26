@@ -20,7 +20,7 @@ public class ReviewController {
 	@Autowired
 	private IReviewDAO reviewDao;
 
-	@GetMapping("/show_review")
+	@GetMapping("/show_review") // 테마에서 오는 해당 테마의 리뷰 보기 ,, 파라미터 받아줘야함
 	public String show_review(Model model) {
 		List<ReviewDTO> review_list = reviewDao.getAll();
 		model.addAttribute("review_list", review_list);
@@ -56,8 +56,10 @@ public class ReviewController {
 		} 
 	}
 	
-	@GetMapping("/write_review")
-	public String write_review() {
+	@GetMapping("/write_review")// id 세션값으로 받기 
+	public String write_review(@RequestParam("member_id")String member_id,
+							  @RequestParam("title")String title,
+							  Model model) {
 		// 예약 내역이 있는지 확인 필요.
 		int check_result = reviewDao.check_reservation();
 		// 있다면 리뷰 작성
