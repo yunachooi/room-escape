@@ -35,7 +35,7 @@
         <div id="theme-wrap">
             <c:forEach var="entry" items="${groupedThemes}">
                 <div class="reservation_theme">
-                    <img src="./images/${entry.value[0].TITLE}.jpg" alt="${entry.key}" width="300" height="230">
+                    <img src="/images/themes/1.jpeg" alt="${entry.key}" width="300" height="230">
                     <div class="theme-title">${entry.key}</div>
                     <div class="type">(${entry.value[0].TYPE_NAME})</div>
 
