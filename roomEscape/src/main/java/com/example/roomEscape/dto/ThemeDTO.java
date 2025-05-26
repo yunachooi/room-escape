@@ -16,5 +16,8 @@ public class ThemeDTO {
 	private Integer type_id;
 	private String branch_name; // 지점 이름
 	private String type_name;
+	private double avgRating;
+	private int reviewCount;
+
 
 }

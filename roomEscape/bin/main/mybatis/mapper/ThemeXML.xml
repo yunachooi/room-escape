@@ -55,26 +55,88 @@
     </delete>
 
     <select id="getFilteredThemes" resultType="com.example.roomEscape.dto.ThemeDTO">
-    SELECT 
-        T.*, 
-        B.NAME AS branch_name
-    FROM THEME T
-    LEFT JOIN BRANCH B ON T.BRANCH_ID = B.BRANCH_ID
-    WHERE T.IS_ACTIVE = 'Y'
-    <if test="branch_id != null and branch_id != ''">
-        AND T.BRANCH_ID = #{branch_id}
-    </if>
-    <if test="type_id != null and type_id != ''">
-        AND T.TYPE_ID = #{type_id}
-    </if>
-    <if test="theme_level != null and theme_level != ''">
-        AND T.THEME_LEVEL = #{theme_level}
-    </if>
-    <if test="people != null and people != ''">
-        AND T.CAPACITY_MIN &lt;= #{people} AND T.CAPACITY_MAX &gt;= #{people}
-    </if>
-    ORDER BY T.THEME_ID DESC
-</select>
+	    SELECT 
+	        T.*, 
+	        B.NAME AS branch_name
+	    FROM THEME T
+	    LEFT JOIN BRANCH B ON T.BRANCH_ID = B.BRANCH_ID
+	    WHERE T.IS_ACTIVE = 'Y'
+	    <if test="branch_id != null and branch_id != ''">
+	        AND T.BRANCH_ID = #{branch_id}
+	    </if>
+	    <if test="type_id != null and type_id != ''">
+	        AND T.TYPE_ID = #{type_id}
+	    </if>
+	    <if test="theme_level != null and theme_level != ''">
+	        AND T.THEME_LEVEL = #{theme_level}
+	    </if>
+	    <if test="people != null and people != ''">
+	        AND T.CAPACITY_MIN &lt;= #{people} AND T.CAPACITY_MAX &gt;= #{people}
+	    </if>
+	    ORDER BY T.THEME_ID DESC
+	</select>
+
+	<!-- 평점순 정렬 -->
+	<select id="getThemesByRating" resultType="com.example.roomEscape.dto.ThemeDTO">
+		   SELECT 
+	    T.THEME_ID,
+	    T.TITLE,
+	    T.DESCRIPTION,
+	    T.THEME_LEVEL,
+	    T.DURATION,
+	    T.CAPACITY_MIN,
+	    T.CAPACITY_MAX,
+	    T.IS_ACTIVE,
+	    T.BRANCH_ID,
+	    T.TYPE_ID,
+	    NVL(AVG(R.RATING), 0) AS AVG_RATING
+	FROM THEME T
+	LEFT JOIN REVIEW R ON T.THEME_ID = R.THEME_ID
+	GROUP BY 
+	    T.THEME_ID,
+	    T.TITLE,
+	    T.DESCRIPTION,
+	    T.THEME_LEVEL,
+	    T.DURATION,
+	    T.CAPACITY_MIN,
+	    T.CAPACITY_MAX,
+	    T.IS_ACTIVE,
+	    T.BRANCH_ID,
+	    T.TYPE_ID
+	ORDER BY AVG_RATING DESC
+
+	</select>
+
+	
+	<!-- 리뷰 수 순 정렬 (인기순) -->
+	<select id="getThemesByReviewCount" resultType="com.example.roomEscape.dto.ThemeDTO">
+	    SELECT 
+	        T.THEME_ID,
+	        T.TITLE,
+	        T.DESCRIPTION,
+	        T.THEME_LEVEL,
+	        T.DURATION,
+	        T.CAPACITY_MIN,
+	        T.CAPACITY_MAX,
+	        T.IS_ACTIVE,
+	        T.BRANCH_ID,
+	        T.TYPE_ID,
+	        COUNT(R.REVIEW_ID) AS REVIEW_COUNT
+	    FROM THEME T
+	    LEFT JOIN REVIEW R ON T.THEME_ID = R.THEME_ID
+	    GROUP BY 
+	        T.THEME_ID,
+	        T.TITLE,
+	        T.DESCRIPTION,
+	        T.THEME_LEVEL,
+	        T.DURATION,
+	        T.CAPACITY_MIN,
+	        T.CAPACITY_MAX,
+	        T.IS_ACTIVE,
+	        T.BRANCH_ID,
+	        T.TYPE_ID
+	    ORDER BY REVIEW_COUNT DESC
+	</select>
 
 
 

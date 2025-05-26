@@ -26,5 +26,9 @@ public interface IThemeDAO {
     	    @Param("theme_level") String theme_level,
     	    @Param("people") Integer people
     	);
+    
+    List<ThemeDTO> getThemesByRating();
+    List<ThemeDTO> getThemesByReviewCount();
+
 }
 

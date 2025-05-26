@@ -26,10 +26,11 @@ public class ThemeViewController {
     private final IThemeTypeDAO themeTypeDAO;
 
     @GetMapping("/list")
-    public String listThemes(  
-        @RequestParam(name = "branch_id", required = false) Integer branch_id,
-        @RequestParam(name = "type_id", required = false) Integer type_id,
-        @RequestParam(name = "theme_level", required = false) String theme_level,
+    public String listThemes(
+        @RequestParam(name = "sort", required = false) String sort,
+        @RequestParam(name = "branch_id", required = false) Integer branchId,
+        @RequestParam(name = "type_id", required = false) Integer typeId,
+        @RequestParam(name = "theme_level", required = false) String themeLevel,
         @RequestParam(name = "people", required = false) Integer people,
         @RequestParam(name = "id", required = false) Integer id,
         Model model
@@ -39,8 +40,16 @@ public class ThemeViewController {
         if (id != null) {
             ThemeDTO theme = themeDAO.selectById(id);
             themes = theme != null ? List.of(theme) : List.of();
+        } else if (branchId != null || typeId != null || themeLevel != null || people != null) {
+            // ✅ 필터 값이 하나라도 있으면 필터 우선 적용
+            themes = themeDAO.getFilteredThemes(branchId, typeId, themeLevel, people);
+        } else if ("rating".equals(sort)) {
+            themes = themeDAO.getThemesByRating();
+        } else if ("popular".equals(sort)) {
+            themes = themeDAO.getThemesByReviewCount();
         } else {
-            themes = themeDAO.getFilteredThemes(branch_id, type_id, theme_level, people);
+            // 아무것도 없으면 전체 목록
+            themes = themeDAO.selectAll();
         }
 
         model.addAttribute("themeList", themes);
@@ -50,9 +59,13 @@ public class ThemeViewController {
         return "user/theme/list";
     }
 
+
     @GetMapping("/detail")
     @ResponseBody
     public ThemeDTO themeDetail(@RequestParam("theme_id") int theme_id) {
         return themeDAO.selectById(theme_id);
     } 
+    
+    
+
 }
