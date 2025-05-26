@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.roomEscape.dao.IReviewDAO;
 import com.example.roomEscape.dto.MemberDTO;
@@ -63,18 +64,21 @@ public class ReviewController {
 	public String write_review(@RequestParam("title")String title,
 								@RequestParam("theme_id")String theme_id,
 								HttpSession session,
-							  Model model) {
+							  Model model,
+							  RedirectAttributes rttr) {
 		MemberDTO loginInfo = (MemberDTO)session.getAttribute("loginInfo");
 		
 		// 예약 내역이 있는지 확인 필요.
-		int check_result = reviewDao.check_reservation(loginInfo.getMember_id(),title);
+		int check_result = reviewDao.check_reservation(loginInfo.getMember_id(),title,theme_id);
 		// 있다면 리뷰 작성
-		if(check_result == 1 ) {
-			reviewDao.write_review();
+		if(check_result == 0 ) {
+			rttr.addFlashAttribute("error", "해당 테마를 예약한 이력이 없습니다.");
+			return "redirect:/user/res/userReservation";
 		}else {
-			
+			model.addAttribute("theme_id", theme_id);
+			model.addAttribute("title", title);
+			return "/user/board/review/write_review";
 		}
-		return "";
 	}
 	
 	

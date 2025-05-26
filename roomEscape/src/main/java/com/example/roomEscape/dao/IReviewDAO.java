@@ -20,6 +20,9 @@ public interface IReviewDAO {
 	//리뷰 작성하기
 	void write_review();
 	// 리뷰 작성이 가능한 사용자인지 예약 확인
-	int check_reservation(@Param("member_id")String member_id, @Param("title")String title);
+	int check_reservation(@Param("member_id")String member_id, 
+						  @Param("title")String title, 
+						  @Param("theme_id") String theme_id);
+					
 
 }
