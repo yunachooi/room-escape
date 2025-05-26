@@ -6,18 +6,12 @@
     <meta charset="UTF-8">
     <title>공지사항 & 이벤트</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <style>
-    
-    	h2{ font-size : 2rem ;text-align : center ; margin : 0 auto; margin-bottom : 80px;}
-    	#tabWrap{ width : 1200px; margin : 0 auto ; display : flex ; justify-content: space-evenly; margin-bottom : 40px;}
-        .tab { font-size : 2rem; display: inline-block; width : 360px; height : 40px; 
-        text-align : center ; line-height : 40px; padding: 10px 20px; cursor: pointer; border: 1px solid #ccc; color : #333; }
-        .tab.active, .tab:hover { background: orange; font-weight: bold; color : white; transition: all 0.3s ease; }
-        .tab-content { border: 1px solid #ccc; padding: 10px; display: none; }
-        .tab-content.active { display: block; }
-    </style>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/reset.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 </head>
-<body>
+<body class="notice-list">
+	<!-- header -->
+	<%@ include file="/WEB-INF/views/common/header.jsp" %>
 <div id="tabWrap">
     <div id="noticeDiv" class="tab active" data-tab="notice">공지사항</div>
     <div id="eventDiv" class="tab" data-tab="event">이벤트</div>
@@ -63,5 +57,7 @@
         $('#tabTitle').text("공지사항");
     });
 </script>
+	<!-- footer -->
+	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 </body>
 </html>
