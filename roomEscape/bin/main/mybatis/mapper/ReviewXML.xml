@@ -21,11 +21,12 @@
 	 </select>
 	 
 	<select id="check_reservation" resultType="int">
-		 SELECT COUNT(*) 
-		 FROM RESERVATION RES 
-		 JOIN THEME_SCHEDULE TS 
-		 ON RES.SCHEDULE_ID = TS.SCHEDULE_ID 
-		 WHERE RES.MEMBER_ID = #{member_id} AND TS.THEME_ID = 1; 
+		SELECT COUNT(*)
+		FROM RESERVATION R
+		JOIN THEME_SCHEDULE TS ON R.SCHEDULE_ID = TS.SCHEDULE_ID
+		JOIN THEME T ON TS.THEME_ID = T.THEME_ID
+		WHERE R.MEMBER_ID = #{member_id}
+	    AND T.THEME_ID = #{theme_id}
 	 </select>
 	 
 </mapper>
