@@ -17,4 +17,13 @@
 		FROM MEMBER 
 		WHERE MEMBER_ID = #{user.member_id} 
 	</select>
+	<update id="update_info">
+		UPDATE MEMBER 
+		SET password = #{user.password},
+			name = #{user.name},
+			phone = #{user.phone},
+			email = #{user.email}
+		WHERE MEMBER_ID = #{user.member_id}
+	</update>
+	
 </mapper>

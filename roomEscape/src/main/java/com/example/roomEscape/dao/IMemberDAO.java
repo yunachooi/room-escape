@@ -13,4 +13,6 @@ public interface IMemberDAO {
 	Object selectById(String member_id);
 	
 	MemberDTO show_info(@Param("user") MemberDTO loginInfo);
+
+	void update_info(@Param("user") MemberDTO member);
 }
