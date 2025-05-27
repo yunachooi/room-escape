@@ -371,3 +371,19 @@ VALUES (REVIEW_ID_SEQ.NEXTVAL, 1, '힌트가 너무 부족해서 진행이 어�
 INSERT INTO REVIEW (REVIEW_ID, RATING, CONTENT, REG_DATE, THEME_ID, MEMBER_ID, RESV_ID)
 VALUES (REVIEW_ID_SEQ.NEXTVAL, 4, '친구랑 가서 정말 재밌게 놀다 왔어요!', SYSDATE, 1, 'user01', 10);
 
+select * from FAQ ;
+select * from NOTICE; 
+select * from QNA_ANSWER ;
+select * from QNA ;
+select * from REVIEW ;
+select * from RESERVATION ;
+select * from THEME_SCHEDULE ;
+select * from THEME ;
+select * from TIME_SLOT ;
+select * from THEME_TYPE ;
+select * from BRANCH ;
+select * from MEMBER ;
+select * from EVENT;
+
+commit;
+
