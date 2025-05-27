@@ -25,9 +25,19 @@ public class ReviewController {
 	private IReviewDAO reviewDao;
 
 	@GetMapping("/show_review") 
-	public String show_review(Model model) {
-		List<ReviewDTO> review_list = reviewDao.getAll();
-		model.addAttribute("review_list", review_list);
+	public String show_review(@RequestParam(value="theme_id", required = false)String theme_id,
+			Model model) {
+		List<ReviewDTO> review_list;
+		if(theme_id != null && !theme_id.isEmpty()) {
+			review_list = reviewDao.get_review_by_theme_id(theme_id);
+			model.addAttribute("review_list", review_list);
+			model.addAttribute("theme_id", theme_id);
+			System.out.println("테스트중2 ..........."+theme_id);
+			
+		}else {
+			review_list = reviewDao.getAll();
+			model.addAttribute("review_list", review_list);
+		}
 		
 		return "/user/board/review/show_review_list";
 	}
@@ -36,28 +46,43 @@ public class ReviewController {
 	@ResponseBody
 	public List<ReviewDTO> show_review2() {
 		List<ReviewDTO> review_list = reviewDao.getAll();
-		System.out.println(review_list);
 		return review_list;
 	}
 	
 	// 필터 옵션에 맞춘 데이터 반환. 
 	@GetMapping("/show_review_option")
 	@ResponseBody
-	public List<ReviewDTO> show_review_option(@RequestParam("select_value")String select) {
-		
-		if(select.equals("별점높은순")) {
-			List<ReviewDTO> review = reviewDao.get_review_ratingDESC();
-			return review ;
+	public List<ReviewDTO> show_review_option(@RequestParam("select_value")String select,
+											  @RequestParam(value="theme_id", required = false)String theme_id) {
+		System.out.println("테스트중임: "+theme_id);
+		if(theme_id != null && !theme_id.isEmpty()) {
+			if(select.equals("별점높은순")) {
+				List<ReviewDTO> review = reviewDao.get_review_ratingDESC_theme_id(theme_id);
+				return review ;
+				
+			} else if(select.equals("별점낮은순")) {
+				List<ReviewDTO> review = reviewDao.get_review_rating_theme_id(theme_id);
+				return review ;
+				//최신순
+			} else  {
+				List<ReviewDTO> review = reviewDao.get_review_reg_date_theme_id(theme_id);
+				return review ;
+			} 
 			
-		} else if(select.equals("별점낮은순")) {
-			List<ReviewDTO> review = reviewDao.get_review_rating();
-			return review ;
-			//최신순
-		} else  {
-			List<ReviewDTO> review = reviewDao.get_review_reg_date();
-			return review ;
-			
-		} 
+		}else {
+			if(select.equals("별점높은순")) {
+				List<ReviewDTO> review = reviewDao.get_review_ratingDESC();
+				return review ;
+				
+			} else if(select.equals("별점낮은순")) {
+				List<ReviewDTO> review = reviewDao.get_review_rating();
+				return review ;
+				//최신순
+			} else  {
+				List<ReviewDTO> review = reviewDao.get_review_reg_date();
+				return review ;
+			} 
+		}
 	}
 	
 	@GetMapping("/write_review")// id 세션값으로 받기 

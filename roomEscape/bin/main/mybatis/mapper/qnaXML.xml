@@ -36,4 +36,20 @@
 	<delete id="delete_qna">
 		DELETE FROM QNA WHERE qna_id = #{qna.qna_id}
 	</delete>
+	
+	<select id="get_search_qna" resultType="com.example.roomEscape.dto.QnaDTO"> 
+		 SELECT * FROM QNA
+		  	<where>
+				<if test="type == 'title'">
+			      	title LIKE '%' || #{keyword} || '%'
+			    </if>
+			    <if test="type == 'content'">
+			     	 content LIKE '%' || #{keyword} || '%'
+			    </if>
+			    <if test="type == 'writer'">
+			     	 member_id LIKE '%' || #{keyword} || '%'
+			    </if>
+		 	 </where>
+	</select>
+	
 </mapper>
