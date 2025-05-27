@@ -24,7 +24,7 @@ public class ReviewController {
 	@Autowired
 	private IReviewDAO reviewDao;
 
-	@GetMapping("/show_review") // 테마에서 오는 해당 테마의 리뷰 보기 ,, 파라미터 받아줘야함
+	@GetMapping("/show_review") 
 	public String show_review(Model model) {
 		List<ReviewDTO> review_list = reviewDao.getAll();
 		model.addAttribute("review_list", review_list);
