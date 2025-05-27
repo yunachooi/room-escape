@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,15 +30,15 @@
 	    <table class="notice-table">
 	        <thead>
 	            <tr>
-	                <th>제목</th>
-	                <th>등록일</th>
+	                <th style="width: 75%;">제목</th>
+	                <th style="width: 25%;">등록일</th>
 	            </tr>
 	        </thead>
 	        <tbody>
 	            <c:forEach var="notice" items="${noticeList}">
 	                <tr>
-	                    <td><a href="${pageContext.request.contextPath}/user/notice/notice_detail?notice_id=${notice.noticeId}">${notice.title}</a></td>
-	                    <td>${notice.regDate}</td>
+	                    <td><a href="${pageContext.request.contextPath}/user/notice/notice_detail?notice_id=${notice.noticeId}">${notice.title}</a></td>	
+	                    <td><fmt:formatDate value="${notice.regDate}" pattern="yyyy-MM-dd" /></td>
 	                </tr>
 	            </c:forEach>
 	        </tbody>
@@ -50,15 +50,18 @@
 	    <table class="notice-table">
 	        <thead>
 	            <tr>
-	                <th>제목</th>
-	                <th>기간</th>
+	                <th style="width: 75%;">제목</th>
+	                <th style="width: 25%;">기간</th>
 	            </tr>
 	        </thead>
 	        <tbody>
 	            <c:forEach var="event" items="${eventList}">
 	                <tr>
 	                    <td><a href="${pageContext.request.contextPath}/user/notice/event_detail?event_id=${event.event_id}">${event.title}</a></td>
-	                    <td>${event.start_date} ~ ${event.end_date}</td>
+	                    <td class="date-col">
+						  <fmt:formatDate value="${event.start_date}" pattern="yyyy-MM-dd" /> ~
+						  <fmt:formatDate value="${event.end_date}" pattern="yyyy-MM-dd" />
+						</td>
 	                </tr>
 	            </c:forEach>
 	        </tbody>
@@ -73,9 +76,9 @@
     <table class="notice-table">
         <thead>
             <tr>	
-                <th>제목</th>
-                <th>작성일</th>
-                <th>답변상태</th>
+                <th style="width: 65%;">제목</th>
+                <th style="width: 25%;">작성일</th>
+                <th style="width: 10%;">답변상태</th>
             </tr>
         </thead>
         <tbody>
@@ -92,26 +95,74 @@
 
 <!-- 리뷰 -->
 <div id="review" class="tab-content">
-    <table class="notice-table">
-        <thead>
-            <tr>
-                <th>제목</th>
-                <th>작성자</th>
-                <th>작성일</th>
-            </tr>
-        </thead>
-        <tbody>
-            <c:forEach var="review" items="${reviewList}">
-                <tr>
-                    <td><a href="/user/notice/review_detail?review_id=${review.review_id}">${review.title}</a></td>
-                    <td>${review.writer}</td>
-                    <td>${review.reg_date}</td>
-                </tr>
-            </c:forEach>
-        </tbody>
+    <select id="review_option" onchange="changeOption(this)">
+      <option>전체 보기</option>
+      <option value="별점높은순">별점 높은순</option>
+      <option value="별점낮은순">별점 낮은순</option>
+      <option value="최신순">최신순</option>
+    </select>
+
+    <div id="review_option_list"></div>
+
+    <table id="initialReviewTable" class="review-table">
+      <thead>
+        <tr>
+          <th>평점</th>
+          <th>리뷰내용</th>
+          <th>작성일</th>
+          <th>테마</th>
+          <th>작성자</th>
+        </tr>
+      </thead>
+      <tbody>
+        <c:forEach var="review" items="${reviewList}">
+          <tr>
+            <td>${review.rating}</td>
+            <td>${review.content}</td>
+            <td>${review.reg_date}</td>
+            <td>${review.theme_id}</td>
+            <td>${review.member_id}</td>
+          </tr>
+        </c:forEach>
+      </tbody>
     </table>
 </div>
 	<script>
+	
+	function changeOption(selectElement) {
+	    const select_value = document.getElementById("review_option").value;
+	    const url = "/review/show_review_option?select_value=" + encodeURIComponent(select_value);
+
+	    fetch(url)
+	      .then(response => response.json())
+	      .then(data => {
+	        const reviewbox = document.getElementById("review_option_list");
+
+	        let html = '<table class="review-table">';
+	        html += '<thead><tr>';
+	        html += '<th>평점</th><th>리뷰내용</th><th>작성일</th><th>테마</th><th>작성자</th>';
+	        html += '</tr></thead><tbody>';
+
+	        data.forEach((review) => {
+	          html += `<tr>`;
+	          html += `<td>${review.rating}</td>`;
+	          html += `<td>${review.content}</td>`;
+	          html += `<td>${review.reg_date}</td>`;
+	          html += `<td>${review.theme_id}</td>`;
+	          html += `<td>${review.member_id}</td>`;
+	          html += `</tr>`;
+	        });
+
+	        html += '</tbody></table>';
+	        reviewbox.innerHTML = html;
+
+	        const originalTable = document.getElementById("initialReviewTable");
+	        if (originalTable) {
+	          originalTable.style.display = "none";
+	        }
+	      });
+	  }
+	
 	    $('.tab').click(function() {
 	        $('.tab').removeClass('active');
 	        $(this).addClass('active');
@@ -134,6 +185,59 @@
 	        // 페이지 로드 시 초기 제목 설정
 	        const initialTitle = $('.tab.active').text();
 	        $('#tabTitle').text("공지사항");
+	        
+	        $(document).ready(function () {
+	            const urlParams = new URLSearchParams(window.location.search);
+	            const tab = urlParams.get("tab");
+	            const themeId = urlParams.get("theme_id");
+
+	            if (tab) {
+	                $('.tab').removeClass('active');
+	                $('.tab-content').removeClass('active');
+
+	                const targetTab = $('#' + tab);
+	                const targetTabBtn = $('.tab[data-tab="' + tab + '"]');
+
+	                if (targetTab.length && targetTabBtn.length) {
+	                    targetTab.addClass('active');
+	                    targetTabBtn.addClass('active');
+	                    $('#tabTitle').text(targetTabBtn.text());
+	                }
+	            }
+
+	            if (tab === "review" && themeId) {
+	                // 테마 id로 필터링된 리뷰 불러오기
+	                fetch("/review/show_review_option?select_value=전체 보기&theme_id=" + encodeURIComponent(themeId))
+	                    .then(response => response.json())
+	                    .then(data => {
+	                        const reviewbox = document.getElementById("review_option_list");
+	                        const initialTable = document.getElementById("initialReviewTable");
+	                        if (initialTable) initialTable.style.display = "none";
+
+	                        let html = '<table class="review-table">';
+	                        html += '<thead><tr>';
+	                        html += '<th>평점</th><th>리뷰내용</th><th>작성일</th><th>테마</th><th>작성자</th>';
+	                        html += '</tr></thead><tbody>';
+
+	                        data.forEach((review) => {
+	                            html += `<tr>`;
+	                            html += `<td>${review.rating}</td>`;
+	                            html += `<td>${review.content}</td>`;
+	                            html += `<td>${review.reg_date}</td>`;
+	                            html += `<td>${review.theme_id}</td>`;
+	                            html += `<td>${review.member_id}</td>`;
+	                            html += `</tr>`;
+	                        });
+
+	                        html += '</tbody></table>';
+	                        reviewbox.innerHTML = html;
+	                    });
+	            }
+	        });
+
+	        
+	        
+	        
 	    });
 	</script>
 </div>

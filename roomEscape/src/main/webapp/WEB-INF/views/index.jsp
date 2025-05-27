@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
- <%@taglib prefix="r" uri="jakarta.tags.core" %>
+<%@taglib prefix="r" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,10 +9,8 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/index.css">
 <title>Room Escape</title>
-
 <!--임시스타일-->
 <style>
-
 form {
     background-color: #f9f9f9;
     border: 1px solid #ddd;
@@ -39,6 +37,7 @@ select, button {
 
         .theme-container {
             display: flex;
+            width : 1200px;
             flex-wrap: wrap;
             padding: 20px;
             justify-content: flex-start;
@@ -157,31 +156,35 @@ select, button {
 	            <img src="/images/themes/${theme.theme_id}.jpeg"
 				     alt="${theme.title}"
 				     onclick="showDetail(${theme.theme_id})"
-				     style="cursor: pointer;" />
+				 />
 	
 	            <div class="theme-title" style="color: black;">${theme.title}</div>
 	        </div>
 	    </c:forEach>
 	</div>
 
-	<!-- overlay -->
-	<div id="modalOverlay"></div>
+	<!-- 오버레이 -->	
+	<div id="modalOverlay" onclick="closeModal()"></div>
 	<!-- ✅ 모달창 -->
 	<div id="themeModal">
-	    <h3 id="modalTitle" style="color: black;"></h3>
-	    <p><b>설명:</b> <span id="modalDescription" ></span></p> 
-	    <p><b>유형:</b> <span id="modalType"></span></p>
-	    <p><b>난이도:</b> <span id="modalLevel"></span></p>
-	    <p><b>정원:</b> <span id="modalCapacity"></span></p>
-	    <p><b>소요시간:</b> <span id="modalDuration"></span>분</p>
-	    <p><b>지점:</b> <span id="modalBranch"></span></p>
-	
-	    <button id="reservationBtn">예약하기</button>
-	    <button onclick="closeModal()">닫기</button>
-	
-	    <input type="hidden" id="modalThemeId" />
+	    <div class="modal-header">
+	        <h3 id="modalTitle" style="font-weight:700;"></h3>
+	        <div class="modal-close" onclick="closeModal()">✖</div>
+	    </div>
+	    <div class="modal-body">
+	        <p><b>설명:</b> <span id="modalDescription"></span></p> 
+	        <p><b>유형:</b> <span id="modalType"></span></p>
+	        <p><b>난이도:</b> <span id="modalLevel"></span></p>
+	        <p><b>정원:</b> <span id="modalCapacity"></span></p>
+	        <p><b>소요시간:</b> <span id="modalDuration"></span>분</p>
+	        <p><b>지점:</b> <span id="modalBranch"></span></p>
+	        <input type="hidden" id="modalThemeId" />
+	        <input type="hidden" id="modalBranchId" />
+	        <div class="modal-buttons">
+	            <button id="reservationBtn">예약하기</button>
+	        </div>
+	    </div>
 	</div>
-	
 	
 	</div>
 	<!-- footer -->
@@ -194,36 +197,63 @@ select, button {
 		    header.classList.add('transparent');
 	
 		    window.addEventListener('scroll', function () {
-		      if (window.scrollY > 200) {
+		      if (window.scrollY > 100) {
 		        header.classList.remove('transparent');
 		      } else {
 		        header.classList.add('transparent');
 		      }
 		    });
+		    
+		    
+		    
+		    const reviewBtn = document.getElementById("goReviewBtn");
+
+		    if (reviewBtn) {
+		      reviewBtn.addEventListener("click", function () {
+		        const themeId = document.getElementById("modalThemeId").value;                
+		        location.href = "/user/notice/list?tab=review&theme_id=" + encodeURIComponent(themeId);
+		      });
+		    }
+		    
+		    
+		    const reserveBtn = document.getElementById("reservationBtn");
+
+	        if (reserveBtn) {
+	            reserveBtn.addEventListener("click", function () {
+	                const themeId = document.getElementById("modalThemeId").value;
+	                const isLoggedIn = "${not empty sessionScope.loginInfo}" === "true";
+
+	                if (!isLoggedIn) {
+	                    alert("로그인이 필요한 기능입니다.");
+	                    return; 
+	                }
+
+	                location.href = "/user/res/userReservation?theme_id=" + themeId;
+	            });
+	        }
+	        
 		  });
-		
-		
 		
 		function showDetail(themeId) {
 		    fetch('/user/theme/detail?theme_id=' + themeId)
 		        .then(res => res.json())
 		        .then(data => {
-		        	document.getElementById('modalTitle').textContent = data.title;
-	                document.getElementById('modalDescription').textContent = data.description;
-	                document.getElementById('modalType').textContent = data.type_name;
-	                document.getElementById('modalLevel').textContent = data.theme_level;
-	                document.getElementById('modalCapacity').textContent = data.capacity_min + " ~ " + data.capacity_max;
-	                document.getElementById('modalDuration').textContent = data.duration;
-	                document.getElementById('modalBranch').textContent = data.branch_name;
-	                document.getElementById('modalThemeId').value = themeId;
+		            document.getElementById('modalTitle').textContent = data.title;
+		            document.getElementById('modalDescription').textContent = data.description;
+		            document.getElementById('modalType').textContent = data.type_name;
+		            document.getElementById('modalLevel').textContent = data.theme_level;
+		            document.getElementById('modalCapacity').textContent = data.capacity_min + " ~ " + data.capacity_max;
+		            document.getElementById('modalDuration').textContent = data.duration;
+		            document.getElementById('modalBranch').textContent = data.branch_name;
+		            document.getElementById('modalThemeId').value = themeId;
 
-		            document.getElementById('themeModal').classList.add('active');
+		            document.getElementById('themeModal').style.display = 'block';
 		            document.getElementById('modalOverlay').classList.add('active');
 		        });
 		}
 
 		function closeModal() {
-		    document.getElementById('themeModal').classList.remove('active');
+		    document.getElementById('themeModal').style.display = 'none';
 		    document.getElementById('modalOverlay').classList.remove('active');
 		}
 
@@ -234,29 +264,5 @@ select, button {
 	        }
 	    });
 
-	    document.addEventListener("DOMContentLoaded", function () {
-	        const reviewBtn = document.getElementById("reviewWriteBtn");
-	        const reserveBtn = document.getElementById("reservationBtn");
-
-	        if (reviewBtn) {
-	            reviewBtn.addEventListener("click", function () {
-	                const themeId = document.getElementById("modalThemeId").value;
-	                const isLoggedIn = ${not empty sessionScope.loginInfo};
-	                if (isLoggedIn) {
-	                    location.href = "/user/board/review/show_review_list?themeId=" + themeId;
-	                } else {
-	                    alert("로그인이 필요한 기능입니다.");
-	                }
-	            });
-	        }
-
-	        if (reserveBtn) {
-	            reserveBtn.addEventListener("click", function () {
-	                const themeId = document.getElementById("modalThemeId").value;
-	                location.href = "/user/res/userReservation?theme_id=" + themeId;
-	            });
-	        }
-	    });
 	</script>
-
 </html>

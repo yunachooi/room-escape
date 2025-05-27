@@ -8,6 +8,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import java.text.SimpleDateFormat;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import com.example.roomEscape.dao.IEventDAO;
 import com.example.roomEscape.dao.INoticeDAO;
@@ -35,9 +40,32 @@ public class EventController {
     @GetMapping("/event_detail")
     public String eventDetail(@RequestParam("event_id") int id, Model model) {
         EventDTO event = eventDAO.selectById(id);
+
+        // 날짜 포맷터 준비
+        SimpleDateFormat fullFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        SimpleDateFormat dateOnlyFormatter = new SimpleDateFormat("yyyy-MM-dd");
+
+        String regDateFormatted = "";
+        String startDateFormatted = "";
+        String endDateFormatted = "";
+
+        if (event.getReg_date() != null) {
+            regDateFormatted = fullFormatter.format(event.getReg_date());
+        }
+        if (event.getStart_date() != null) {
+            startDateFormatted = dateOnlyFormatter.format(event.getStart_date());
+        }
+        if (event.getEnd_date() != null) {
+            endDateFormatted = dateOnlyFormatter.format(event.getEnd_date());
+        }
+
         model.addAttribute("event", event);
+        model.addAttribute("regDateFormatted", regDateFormatted);
+        model.addAttribute("startDateFormatted", startDateFormatted);
+        model.addAttribute("endDateFormatted", endDateFormatted);
         return "user/notice/event_detail";
     }
+
     
     // 공지사항 상세보기
     @GetMapping("/notice_detail")

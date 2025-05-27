@@ -17,9 +17,16 @@
 
 	</select>
 
-	<select id="selectById" resultType="com.example.roomEscape.dto.NoticeDTO">
-        SELECT * FROM NOTICE WHERE NOTICE_ID = #{notice_id}
-    </select>
+	<select id="selectById" resultType="com.example.roomEscape.dto.NoticeDTO" parameterType="int">
+	    SELECT 
+	        notice_id,
+	        title,
+	        content,
+	        reg_date,
+	        admin_id
+	    FROM notice
+	    WHERE notice_id = #{noticeId}
+	</select>
 
 	<insert id="insert">
 		INSERT INTO NOTICE (NOTICE_ID, TITLE, CONTENT, REG_DATE)

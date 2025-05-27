@@ -1,21 +1,45 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/reset.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
-    <title>공지사항 상세보기</title>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/notice-detail.css">
+	<title>공지사항 상세보기</title>
 </head>
 <body>
 	<!-- header -->
 	<%@ include file="/WEB-INF/views/common/header.jsp" %>
-    <h2>${notice.title}</h2>
-    <p><strong>등록일:</strong> ${notice.regDate}</p>
-    <hr>
-    <p>${notice.content}</p>
-    <br>
-    <a href="${pageContext.request.contextPath}/user/notice/list">목록으로</a>
-    <!-- footer -->
+	<div id="wrap">
+		<h2>공지사항 상세</h2>
+		<div class="notice-detail-container">
+			<table>
+				<thead>
+					<tr>
+						<th>-</th>
+						<th>-</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>제목</td>
+						<td>${notice.title}</td>
+					</tr>
+					<tr>
+						<td>등록일</td>
+						<td>${notice.regDate}</td>
+					</tr>
+					<tr>
+						<td>내용</td>
+						<td><div class="notice-content">${notice.content}</div></td>
+					</tr>
+				</tbody>
+			</table>
+			<a class="to-list" href="${pageContext.request.contextPath}/user/notice/list">목록으로</a>
+		</div>
+	</div>
+	<!-- footer -->
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 </body>
 </html>

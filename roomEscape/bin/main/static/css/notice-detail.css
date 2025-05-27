@@ -2,52 +2,41 @@
 
 /* 전체 배경과 중앙 정렬 */
 body {
-    background-color: #f7f7f7;
-    margin: 0;
-    padding: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding-top: 40px;
 }
-#wrap{
-	width : 1000px;
-	min-height : 100vh;
+
+#wrap {
+    width: 1000px;
+    min-height: 100vh;
 }
-/* 테이블 박스 */
-.faq-detail-container {
+
+/* 박스 */
+.notice-detail-container {
     width: 90%;
-    max-width: 800px;
+    max-width: 1000px;
+    margin:0 auto;
     background-color: white;
     padding: 40px 30px;
     border-radius: 12px;
-    box-shadow: 0 0 12px rgba(0, 0, 0, 0.05);
 }
 
-/* 테이블 헤더 */
+/* 제목 스타일 */
 h2 {
     text-align: center;
     color: orange;
     font-size: 2rem;
     font-weight: 700;
-    margin-bottom: 30px;
-}
-.to-list {
-	margin-top : 20px;
-	padding:10px;
-	
-}
-.to-list:hover {
-	color : blue;
-	text-decoration:underline;	
 }
 
-/* 테이블 기본 스타일 */
+/* 테이블 */
 table {
     width: 100%;
     border-collapse: collapse;
     font-size: 1rem;
-    margin-bottom : 20px;
+    margin-bottom: 20px;
 }
 
 thead th {
@@ -65,16 +54,31 @@ tbody td {
 tbody td:first-child {
     font-weight: bold;
     background-color: #f4f4f4;
-    width: 20%;
+    width: 40%;
     text-align: center;
 }
 
 tbody td:last-child {
-    width: 80%;
-
+    width: 60%;
 }
-tbody tr:last-child{
-	min-height :400px ;
+
+.notice-content {
+    min-height: 400px;
+    white-space: pre-wrap;
+    line-height: 1.6;
+}
+
+/* 버튼 스타일 */
+.to-list {
+    margin-top: 20px;
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+}
+
+.to-list:hover {
+    color: blue;
+    text-decoration: underline;
 }
 
 /* 반응형 대응 */
