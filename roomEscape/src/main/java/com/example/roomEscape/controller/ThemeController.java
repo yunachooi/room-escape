@@ -32,7 +32,7 @@ public class ThemeController {
     @GetMapping("/list")
     public String listThemes(Model model,HttpSession session,RedirectAttributes rttr) {
     	MemberDTO member = (MemberDTO)session.getAttribute("loginInfo");
-    	if(member == null || member.getRole() != "admin") {
+    	if(member == null || !"admin".equals(member.getRole())) {
     		rttr.addFlashAttribute("need_admin", "로그인이 필요한 서비스입니다.");
     		return "redirect:/user/to_login";
     	}
@@ -45,7 +45,7 @@ public class ThemeController {
     @GetMapping("/form")
     public String showForm(@RequestParam(value = "theme_id", required = false) Integer theme_id, Model model,HttpSession session,RedirectAttributes rttr) {
     	MemberDTO member = (MemberDTO)session.getAttribute("loginInfo");
-    	if(member == null || member.getRole() != "admin") {
+    	if(member == null || !"admin".equals(member.getRole())) {
     		rttr.addFlashAttribute("need_admin", "로그인이 필요한 서비스입니다.");
     		return "redirect:/user/to_login";
     	}
@@ -69,7 +69,7 @@ public class ThemeController {
     @PostMapping("/insert")
     public String insertTheme(@ModelAttribute ThemeDTO theme,HttpSession session,RedirectAttributes rttr) {
     	MemberDTO member = (MemberDTO)session.getAttribute("loginInfo");
-    	if(member == null || member.getRole() != "admin") {
+    	if(member == null || !"admin".equals(member.getRole())) {
     		rttr.addFlashAttribute("need_admin", "로그인이 필요한 서비스입니다.");
     		return "redirect:/user/to_login";
     	}
@@ -81,7 +81,7 @@ public class ThemeController {
     @PostMapping("/update")
     public String updateTheme(@ModelAttribute ThemeDTO theme,HttpSession session,RedirectAttributes rttr) {
     	MemberDTO member = (MemberDTO)session.getAttribute("loginInfo");
-    	if(member == null || member.getRole() != "admin") {
+    	if(member == null || !"admin".equals(member.getRole())) {
     		rttr.addFlashAttribute("need_admin", "로그인이 필요한 서비스입니다.");
     		return "redirect:/user/to_login";
     	}
@@ -93,7 +93,7 @@ public class ThemeController {
     @PostMapping("/delete")
     public String deleteTheme(@RequestParam("theme_id") int theme_id,HttpSession session,RedirectAttributes rttr) {
     	MemberDTO member = (MemberDTO)session.getAttribute("loginInfo");
-    	if(member == null || member.getRole() != "admin") {
+    	if(member == null || !"admin".equals(member.getRole())) {
     		rttr.addFlashAttribute("need_admin", "로그인이 필요한 서비스입니다.");
     		return "redirect:/user/to_login";
     	}

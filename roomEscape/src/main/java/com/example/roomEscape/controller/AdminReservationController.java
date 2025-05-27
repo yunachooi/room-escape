@@ -39,7 +39,7 @@ public class AdminReservationController {
 	@GetMapping("/reservation")
 	public String reservation(Model model,HttpSession session,RedirectAttributes rttr) {
 		MemberDTO member = (MemberDTO)session.getAttribute("loginInfo");
-    	if(member == null || member.getRole() != "admin") {
+    	if(member == null || !"admin".equals(member.getRole())) {
     		rttr.addFlashAttribute("need_admin", "로그인이 필요한 서비스입니다.");
     		return "redirect:/user/to_login";
     	}
@@ -54,7 +54,7 @@ public class AdminReservationController {
 	@PostMapping("/reservation")
 	public String findTheReservation(@RequestParam("NAME") String NAME, Model model,HttpSession session,RedirectAttributes rttr) {
 		MemberDTO member = (MemberDTO)session.getAttribute("loginInfo");
-    	if(member == null || member.getRole() != "admin") {
+    	if(member == null || !"admin".equals(member.getRole())) {
     		rttr.addFlashAttribute("need_admin", "로그인이 필요한 서비스입니다.");
     		return "redirect:/user/to_login";
     	}
@@ -70,7 +70,7 @@ public class AdminReservationController {
 	@GetMapping("/reservationChart")
 	public String reservationChartPage(Model model,HttpSession session,RedirectAttributes rttr) {
 		MemberDTO member = (MemberDTO)session.getAttribute("loginInfo");
-    	if(member == null || member.getRole() != "admin") {
+    	if(member == null || !"admin".equals(member.getRole())) {
     		rttr.addFlashAttribute("need_admin", "로그인이 필요한 서비스입니다.");
     		return "redirect:/user/to_login";
     	}

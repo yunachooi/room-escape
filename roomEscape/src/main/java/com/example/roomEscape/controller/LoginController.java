@@ -53,7 +53,8 @@ public class LoginController {
 			
 			if (encoder.matches(password, member.getPassword())) {
 				HttpSession session = request.getSession();
-				session.setAttribute("loginInfo", member);
+				session.setAttribute("loginInfo",member);
+				System.out.println("test 확인 중 어드민 확인 :"  + member.getRole());
 				return "redirect:/user/";
 			}
 		}
