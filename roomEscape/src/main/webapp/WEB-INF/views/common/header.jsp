@@ -18,7 +18,7 @@
     <div class="auth">
 	    <c:if test="${not empty sessionScope.loginInfo}">
 	    	<div class="auth-wrap">
-	    	<a href="${pageContext.request.contextPath}/user/login/user_info">마이페이지</a>
+	    	<a href="${pageContext.request.contextPath}/user_info/show_info">마이페이지</a>
 	    	|
 	        <a href="${pageContext.request.contextPath}/user/logout">로그아웃</a>
 	    	</div>
