@@ -13,14 +13,17 @@
 <body class="notice-list">
 	<!-- header -->
 	<%@ include file="/WEB-INF/views/common/header.jsp" %>
+	
 <div id="notice-list">
+
 	<div id="tabWrap">
 	    <div id="noticeDiv" class="tab active" data-tab="notice">공지사항</div>
+	    <div id="QnaDiv" class="tab" data-tab="qna">문의하기</div>
 	    <div id="eventDiv" class="tab" data-tab="event">이벤트</div>
 	</div>
 	
-	<h2 id="tabTitle">공지사항 / 이벤트 </h2>
-	
+		<h2 id="tabTitle">공지사항 / 이벤트 </h2>
+		
 	<!-- 공지사항 -->
 	<div id="notice" class="tab-content active">
 	    <table class="notice-table">
@@ -65,7 +68,6 @@
 	    $('.tab').click(function() {
 	        $('.tab').removeClass('active');
 	        $(this).addClass('active');
-	
 	        const tabId = $(this).data('tab');
 	        $('.tab-content').removeClass('active');
 	        $('#' + tabId).addClass('active');
