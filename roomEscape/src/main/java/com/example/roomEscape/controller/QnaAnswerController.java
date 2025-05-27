@@ -8,11 +8,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.roomEscape.dao.IQnaAnswerDAO;
 import com.example.roomEscape.dao.IQnaDAO;
+import com.example.roomEscape.dto.MemberDTO;
 import com.example.roomEscape.dto.QnaAnswerDTO;
 import com.example.roomEscape.dto.QnaDTO;
+
+import jakarta.servlet.http.HttpSession;
 
 
 @Controller
@@ -28,7 +32,12 @@ public class QnaAnswerController {
 	// QNA List에서 답변하기 버튼 누르면 해당 QNA 보여주기
 	@GetMapping("/show_qna_answer")
 	public String showqnaanswer(@RequestParam("qna_id")int qna_id,
-									Model model) {
+									Model model,HttpSession session,RedirectAttributes rttr) {
+		MemberDTO member = (MemberDTO)session.getAttribute("loginInfo");
+    	if(member == null || member.getRole() != "admin") {
+    		rttr.addFlashAttribute("need_admin", "로그인이 필요한 서비스입니다.");
+    		return "redirect:/user/to_login";
+    	}
 		QnaDTO qna = qnaDao.getOneNeedToAnswer(qna_id);
 		model.addAttribute("qna", qna);
 		return "/admin/board/qna_need_answer";
@@ -36,7 +45,12 @@ public class QnaAnswerController {
 	
 	@PostMapping("/upload_qna_answer")
 	public String uploadQnaAnswer(QnaAnswerDTO qna_answer,
-									Model model) {
+									Model model,HttpSession session,RedirectAttributes rttr) {
+		MemberDTO member = (MemberDTO)session.getAttribute("loginInfo");
+    	if(member == null || member.getRole() != "admin") {
+    		rttr.addFlashAttribute("need_admin", "로그인이 필요한 서비스입니다.");
+    		return "redirect:/user/to_login";
+    	}
 		qnaanswerDao.upload_answer(qna_answer); // 답변 DB 에 등록
 		qnaDao.update_is_answered(qna_answer.getQna_id()); // 답변 등록 후 is_answered 'Y'로 변경
 		return "redirect:/qna/show_qna";

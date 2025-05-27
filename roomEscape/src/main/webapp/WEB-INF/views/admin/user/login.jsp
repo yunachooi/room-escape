@@ -22,6 +22,12 @@
 		</script>
 	</c:if>
 	
+	<c:if test="${not empty need_admin}">
+		<script>
+			alert('${need_admin}');
+		</script>
+	</c:if>
+	
 	<form action="/user/login" method="POST">
 		ID:<input type="text" name="id" ><br>
 		PW: <input type="password" name="pw" >
