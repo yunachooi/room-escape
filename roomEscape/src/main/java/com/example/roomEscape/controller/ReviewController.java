@@ -63,6 +63,7 @@ public class ReviewController {
 	@GetMapping("/write_review")// id 세션값으로 받기 
 	public String write_review(@RequestParam("title")String title,
 								@RequestParam("theme_id")String theme_id,
+								@RequestParam("resv_id")String resv_id,
 								HttpSession session,
 							  Model model,
 							  RedirectAttributes rttr) {
@@ -82,7 +83,13 @@ public class ReviewController {
 	}
 	
 	
-	
+	@GetMapping("/insert_review")
+	public String insert_review(ReviewDTO review) {
+		System.out.println(review);
+		reviewDao.insert_review(review);
+		
+		return "redirect:/user/res/reservationStatus";
+	}
 	
 	
 }

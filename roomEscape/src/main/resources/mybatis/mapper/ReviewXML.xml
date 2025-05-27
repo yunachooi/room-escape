@@ -29,4 +29,15 @@
 	    AND T.THEME_ID = #{theme_id}
 	 </select>
 	 
+	 <insert id="insert_review">
+	 	INSERT INTO REVIEW VALUES(REVIEW_ID_SEQ.NEXTVAL,
+	 							#{review.rating},
+	 							#{review.content},
+	 							SYSDATE,
+	 							#{review.theme_id},
+	 							#{review.member_id},
+	 							#{review.resv_id}
+	 							)
+	 </insert>
+	 
 </mapper>
