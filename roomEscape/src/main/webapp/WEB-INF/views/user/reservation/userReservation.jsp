@@ -12,9 +12,14 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/reset.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
     <title>예약하기</title>
 </head>
 <body>
+	<!-- header -->
+	<%@ include file="/WEB-INF/views/common/header.jsp" %>
+
     <div class="reservation-container">
         <h2>예약하기</h2>
         <button type="button" onclick="realTimeReservation()">실시간예약</button>
@@ -85,5 +90,8 @@
             location.href = "/user/res/reservationStatus";
         }
     </script>
+    
+   	<!-- footer -->
+	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 </body>
 </html>

@@ -4,12 +4,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/reset.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css">
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
-	<h1>Login Page</h1>
-	<hr>
+<body class="index">
 	
 	<c:if test="${login_error1 }">
 		<script>
@@ -21,11 +22,13 @@
 			alert("ID 혹은 PW가 틀립니다.");
 		</script>
 	</c:if>
-	
-	<form action="/user/login" method="POST">
-		ID:<input type="text" name="id" ><br>
-		PW: <input type="password" name="pw" >
-		<input type="submit" value="로그인">
-	</form>
+	<div id="formWrap">
+		<img id="logo" src="/images/compoment/logo.png" alt="logo">
+		<form action="/user/login" method="POST">
+			ID:<input type="text" name="id" ><br>
+			PW: <input type="password" name="pw">
+			<input type="submit" value="로그인">
+		</form>
+	</div>	
 </body>
 </html>

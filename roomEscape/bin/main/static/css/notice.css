@@ -18,6 +18,9 @@ body {
 	min-height : 1080px;
 }
 
+#titleWrap{
+	margin-top:80px;
+}
 #tabTitle {
     font-size: 2rem;
     text-align: center;
@@ -27,7 +30,7 @@ body {
 #tabWrap {
     width: 100%;
     max-width: 1200px;
-    margin: 0 auto 40px;
+    margin: 160px auto 40px;
     display: flex;
     justify-content: space-evenly;
 }

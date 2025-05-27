@@ -51,31 +51,41 @@
 			    });
         });
 	</script>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/reset.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/regist.css">
     <title>회원가입 페이지</title>
 </head>
 <body>
     <h2>회원가입</h2>
     <form id="registForm" action="/user/regist" method="post" onsubmit="return validateForm();">
-    <h3>필수 항목</h3>
-        아이디: <input type="text" name="member_id" id="member_id" placeholder="중복 확인을 눌러주세요">
-        <button type="button" onclick="checkDuplicateId()" >중복 확인</button><span id="id_check" hidden></span><br> 
-		비밀번호: <input type="password" id="password" name="password" placeholder="영문, 숫자, 기호 포함 8자 이상"><br>
-		비밀번호 확인: <input type="password" id="password_check" name="password_check" placeholder="한번 더 입력해주세요"><span id="pw_match_msg"></span><br>
-        이름: <input type="text" name="name"><br>
-        전화번호: <input type="text" name="phone" id="phone" maxlength="13" placeholder="-를 빼고 숫자만 입력하세요"><br>
+    <h3 class="sub-title">필수 항목</h3>
+        아이디
+		<input type="text" name="member_id" id="member_id" placeholder="중복 확인을 눌러주세요">
+		
+		<div class="id-row">
+		    <button type="button" onclick="checkDuplicateId()">중복 확인</button>
+		    <span id="id_check" hidden></span>
+		</div><br> 
+		비밀번호 <input type="password" id="password" name="password" placeholder="영문, 숫자, 기호 포함 8자 이상"><br>
+		비밀번호 확인 <input type="password" id="password_check" name="password_check" placeholder="한번 더 입력해주세요"><span id="pw_match_msg"></span><br>
+        이름 <input type="text" name="name"><br>
+        전화번호 <input type="text" name="phone" id="phone" maxlength="13" placeholder="-를 빼고 숫자만 입력하세요"><br>
         
-        <h3>선택 항목</h3>
-		이메일: 
-		<input type="text" id="email_id" placeholder="example">
-		@
-		<input type="text" id="email_domain" name="email" placeholder="domain.com">
-		<select id="domain_select">
-		    <option value="">직접 입력</option>
-		    <option value="naver.com">naver.com</option>
-		    <option value="gmail.com">gmail.com</option>
-		    <option value="daum.net">daum.net</option>
-		</select><br>
-        <button type="submit">가입하기</button>
+        <h3 class="sub-title">선택 항목</h3>
+			이메일:
+        <div class="email-row">
+			<input type="text" id="email_id" placeholder="example">
+			@
+			<input type="text" id="email_domain" name="email" placeholder="domain.com">
+			<select id="domain_select">
+			    <option value="">직접 입력</option>
+			    <option value="naver.com">naver.com</option>
+			    <option value="gmail.com">gmail.com</option>
+			    <option value="daum.net">daum.net</option>
+			</select><br>
+        </div>
+	        <button type="submit">가입하기</button>
     </form>
     <script>
 	    //아이디 중복검사

@@ -1,0 +1,133 @@
+@charset "UTF-8";
+
+/* 전체 레이아웃 정렬 */
+body {
+    background-color: #f7f7f7;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 40px;
+}
+
+/* 제목 */
+h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+/* 소제목 */
+h3 {
+    margin-top: 30px;
+    margin-bottom: 10px;
+    color: #333;
+    padding-bottom: 5px;
+    width: 100%;
+    max-width: 500px;
+}
+
+/* 폼 */
+form {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    width: 90%;
+    max-width: 500px;
+}
+
+/* 입력 필드 */
+input[type="text"],
+input[type="password"],
+select {
+    width: calc(100% - 10px);
+    padding: 10px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+
+/* 이메일 한 줄 정렬 */
+.email-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap; 
+    margin: 8px 0;
+}
+
+.id-row {
+    display: flex;
+    align-items: center;
+    line-height: 20px;
+    gap: 10px;
+    margin-top: 4px;
+}
+
+#id_check {
+    font-size: 0.9rem;
+}
+
+#email_id {
+    flex: 1;
+}
+
+#email_domain {
+    flex: 1;
+}
+
+#domain_select {
+    width: 140px;
+}
+
+/* 버튼 */
+button,
+input[type="submit"] {
+    background-color: orange;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+button:hover,
+input[type="submit"]:hover {
+    background-color: darkorange;
+}
+
+/* 안내 메시지 */
+#id_check,
+#pw_match_msg {
+    margin-left: 10px;
+    font-size: 0.9rem;
+}
+
+/* 반응형 */
+@media (max-width: 480px) {
+    input#email_id,
+    input#email_domain,
+    select#domain_select {
+        width: 100%;
+        display: block;
+        margin-bottom: 8px;
+    }
+
+    form {
+        padding: 20px;
+    }
+}
+
+.sub-title, h2{
+	text-align : center;
+	color :orange;
+	font-size : 40px;
+	font-weight : 700 ;
+	
+	
+}

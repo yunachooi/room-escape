@@ -2,6 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/reset.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
     <title>테마 목록</title>
     <style>
         .theme-container {
@@ -46,7 +48,8 @@
     </style>
 </head>
 <body>
-
+<!-- header -->
+<%@ include file="/WEB-INF/views/common/header.jsp" %>
 <h2>테마 목록</h2>
 
 <!-- ✅ 로그인 여부 전달용 hidden 값 -->
@@ -218,6 +221,7 @@
 
 	});
 </script>
-
+	<!-- footer -->
+	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 </body>
 </html>

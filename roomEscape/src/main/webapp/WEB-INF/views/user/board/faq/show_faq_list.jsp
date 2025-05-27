@@ -5,12 +5,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/reset.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+<title>FAQ</title>
 </head>
 <body>
-	<h1>FAQ Show List Page</h1>
-	<hr>
-	<table border="1">
+	<!-- header -->
+	<%@ include file="/WEB-INF/views/common/header.jsp" %>
+	
+	<h2>자주 묻는 질문</h2>
+	<table>
 		<thead>
 			<tr>
 				<th>번호</th>
@@ -28,5 +32,8 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	
+	<!-- footer -->
+	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 </body>
 </html>
