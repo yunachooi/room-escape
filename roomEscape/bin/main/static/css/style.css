@@ -65,6 +65,14 @@ body:not(.index) {
   margin-top: -30px; /* 높이 보정 */
 }
 
+.auth-wrap{
+	position :relative;
+  	top:-15px;
+}
+.auth span{
+	color : blue;
+	font-weight : 500;
+}
 /* 기본 상태는 검정색 (스크롤 후 상태) */
 .auth a {
   color: #333;
