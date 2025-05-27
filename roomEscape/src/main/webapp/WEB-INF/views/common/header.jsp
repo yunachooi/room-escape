@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <header id="mainHeader">
   <nav class="nav-container">
   <div class="main-nav">
@@ -16,7 +16,14 @@
 	    </ul>
   </div>
     <div class="auth">
-      <a href="/user/to_login">로그인</a>  |  <a href="/user/regist">회원가입</a>
-    </div>
+	    <c:if test="${not empty sessionScope.loginInfo}">
+	        <span>${sessionScope.loginInfo.name}님 환영합니다.</span> | 
+	        <a href="${pageContext.request.contextPath}/user/logout">로그아웃</a>
+	    </c:if>
+	    <c:if test="${empty sessionScope.loginInfo}">
+	        <a href="${pageContext.request.contextPath}/user/to_login">로그인</a> |
+	        <a href="${pageContext.request.contextPath}/user/regist">회원가입</a>
+	    </c:if>
+	</div>
   </nav>
 </header>

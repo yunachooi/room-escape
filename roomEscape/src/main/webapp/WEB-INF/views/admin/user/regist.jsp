@@ -56,7 +56,7 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/regist.css">
     <title>회원가입 페이지</title>
 </head>
-<body>
+<body class="index">
     <h2>회원가입</h2>
     <form id="registForm" action="/user/regist" method="post" onsubmit="return validateForm();">
     <h3 class="sub-title">필수 항목</h3>
@@ -73,7 +73,7 @@
         전화번호 <input type="text" name="phone" id="phone" maxlength="13" placeholder="-를 빼고 숫자만 입력하세요"><br>
         
         <h3 class="sub-title">선택 항목</h3>
-			이메일:
+			이메일
         <div class="email-row">
 			<input type="text" id="email_id" placeholder="example">
 			@
@@ -85,7 +85,7 @@
 			    <option value="daum.net">daum.net</option>
 			</select><br>
         </div>
-	        <button type="submit">가입하기</button>
+	        <button type="submit" class="btn-submit-large">가입하기</button>
     </form>
     <script>
 	    //아이디 중복검사

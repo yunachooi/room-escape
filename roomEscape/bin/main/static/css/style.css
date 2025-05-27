@@ -72,7 +72,7 @@ body:not(.index) {
 }
 
 .auth a:hover {
-  color: orange;
+   color: orange!important;
 }
 
 /* 헤더가 투명할 때 글자색 흰색 */
