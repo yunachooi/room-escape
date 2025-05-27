@@ -22,6 +22,11 @@
 			alert("ID 혹은 PW가 틀립니다.");
 		</script>
 	</c:if>
+	<c:if test="${update_info_fail }">
+		<script>
+			alert("정보 수정에 실패했습니다.");
+		</script>
+	</c:if>
 	<div id="formWrap">
     <img id="logo" src="/images/compoment/logo.png" alt="logo">
     <form action="/user/login" method="POST">
