@@ -12,7 +12,7 @@
 </head>
 <body class="index">
 	
-	<c:if test="${login_error1 }">
+	<c:if test="${login_error1}">
 		<script>
 			alert("ID 와 PW 모두 입력해주세요. ");
 		</script>

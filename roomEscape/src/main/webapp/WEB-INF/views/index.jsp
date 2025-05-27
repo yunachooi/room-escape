@@ -85,7 +85,7 @@ select, button {
 	  </div>
 	
 	<!-- 검색 영역 -->
-
+<div class="theme-search">
 	
 	<!-- ✅ 필터 검색폼 유지 -->
 	
@@ -161,15 +161,11 @@ select, button {
 
     <input type="hidden" id="modalThemeId" />
 </div>
-	<Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br>
-    
-	<div class="theme-search">
+	
 	
 	</div>
 	<!-- footer -->
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
-	
-    <a href="/faq/to_write_faq">Aasdsadasd</a>
 </body>
 
 	<script>

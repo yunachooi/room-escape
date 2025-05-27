@@ -1,0 +1,108 @@
+@charset "UTF-8";
+
+/* 전체 레이아웃 정렬 */
+body {
+    background-color: #f7f7f7;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 40px;
+    font-family: 'Arial', sans-serif;
+}
+
+#faqWrap{
+	min-height : 100vh;
+	width : 1000px;
+}
+
+/* 컨테이너 */
+.faq-container {
+    width: 90%;
+    max-width: 1000px;
+    background-color: #ffffff;
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.05);
+}
+
+/* 제목 */
+h2 {
+    font-size: 2rem;
+    text-align: center;
+    color: orange;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
+/* 테이블 스타일 */
+table {
+    width: 100%;
+    border : 1px solid #EEE;
+    border-collapse: collapse;
+    font-size: 1rem;
+    margin-top: 20px;
+}
+
+thead th {
+    background-color: orange;
+    color: white;
+    padding: 12px;
+    text-align: center;
+}
+
+tbody td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+tbody tr:hover {
+    background-color: #f9f9f9;
+}
+
+/* 링크 스타일 */
+a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+a:hover {
+    color: darkorange;
+}
+
+/* 반응형 */
+@media (max-width: 600px) {
+    .faq-container {
+        padding: 20px 15px;
+    }
+
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+
+    thead tr {
+        display: none;
+    }
+
+    tbody td {
+        text-align: left;
+        position: relative;
+        padding-left: 50%;
+        border-bottom: 1px solid #ccc;
+    }
+
+    tbody td::before {
+        position: absolute;
+        left: 10px;
+        top: 12px;
+        white-space: nowrap;
+        font-weight: bold;
+    }
+
+    tbody td:nth-child(1)::before { content: "번호"; }
+    tbody td:nth-child(2)::before { content: "제목"; }
+    tbody td:nth-child(3)::before { content: "작성자"; }
+}
