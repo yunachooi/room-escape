@@ -1,108 +1,139 @@
 @charset "UTF-8";
 
-
-/* 기본 스타일 재정의 (reset.css로 인해 사라진 여백, 폰트 등) */
-body {
-    font-size: 16px;
-    line-height: 1.5;
-    color: #333;
-    background-color: #fff;
-    margin: 0;
-    padding: 0;
+/* 전체 컨테이너 */
+#notice-list {
+    width: 90%;
+    max-width: 1000px;
+    min-height : 980px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    background-color: white;
+    border-radius: 10px;
 }
 
-
-
-/* notice-list */
-#notice-list{
-	min-height : 1080px;
-}
-
-#titleWrap{
-	margin-top:80px;
-}
+/* 제목 */
 #tabTitle {
     font-size: 2rem;
     text-align: center;
-    margin: 0 auto 80px;
-}
-
-#tabWrap {
-    width: 100%;
-    max-width: 1200px;
-    margin: 160px auto 40px;
-    display: flex;
-    justify-content: space-evenly;
-}
-
-.notice-list .tab {
-    font-size: 1.25rem;
-    width: 240px;
-    height: 60px;
-    text-align: center;
-    line-height: 60px;
-    cursor: pointer;
-    border: 1px solid #ccc;
-    color: #333;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-}
-
-.notice-list .tab.active,
-.notice-list .tab:hover {
-    background: orange;
+    margin-bottom: 30px;
+    color: orange;
     font-weight: bold;
+}
+
+/* 탭 영역 */
+#tabWrap {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.tab {
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    background-color: white;
+    transition: background-color 0.3s;
+}
+
+.tab.active,
+.tab:hover {
+    background-color: orange;
     color: white;
 }
-
-.notice-list .tab-content {
-    max-width: 1000px;
-    margin: 0 auto;
+.qna-header {
+	display : flex;
+	justify-content : space-between;
+}
+/* 콘텐츠 영역 */
+.tab-content {
     display: none;
-    background-color: #fff;
-    border-radius: 4px;
 }
 
-.notice-list .tab-content.active {
+.tab-content.active {
     display: block;
 }
-
-.notice-list .tab-content p {
-    font-size: 1rem;
-    margin: 10px 0;
-}
-
 
 /* 공통 테이블 스타일 */
 .notice-table {
     width: 100%;
-    max-width: 1000px;
-    margin: 0 auto;
+    border: 1px solid #eee;
     border-collapse: collapse;
     font-size: 1rem;
+    margin-top: 20px;
 }
 
-.notice-table thead {
-    background-color: #f0f0f0;
+.notice-table th {
+    background-color: orange;
+    color: white;
+    padding: 12px;
+    text-align: center;
 }
 
-.notice-table th, .notice-table td {
-    padding: 12px 16px;
-    border: 1px solid #ddd;
-    text-align: left;
+.notice-table td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
 }
 
 .notice-table tr:hover {
-    background-color: #fff3e0;
+    background-color: #f9f9f9;
 }
 
-.notice-table a {
+/* 링크 스타일 */
+a {
+    text-decoration: none;
     color: #333;
-    font-weight: 500;
+    font-weight: bold;
 }
 
-.notice-table a:hover {
-    text-decoration: underline;
-    color: orange;
+a:hover {
+    color: darkorange;
+}
+
+/* 반응형 */
+@media (max-width: 600px) {
+    #tabWrap {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .tab {
+        width: 80%;
+        text-align: center;
+    }
+
+    .notice-table,
+    .notice-table thead,
+    .notice-table tbody,
+    .notice-table th,
+    .notice-table td,
+    .notice-table tr {
+        display: block;
+    }
+
+    .notice-table thead tr {
+        display: none;
+    }
+
+    .notice-table td {
+        text-align: left;
+        position: relative;
+        padding-left: 50%;
+        border-bottom: 1px solid #ccc;
+    }
+
+    .notice-table td::before {
+        position: absolute;
+        left: 10px;
+        top: 12px;
+        white-space: nowrap;
+        font-weight: bold;
+    }
+
+    .notice-table td:nth-child(1)::before { content: "제목"; }
+    .notice-table td:nth-child(2)::before { content: "등록일"; }
+    .notice-table td:nth-child(3)::before { content: "기타"; }
 }

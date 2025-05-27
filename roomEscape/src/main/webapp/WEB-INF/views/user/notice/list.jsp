@@ -16,13 +16,14 @@
 	
 <div id="notice-list">
 
+		<h2 id="tabTitle"></h2>
 	<div id="tabWrap">
 	    <div id="noticeDiv" class="tab active" data-tab="notice">공지사항</div>
 	    <div id="QnaDiv" class="tab" data-tab="qna">문의하기</div>
 	    <div id="eventDiv" class="tab" data-tab="event">이벤트</div>
+	    <div id="QnaDiv" class="tab" data-tab="review">리뷰</div>
 	</div>
 	
-		<h2 id="tabTitle">공지사항 / 이벤트 </h2>
 		
 	<!-- 공지사항 -->
 	<div id="notice" class="tab-content active">
@@ -63,7 +64,53 @@
 	        </tbody>
 	    </table>
 	</div>
-	
+	<!-- QnA -->
+<div id="qna" class="tab-content">
+	<div class="qna-header">
+        <h3>궁금한 점이 있다면 문의해주세요!</h3>
+        <a href="${pageContext.request.contextPath}/qna/to_write_qna_user" class="qna-btn">+ 문의하기</a>
+    </div>
+    <table class="notice-table">
+        <thead>
+            <tr>	
+                <th>제목</th>
+                <th>작성일</th>
+                <th>답변상태</th>
+            </tr>
+        </thead>
+        <tbody>
+            <c:forEach var="qna" items="${qnaList}">
+                <tr>
+                    <td><a href="/user/notice/qna_detail?qna_id=${qna.qna_id}">${qna.title}</a></td>
+                    <td>${qna.reg_date}</td>
+                    <td>${qna.is_answered ? '답변완료' : '미답변'}</td>
+                </tr>
+            </c:forEach>
+        </tbody>
+    </table>
+</div>
+
+<!-- 리뷰 -->
+<div id="review" class="tab-content">
+    <table class="notice-table">
+        <thead>
+            <tr>
+                <th>제목</th>
+                <th>작성자</th>
+                <th>작성일</th>
+            </tr>
+        </thead>
+        <tbody>
+            <c:forEach var="review" items="${reviewList}">
+                <tr>
+                    <td><a href="/user/notice/review_detail?review_id=${review.review_id}">${review.title}</a></td>
+                    <td>${review.writer}</td>
+                    <td>${review.reg_date}</td>
+                </tr>
+            </c:forEach>
+        </tbody>
+    </table>
+</div>
 	<script>
 	    $('.tab').click(function() {
 	        $('.tab').removeClass('active');
