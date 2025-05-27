@@ -14,7 +14,7 @@
 	
 	<c:if test="${login_error1 }">
 		<script>
-			alert("ID 와 PW 모두 입력해주세요.");
+			alert("ID 와 PW 모두 입력해주세요. ");
 		</script>
 	</c:if>
 	<c:if test="${login_error2 }">
@@ -22,21 +22,22 @@
 			alert("ID 혹은 PW가 틀립니다.");
 		</script>
 	</c:if>
-
 	<div id="formWrap">
-		<img id="logo" src="/images/compoment/logo.png" alt="logo">
-		<form action="/user/login" method="POST">
-			ID:<input type="text" name="id" ><br>
-			PW: <input type="password" name="pw">
-			<input type="submit" value="로그인">
-		</form>
-	</div>	
-	
-	<c:if test="${not empty need_admin}">
-		<script>
-			alert('${need_admin}');
-		</script>
-	</c:if>
+    <img id="logo" src="/images/compoment/logo.png" alt="logo">
+    <form action="/user/login" method="POST">
+        ID<input type="text" name="id"><br>
+        PW<input type="password" name="pw"><br>
 
+        <div class="form-actions">
+            <div class="submit-wrap">
+	            <input type="submit" value="로그인">
+	        </div>
+            <div class="signup-area">
+                <p>아이디가 없으세요?</p>
+                <a href="/user/regist" class="btn-link">회원가입</a>
+            </div>
+        </div>
+    </form>
+</div>
 </body>
 </html>

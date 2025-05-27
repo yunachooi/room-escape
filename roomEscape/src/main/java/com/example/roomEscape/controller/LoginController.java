@@ -61,4 +61,10 @@ public class LoginController {
 		rttr.addFlashAttribute("login_error2", true);
 		return "redirect:/user/admin/user/to_login";
 	}
+	
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+	    session.invalidate(); 
+	    return "redirect:/user/"; 
+	}
 }
