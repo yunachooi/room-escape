@@ -35,9 +35,9 @@
 			<tr>
 				<td>작성자</td>
 				<td>
-					<input type="text" name="member_id" value="${loginInfo.member_id }" readonly>
-					<input type="hidden" name="theme_id" value="${theme_id }">
-					<input type="hidden" name="resv_id" value="${resv_id }">
+					<input type="text" name="member_id" value="${loginInfo.member_id}" readonly>
+					<input type="hidden" name="theme_id" value="${theme_id}">
+					<input type="hidden" name="resv_id" value="${resv_id}">
 				</td>
 			</tr>
 			<tr>

@@ -78,16 +78,17 @@ public class ReviewController {
 		}else {
 			model.addAttribute("theme_id", theme_id);
 			model.addAttribute("title", title);
+			model.addAttribute("resv_id", resv_id);
 			return "/user/board/review/write_review";
 		}
 	}
 	
 	
 	@GetMapping("/insert_review")
-	public String insert_review(ReviewDTO review) {
-		System.out.println(review);
+	public String insert_review(ReviewDTO review,
+								Model model) {
+		System.out.println("review" + review);
 		reviewDao.insert_review(review);
-		
 		return "redirect:/user/res/reservationStatus";
 	}
 	
