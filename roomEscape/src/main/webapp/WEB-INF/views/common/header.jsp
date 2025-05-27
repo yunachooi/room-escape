@@ -17,11 +17,16 @@
   </div>
     <div class="auth">
 	    <c:if test="${not empty sessionScope.loginInfo}">
-	        <span>${sessionScope.loginInfo.name}님 환영합니다.</span> | 
+	    	<div class="auth-wrap">
+	    	<a href="${pageContext.request.contextPath}/user/login/user_info">마이페이지</a>
+	    	|
 	        <a href="${pageContext.request.contextPath}/user/logout">로그아웃</a>
+	    	</div>
+	        <span>[ ${sessionScope.loginInfo.name} ] 님 환영합니다.</span>
 	    </c:if>
 	    <c:if test="${empty sessionScope.loginInfo}">
-	        <a href="${pageContext.request.contextPath}/user/to_login">로그인</a> |
+	        <a href="${pageContext.request.contextPath}/user/to_login">로그인</a> 
+	        |
 	        <a href="${pageContext.request.contextPath}/user/regist">회원가입</a>
 	    </c:if>
 	</div>
