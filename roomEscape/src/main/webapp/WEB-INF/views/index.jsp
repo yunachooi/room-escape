@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/reset.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/index.css">
 <title>Room Escape</title>
 
 <!--임시스타일-->
@@ -84,6 +85,7 @@ select, button {
 	  </div>
 	
 	<!-- 검색 영역 -->
+
 	
 	<!-- ✅ 필터 검색폼 유지 -->
 	
@@ -128,8 +130,7 @@ select, button {
 
     <button type="submit">검색</button>
 </form>
-	
-	
+  
 	<div class="theme-container">
     <c:forEach var="theme" items="${themeList}">
         <div class="theme-card">
@@ -161,7 +162,11 @@ select, button {
     <input type="hidden" id="modalThemeId" />
 </div>
 	<Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br>
+    
+	<div class="theme-search">
 	
+	</div>
+    
 	<!-- footer -->
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 	
