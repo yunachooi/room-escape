@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/reset.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/index.css">
 <title>Room Escape</title>
 </head>
 <body class="index">
@@ -25,9 +26,11 @@
 	  </div>
 	
 	<!-- 검색 영역 -->
-
-	<Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br>
-
+	<div class="theme-search">
+	
+	</div>
+	
+	
 	<!-- footer -->
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 	
