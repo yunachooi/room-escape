@@ -6,7 +6,7 @@
     지점 선택:
     <label><input type="radio" name="branch" value="강남" checked> 강남</label>
     <label><input type="radio" name="branch" value="홍대"> 홍대</label>
-    <label><input type="radio" name="branch" value="종로"> 종로</label>
+    <label><input type="radio" name="branch" value="잠실"> 잠실</label>
   </p>
   <p>
     종류:
