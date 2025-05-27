@@ -30,7 +30,7 @@ public class NoticeController {
     @GetMapping("/list")
     public String list(@RequestParam(name = "page", defaultValue = "1") int page, Model model,HttpSession session,RedirectAttributes rttr) {
     	MemberDTO member = (MemberDTO)session.getAttribute("loginInfo");
-    	if(member == null || member.getRole() != "admin") {
+    	if(member == null || !"admin".equals(member.getRole())) {
     		rttr.addFlashAttribute("need_admin", "로그인이 필요한 서비스입니다.");
     		return "redirect:/user/to_login";
     	}
@@ -53,7 +53,7 @@ public class NoticeController {
     @GetMapping("/form")
     public String form(HttpSession session,RedirectAttributes rttr) {
     	MemberDTO member = (MemberDTO)session.getAttribute("loginInfo");
-    	if(member == null || member.getRole() != "admin") {
+    	if(member == null || !"admin".equals(member.getRole())) {
     		rttr.addFlashAttribute("need_admin", "로그인이 필요한 서비스입니다.");
     		return "redirect:/user/to_login";
     	}
@@ -67,7 +67,7 @@ public class NoticeController {
 			             @RequestParam("content") String content,
 			             HttpSession session,RedirectAttributes rttr) {
     	MemberDTO member = (MemberDTO)session.getAttribute("loginInfo");
-    	if(member == null || member.getRole() != "admin") {
+    	if(member == null || !"admin".equals(member.getRole())) {
     		rttr.addFlashAttribute("need_admin", "로그인이 필요한 서비스입니다.");
     		return "redirect:/user/to_login";
     	}
@@ -117,7 +117,7 @@ public class NoticeController {
     @GetMapping("/delete")
     public String delete(@RequestParam("id") int id,HttpSession session,RedirectAttributes rttr) {
     	MemberDTO member = (MemberDTO)session.getAttribute("loginInfo");
-    	if(member == null || member.getRole() != "admin") {
+    	if(member == null || !"admin".equals(member.getRole())) {
     		rttr.addFlashAttribute("need_admin", "로그인이 필요한 서비스입니다.");
     		return "redirect:/user/to_login";
     	}

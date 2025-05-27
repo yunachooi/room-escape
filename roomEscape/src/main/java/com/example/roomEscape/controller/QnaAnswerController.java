@@ -34,7 +34,7 @@ public class QnaAnswerController {
 	public String showqnaanswer(@RequestParam("qna_id")int qna_id,
 									Model model,HttpSession session,RedirectAttributes rttr) {
 		MemberDTO member = (MemberDTO)session.getAttribute("loginInfo");
-    	if(member == null || member.getRole() != "admin") {
+    	if(member == null || !"admin".equals(member.getRole())) {
     		rttr.addFlashAttribute("need_admin", "로그인이 필요한 서비스입니다.");
     		return "redirect:/user/to_login";
     	}
@@ -47,7 +47,7 @@ public class QnaAnswerController {
 	public String uploadQnaAnswer(QnaAnswerDTO qna_answer,
 									Model model,HttpSession session,RedirectAttributes rttr) {
 		MemberDTO member = (MemberDTO)session.getAttribute("loginInfo");
-    	if(member == null || member.getRole() != "admin") {
+    	if(member == null || !"admin".equals(member.getRole())) {
     		rttr.addFlashAttribute("need_admin", "로그인이 필요한 서비스입니다.");
     		return "redirect:/user/to_login";
     	}

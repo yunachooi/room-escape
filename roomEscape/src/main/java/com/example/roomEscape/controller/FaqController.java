@@ -37,7 +37,7 @@ public class FaqController {
 	@GetMapping("/show_list")
 	public String showlist(Model model,HttpSession session,RedirectAttributes rttr) {
 		MemberDTO member = (MemberDTO)session.getAttribute("loginInfo");
-    	if(member == null || member.getRole() != "admin") {
+    	if(member == null || !"admin".equals(member.getRole())) {
     		rttr.addFlashAttribute("need_admin", "로그인이 필요한 서비스입니다.");
     		return "redirect:/user/to_login";
     	}
@@ -50,7 +50,8 @@ public class FaqController {
 	@GetMapping("/to_write_faq") // FAQ 작성으로 이동.
 	public String toWritefaq(HttpSession session,RedirectAttributes rttr) {
 		MemberDTO member = (MemberDTO)session.getAttribute("loginInfo");
-    	if(member == null || member.getRole() != "admin") {
+		System.out.println("실제 등급 값: "+member.getRole());
+    	if(member == null || !"admin".equals(member.getRole())) {
     		rttr.addFlashAttribute("need_admin", "로그인이 필요한 서비스입니다.");
     		return "redirect:/user/to_login";
     	}
@@ -62,7 +63,7 @@ public class FaqController {
 						Model model,
 						HttpSession session,RedirectAttributes rttr) {
 		MemberDTO member = (MemberDTO)session.getAttribute("loginInfo");
-    	if(member == null || member.getRole() != "admin") {
+    	if(member == null || !"admin".equals(member.getRole())) {
     		rttr.addFlashAttribute("need_admin", "로그인이 필요한 서비스입니다.");
     		return "redirect:/user/to_login";
     	}
@@ -74,12 +75,7 @@ public class FaqController {
 	// FAQ Detail Page 
 	@GetMapping("/show_detail_faq")
 	public String showdetailfaq(@RequestParam("faq_id") String faq_id,
-								Model model,HttpSession session,RedirectAttributes rttr) {
-		MemberDTO member = (MemberDTO)session.getAttribute("loginInfo");
-    	if(member == null || member.getRole() != "admin") {
-    		rttr.addFlashAttribute("need_admin", "로그인이 필요한 서비스입니다.");
-    		return "redirect:/user/to_login";
-    	}
+								Model model) {
 		FaqDTO faq = faqDao.getFaqByFaqId(faq_id);
 		model.addAttribute("faq", faq);
 		return "/admin/board/show_detail_faq";

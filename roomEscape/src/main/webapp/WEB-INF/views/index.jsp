@@ -166,10 +166,10 @@ select, button {
 	<div class="theme-search">
 	
 	</div>
-    
 	<!-- footer -->
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 	
+    <a href="/faq/to_write_faq">Aasdsadasd</a>
 </body>
 
 	<script>
