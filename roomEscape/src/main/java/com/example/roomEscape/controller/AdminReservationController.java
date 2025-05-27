@@ -13,10 +13,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.roomEscape.dao.IReservationDAO;
 import com.example.roomEscape.dao.IThemeFlatDAO;
+import com.example.roomEscape.dto.MemberDTO;
 import com.example.roomEscape.dto.ReservationDTO;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/admin/res")
@@ -33,7 +37,12 @@ public class AdminReservationController {
 	}
 
 	@GetMapping("/reservation")
-	public String reservation(Model model) {
+	public String reservation(Model model,HttpSession session,RedirectAttributes rttr) {
+		MemberDTO member = (MemberDTO)session.getAttribute("loginInfo");
+    	if(member == null || member.getRole() != "admin") {
+    		rttr.addFlashAttribute("need_admin", "로그인이 필요한 서비스입니다.");
+    		return "redirect:/user/to_login";
+    	}
 		System.out.println("reservation...");
 		List<ReservationDTO> list = reservationDao.reservationSelect();
 		System.out.println(list);
@@ -43,7 +52,12 @@ public class AdminReservationController {
 	}
 
 	@PostMapping("/reservation")
-	public String findTheReservation(@RequestParam("NAME") String NAME, Model model) {
+	public String findTheReservation(@RequestParam("NAME") String NAME, Model model,HttpSession session,RedirectAttributes rttr) {
+		MemberDTO member = (MemberDTO)session.getAttribute("loginInfo");
+    	if(member == null || member.getRole() != "admin") {
+    		rttr.addFlashAttribute("need_admin", "로그인이 필요한 서비스입니다.");
+    		return "redirect:/user/to_login";
+    	}
 		System.out.println("FindTheReservation... " + NAME);
 
 		List<ReservationDTO> list = reservationDao.findReservationName(NAME);
@@ -54,7 +68,12 @@ public class AdminReservationController {
 	}
 	
 	@GetMapping("/reservationChart")
-	public String reservationChartPage(Model model) {
+	public String reservationChartPage(Model model,HttpSession session,RedirectAttributes rttr) {
+		MemberDTO member = (MemberDTO)session.getAttribute("loginInfo");
+    	if(member == null || member.getRole() != "admin") {
+    		rttr.addFlashAttribute("need_admin", "로그인이 필요한 서비스입니다.");
+    		return "redirect:/user/to_login";
+    	}
 	    System.out.println("reservationChartPage...");
 	    
 	    List<ReservationDTO> list = reservationDao.reservationSelect();
