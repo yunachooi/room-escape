@@ -20,4 +20,5 @@ public class ReservationDTO {
 	private String PHONE;
 	private int THEME_ID;
     private int RESERVATION_COUNT;
+    private int isReviewed;
 }

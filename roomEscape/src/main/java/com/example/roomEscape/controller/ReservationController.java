@@ -1,8 +1,6 @@
 package com.example.roomEscape.controller;
 
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -15,9 +13,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.roomEscape.dao.IReservationDAO;
+import com.example.roomEscape.dao.IReviewDAO;
 import com.example.roomEscape.dao.IThemeFlatDAO;
 import com.example.roomEscape.dto.MemberDTO;
 import com.example.roomEscape.dto.ReservationDTO;
@@ -32,6 +30,8 @@ public class ReservationController {
 	IReservationDAO reservationDao;
 	@Autowired
     private IThemeFlatDAO themeFlatDAO;
+	@Autowired
+	private IReviewDAO reviewDao;
 	
 	@GetMapping("/userReservation")
 	public String userReservation(
@@ -143,6 +143,11 @@ public class ReservationController {
         System.out.println("user id..." + member.getMember_id());
         
         List<ReservationDTO> list = reservationDao.reservationCheck(member.getMember_id());
+        for (ReservationDTO item : list) {
+            int reviewed = reviewDao.checkReviewExists(item.getRESV_ID()); // 0 or 1 반환
+            item.setIsReviewed(reviewed); // DTO에 isReviewed 필드가 있어야 함
+        }
+        
         model.addAttribute("list", list);
         
         return "/user/reservation/reservationStatus";
