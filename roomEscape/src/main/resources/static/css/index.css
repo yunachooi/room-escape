@@ -82,6 +82,16 @@ html, body {
   }
 }
 
+@keyframes fadeIn {
+  from { opacity: 0; transform: translate(-50%, -60%); }
+  to { opacity: 1; transform: translate(-50%, -50%); }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; transform: translate(-50%, -50%); }
+  to { opacity: 0; transform: translate(-50%, -60%); }
+}
+
 .hero-text p {
 	margin-top : 20px;
   font-size: 1.25rem;
@@ -105,4 +115,114 @@ html, body {
 /*테마검색*/
 .theme-search{
 	min-height:100vh;
+}
+
+/*모달*/
+#themeModal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border: 1px solid #aaa;
+    padding: 20px;
+    z-index: 9999;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* 보일 때 클래스 */
+#themeModal.active {
+    visibility: visible;
+    opacity: 1;
+    animation: fadeIn 0.3s ease forwards;
+}
+
+/* 모달 내부 버튼 꾸미기 */
+#themeModal button {
+  background-color: orange;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  margin-right: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+#themeModal button:hover {
+  background-color: darkorange;
+}
+
+/*overlay*/
+#modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5); /* 어두운 배경 */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+    z-index: 9998;
+}
+
+/* 모달이 열릴 때 오버레이도 보여짐 */
+#modalOverlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+/*검색 필터 영역*/
+.theme-filter-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  align-items: flex-end;
+  margin: 20px auto;
+  max-width: 1000px;
+}
+
+.theme-filter-form .filter-group {
+  display: flex;
+  flex-direction: column;
+  min-width: 120px;
+}
+.filter-group label{
+	color : #333;
+	text-align: center;
+}
+.theme-filter-form select,
+.theme-filter-form button {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+.theme-filter-form button {
+  background-color: orange;
+  color: white;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+}
+
+.theme-filter-form button:hover {
+  background-color: darkorange;
+}
+
+@media (max-width: 600px) {
+  .theme-filter-form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .theme-filter-form .filter-group {
+    width: 100%;
+  }
 }
