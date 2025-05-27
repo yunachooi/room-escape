@@ -23,10 +23,10 @@ public class LoginController {
 	@Autowired
 	private ILoginDAO loginDao;
 	
-	@GetMapping("/")
-	public String root() {
-		return "index"; 
-	}
+//	@GetMapping("/")
+//	public String root() {
+//		return "index"; 
+//	}
 	
 	@GetMapping("/to_login")
 	public String login() {
