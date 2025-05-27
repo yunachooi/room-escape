@@ -22,6 +22,7 @@
 			alert("ID 혹은 PW가 틀립니다.");
 		</script>
 	</c:if>
+
 	<div id="formWrap">
 		<img id="logo" src="/images/compoment/logo.png" alt="logo">
 		<form action="/user/login" method="POST">
@@ -30,5 +31,12 @@
 			<input type="submit" value="로그인">
 		</form>
 	</div>	
+	
+	<c:if test="${not empty need_admin}">
+		<script>
+			alert('${need_admin}');
+		</script>
+	</c:if>
+
 </body>
 </html>

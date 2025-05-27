@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.roomEscape.dao.INoticeDAO;
+import com.example.roomEscape.dto.MemberDTO;
 import com.example.roomEscape.dto.NoticeDTO;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -26,7 +28,12 @@ public class NoticeController {
     private final INoticeDAO noticeDao;
 
     @GetMapping("/list")
-    public String list(@RequestParam(name = "page", defaultValue = "1") int page, Model model) {
+    public String list(@RequestParam(name = "page", defaultValue = "1") int page, Model model,HttpSession session,RedirectAttributes rttr) {
+    	MemberDTO member = (MemberDTO)session.getAttribute("loginInfo");
+    	if(member == null || member.getRole() != "admin") {
+    		rttr.addFlashAttribute("need_admin", "로그인이 필요한 서비스입니다.");
+    		return "redirect:/user/to_login";
+    	}
         int pageSize = 10;
         int offset = (page - 1) * pageSize;
 
@@ -44,7 +51,12 @@ public class NoticeController {
 
 
     @GetMapping("/form")
-    public String form() {
+    public String form(HttpSession session,RedirectAttributes rttr) {
+    	MemberDTO member = (MemberDTO)session.getAttribute("loginInfo");
+    	if(member == null || member.getRole() != "admin") {
+    		rttr.addFlashAttribute("need_admin", "로그인이 필요한 서비스입니다.");
+    		return "redirect:/user/to_login";
+    	}
         return "admin/notice/form";
     }
 
@@ -52,7 +64,13 @@ public class NoticeController {
     public String insert(@RequestParam("branch") String branch,
 		            	 @RequestParam("prefix") String prefix,
 			             @RequestParam("title") String title,
-			             @RequestParam("content") String content) {
+			             @RequestParam("content") String content,
+			             HttpSession session,RedirectAttributes rttr) {
+    	MemberDTO member = (MemberDTO)session.getAttribute("loginInfo");
+    	if(member == null || member.getRole() != "admin") {
+    		rttr.addFlashAttribute("need_admin", "로그인이 필요한 서비스입니다.");
+    		return "redirect:/user/to_login";
+    	}
 
         NoticeDTO dto = new NoticeDTO();
 
@@ -97,7 +115,12 @@ public class NoticeController {
 
 
     @GetMapping("/delete")
-    public String delete(@RequestParam("id") int id) {
+    public String delete(@RequestParam("id") int id,HttpSession session,RedirectAttributes rttr) {
+    	MemberDTO member = (MemberDTO)session.getAttribute("loginInfo");
+    	if(member == null || member.getRole() != "admin") {
+    		rttr.addFlashAttribute("need_admin", "로그인이 필요한 서비스입니다.");
+    		return "redirect:/user/to_login";
+    	}
         noticeDao.delete(id);
         return "redirect:/admin/notice/list";
     }

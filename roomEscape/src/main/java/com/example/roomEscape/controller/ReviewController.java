@@ -24,7 +24,7 @@ public class ReviewController {
 	@Autowired
 	private IReviewDAO reviewDao;
 
-	@GetMapping("/show_review") // 테마에서 오는 해당 테마의 리뷰 보기 ,, 파라미터 받아줘야함
+	@GetMapping("/show_review") 
 	public String show_review(Model model) {
 		List<ReviewDTO> review_list = reviewDao.getAll();
 		model.addAttribute("review_list", review_list);
@@ -63,6 +63,7 @@ public class ReviewController {
 	@GetMapping("/write_review")// id 세션값으로 받기 
 	public String write_review(@RequestParam("title")String title,
 								@RequestParam("theme_id")String theme_id,
+								@RequestParam("resv_id")String resv_id,
 								HttpSession session,
 							  Model model,
 							  RedirectAttributes rttr) {
@@ -77,12 +78,19 @@ public class ReviewController {
 		}else {
 			model.addAttribute("theme_id", theme_id);
 			model.addAttribute("title", title);
+			model.addAttribute("resv_id", resv_id);
 			return "/user/board/review/write_review";
 		}
 	}
 	
 	
-	
+	@GetMapping("/insert_review")
+	public String insert_review(ReviewDTO review,
+								Model model) {
+		System.out.println("review" + review);
+		reviewDao.insert_review(review);
+		return "redirect:/user/res/reservationStatus";
+	}
 	
 	
 }

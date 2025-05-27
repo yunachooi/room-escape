@@ -49,10 +49,16 @@ request.setAttribute("today", today.toString());
                         </c:if>
                     </td>
                     <td>
-                        <c:if test="${item.RESV_DATE <= today}">
-                            <button type="button" onclick="review('${fn:escapeXml(item.THEME_TITLE)}','${fn:escapeXml(item.THEME_ID)}')">리뷰작성</button>
+                        <c:if test="${item.RESV_DATE <= today && item.isReviewed == 0}">
+                            <button type="button" onclick="review('${fn:escapeXml(item.THEME_TITLE)}',
+                            									  '${fn:escapeXml(item.THEME_ID)}',
+                            									  '${fn:escapeXml(item.RESV_ID)}')">리뷰작성
+                            </button>
                         </c:if>
-                        <c:if test="${item.RESV_DATE > today}">
+					    <c:if test="${item.RESV_DATE <= today && item.isReviewed == 1}">
+					        작성완료
+					    </c:if>
+                        <c:if test="${item.RESV_DATE > today }">
                             작성불가
                         </c:if>
                     </td>
@@ -74,8 +80,8 @@ request.setAttribute("today", today.toString());
                 location.href = "/user/res/reservation/cancel?RESV_ID=" + (RESV_ID);
             }
         }
-        function review(title,theme_id){
-            location.href = "/review/write_review?title=" + encodeURIComponent(title)+"&theme_id="+theme_id;
+        function review(title,theme_id,resv_id){
+            location.href = "/review/write_review?title=" + encodeURIComponent(title)+"&theme_id="+theme_id+"&resv_id="+resv_id;
         }
     </script>
 </body>

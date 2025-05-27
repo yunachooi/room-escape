@@ -116,7 +116,7 @@
             <p>리뷰 수: ${theme.reviewCount}개</p>
 
             <!-- ✅ 모든 사용자에게 보이되, 로그인 여부에 따라 동작 -->
-            <button onclick="handleWrite(${theme.theme_id})">리뷰 작성</button>
+           <%--  <button onclick="handleWrite(${theme.theme_id})">리뷰 작성</button> --%>
         </div>
     </c:forEach>
 </div>
@@ -134,7 +134,7 @@
     <!-- 항상 출력 -->
     <button id="reservationBtn">예약하기</button>
     
-    <button id="reviewWriteBtn">리뷰 작성</button>
+   <!--  <button id="reviewWriteBtn">리뷰 작성</button> -->
     <button onclick="closeModal()">닫기</button>
 
     <input type="hidden" id="modalThemeId" />
@@ -188,13 +188,8 @@
 	}
 	// ✅ 공통 예약 처리 함수 (카드/모달 모두에서 사용)
 	function handleReservation(branchId) {
-    const isLoggedIn = document.getElementById("isLoggedIn").value === "true";
-    if (isLoggedIn) {
-        location.href = "/user/res/userReservation?branch=" + branchId; // 브랜치id 파라미터 넘겨주기
-    } else { 
-        alert("로그인이 필요한 기능입니다.");
-    }
-}
+	    location.href = "/user/res/userReservation?branch=" + branchId;
+	}
 
 	// ✅ 모달 안 버튼도 같은 로직으로 처리
 	document.addEventListener("DOMContentLoaded", function () {

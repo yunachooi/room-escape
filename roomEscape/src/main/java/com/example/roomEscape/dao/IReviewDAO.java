@@ -23,6 +23,11 @@ public interface IReviewDAO {
 	int check_reservation(@Param("member_id")String member_id, 
 						  @Param("title")String title, 
 						  @Param("theme_id") String theme_id);
-					
+	
+	void insert_review(@Param("review") ReviewDTO review);
+	
+	int check_write_review(@Param("review")ReviewDTO review);
+	
+	int checkReviewExists(@Param("resv_id") int resv_id);
 
 }

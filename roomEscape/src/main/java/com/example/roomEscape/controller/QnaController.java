@@ -13,8 +13,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.roomEscape.dao.IQnaAnswerDAO;
 import com.example.roomEscape.dao.IQnaDAO;
+import com.example.roomEscape.dto.MemberDTO;
 import com.example.roomEscape.dto.QnaAnswerDTO;
 import com.example.roomEscape.dto.QnaDTO;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/qna")
@@ -31,7 +34,12 @@ public class QnaController {
 	
 	// 모든 QnA 받아오기. //관리자용 
 	@GetMapping("/show_qna")
-	public String showqna(Model model) {
+	public String showqna(Model model,HttpSession session,RedirectAttributes rttr) {
+		MemberDTO member = (MemberDTO)session.getAttribute("loginInfo");
+    	if(member == null || member.getRole() != "admin") {
+    		rttr.addFlashAttribute("need_admin", "로그인이 필요한 서비스입니다.");
+    		return "redirect:/user/to_login";
+    	}
 		List<QnaDTO> qna_list = qnaDao.getAllQna();
 		model.addAttribute("qna_list", qna_list);
 		return "/admin/board/show_qna_list";

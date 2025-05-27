@@ -29,4 +29,31 @@
 	    AND T.THEME_ID = #{theme_id}
 	 </select>
 	 
+	 <insert id="insert_review">
+	 	INSERT INTO REVIEW VALUES(REVIEW_ID_SEQ.NEXTVAL,
+	 							#{review.rating},
+	 							#{review.content},
+	 							SYSDATE,
+	 							#{review.theme_id},
+	 							#{review.member_id},
+	 							#{review.resv_id}
+	 							)
+	 </insert>
+	 
+	 <select id="check_write_review">
+	 	SELECT COUNT(*)
+		FROM REVIEW RE
+		JOIN RESERVATION RES 
+		ON RE.RESV_ID = RES.RESV_ID
+		WHERE RE.RESV_ID = #{review.resv_id} AND 
+			  RE.MEMBER_ID = #{review.member_id} AND 
+			  THEME_ID = #{review.theme_id}
+	 </select>
+	 
+	 <select id="checkReviewExists" resultType="int">
+    	SELECT COUNT(*) 
+    	FROM REVIEW 
+    	WHERE RESV_ID = #{resv_id}
+	</select>
+	 
 </mapper>
