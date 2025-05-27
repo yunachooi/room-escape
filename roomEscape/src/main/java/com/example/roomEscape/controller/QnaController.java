@@ -119,6 +119,18 @@ public class QnaController {
 		return "redirect:/qna/show_qna_user" ;
 	}
 	
+	@GetMapping("search_qna")
+	public String search_qna (@RequestParam("keyword")String keyword,
+							@RequestParam("type")String type,
+							Model model) {
+		System.out.println("종류:"+type+"검색어: "+keyword);
+		List<QnaDTO> qna_list = qnaDao.get_search_qna(type,keyword);
+		model.addAttribute("qna_list", qna_list);
+		return "/user/board/qna/show_qna_list";
+		
+		
+	}
+	
 	
 	
 	

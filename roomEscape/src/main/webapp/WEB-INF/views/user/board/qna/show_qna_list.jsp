@@ -10,6 +10,17 @@
 <body>
 	<h1>Show QnA List Page </h1>
 	<hr>
+	
+	<form action="/qna/search_qna" method="GET">
+		<select name="type">
+			<option value="title">제목</option>
+			<option value="content">본문</option>
+			<option value="writer">작성자</option>
+		</select>
+		<input type="text" name="keyword" >
+		<input type="submit" value="검색">
+	</form>
+	
 	<table border="1" cellpadding="5" cellspacing="0">
 		<thead>
 			

@@ -29,6 +29,12 @@
 	    AND T.THEME_ID = #{theme_id}
 	 </select>
 	 
+	<select id="get_review_by_theme_id" resultType="com.example.roomEscape.dto.ReviewDTO">
+		SELECT * 
+		FROM REVIEW 
+		WHERE THEME_ID = #{theme_id}
+	</select>
+	 
 	 <insert id="insert_review">
 	 	INSERT INTO REVIEW VALUES(REVIEW_ID_SEQ.NEXTVAL,
 	 							#{review.rating},
@@ -55,5 +61,27 @@
     	FROM REVIEW 
     	WHERE RESV_ID = #{resv_id}
 	</select>
+	
+	<select id="get_review_ratingDESC_theme_id" resultType="com.example.roomEscape.dto.ReviewDTO">
+		 SELECT * 
+		 FROM REVIEW 
+		 WHERE THEME_ID = #{theme_id}
+		 ORDER BY RATING DESC 
+	 </select>
+	 
+	<select id="get_review_rating_theme_id" resultType="com.example.roomEscape.dto.ReviewDTO">
+		 SELECT * 
+		 FROM REVIEW 
+		 WHERE THEME_ID = #{theme_id}
+		 ORDER BY RATING 
+	 </select>
+	 
+	<select id="get_review_reg_date_theme_id" resultType="com.example.roomEscape.dto.ReviewDTO">
+	 	SELECT * 
+	 	FROM REVIEW 
+	 	WHERE THEME_ID = #{theme_id}
+	 	ORDER BY REG_DATE DESC 
+	 </select>
+	
 	 
 </mapper>

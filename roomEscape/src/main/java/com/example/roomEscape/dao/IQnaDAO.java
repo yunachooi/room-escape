@@ -27,4 +27,7 @@ public interface IQnaDAO {
 	void update_qna(@Param("qna") QnaDTO qna);
 	// QnA 삭제
 	void delete_qna(@Param("qna") QnaDTO qna);
+	// QnA 검색 및 가져오기
+	List<QnaDTO> get_search_qna(@Param("type") String type, 
+								@Param("keyword") String keyword);
 }

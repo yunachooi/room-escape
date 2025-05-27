@@ -105,7 +105,7 @@
             <img src="/images/themes/${theme.theme_id}.jpeg" alt="${theme.title}" style="width:250px; height:350px;">
             <div>${theme.title}</div>
             <button onclick="showDetail(${theme.theme_id})">상세보기</button>
-            <button onclick="location.href='/review/show_review?themeId=${theme.theme_id}'">리뷰 보기</button>
+            <button onclick="location.href='/review/show_review?theme_id=${theme.theme_id}'">리뷰 보기</button>
           
           
            <button onclick="handleReservation(${theme.branch_id})">예약하기</button>
