@@ -4,46 +4,10 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>테마 목록</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/reset.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
-    <style>
-        .theme-container {
-            display: flex;
-            flex-wrap: wrap;
-            padding: 20px;
-            justify-content: flex-start;
-            gap: 20px;
-        }
-        .theme-card {
-            width: 220px;
-            text-align: center;
-        }
-        .theme-card img {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-            border: 1px solid #ddd;
-        }
-        .theme-buttons button {
-            margin: 5px;
-            padding: 8px 12px;
-            font-size: 14px;
-            cursor: pointer;
-        }
-        #themeModal {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: white;
-            border: 1px solid #aaa;
-            padding: 20px;
-            z-index: 9999;
-            box-shadow: 0 0 10px rgba(0,0,0,0.3);
-        }
-    </style>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/theme-list.css">   
+    <title>테마 목록</title>
 </head>
 <body>
 
@@ -106,44 +70,51 @@
     </c:forEach>
 </div>
 
+<div id="modalOverlay" onclick="closeModal()"></div>
 <div id="themeModal">
-    <h3 id="modalTitle"></h3>
-    <p><b>설명:</b> <span id="modalDescription"></span></p> 
-    <p><b>유형:</b> <span id="modalType"></span></p>
-    <p><b>난이도:</b> <span id="modalLevel"></span></p>
-    <p><b>정원:</b> <span id="modalCapacity"></span></p>
-    <p><b>소요시간:</b> <span id="modalDuration"></span>분</p>
-    <p><b>지점:</b> <span id="modalBranch"></span></p>
-
-    <input type="hidden" id="modalThemeId" />
-    <input type="hidden" id="modalBranchId" />
-
-    <button id="reservationBtn">예약하기</button>
-    <button onclick="closeModal()">닫기</button>
+    <div class="modal-header">
+        <h3 id="modalTitle"></h3>
+        <button class="modal-close" onclick="closeModal()">✖</button>
+    </div>
+    <div class="modal-body">
+        <p><b>설명:</b> <span id="modalDescription"></span></p> 
+        <p><b>유형:</b> <span id="modalType"></span></p>
+        <p><b>난이도:</b> <span id="modalLevel"></span></p>
+        <p><b>정원:</b> <span id="modalCapacity"></span></p>
+        <p><b>소요시간:</b> <span id="modalDuration"></span>분</p>
+        <p><b>지점:</b> <span id="modalBranch"></span></p>
+        <input type="hidden" id="modalThemeId" />
+        <input type="hidden" id="modalBranchId" />
+        <div class="modal-buttons">
+            <button id="reservationBtn">예약하기</button>
+        </div>
+    </div>
 </div>
 
 <script>
-    function showDetail(themeId) {
-        fetch('/user/theme/detail?theme_id=' + themeId)
-            .then(res => res.json())
-            .then(data => {
-                document.getElementById('modalTitle').textContent = data.title;
-                document.getElementById('modalDescription').textContent = data.description;
-                document.getElementById('modalType').textContent = data.type_name;
-                document.getElementById('modalLevel').textContent = data.theme_level;
-                document.getElementById('modalCapacity').textContent = data.capacity_min + " ~ " + data.capacity_max;
-                document.getElementById('modalDuration').textContent = data.duration;
-                document.getElementById('modalBranch').textContent = data.branch_name;
-                document.getElementById('modalThemeId').value = themeId;
-                document.getElementById('modalBranchId').value = data.branch_id;
-
-                document.getElementById('themeModal').style.display = 'block';
-            });
-    }
-
-    function closeModal() {
-        document.getElementById('themeModal').style.display = 'none';
-    }
+	function showDetail(themeId) {
+	    fetch('/user/theme/detail?theme_id=' + themeId)
+	        .then(res => res.json())
+	        .then(data => {
+	            document.getElementById('modalTitle').textContent = data.title;
+	            document.getElementById('modalDescription').textContent = data.description;
+	            document.getElementById('modalType').textContent = data.type_name;
+	            document.getElementById('modalLevel').textContent = data.theme_level;
+	            document.getElementById('modalCapacity').textContent = data.capacity_min + " ~ " + data.capacity_max;
+	            document.getElementById('modalDuration').textContent = data.duration;
+	            document.getElementById('modalBranch').textContent = data.branch_name;
+	            document.getElementById('modalThemeId').value = themeId;
+	            document.getElementById('modalBranchId').value = data.branch_id;
+	
+	            document.getElementById('themeModal').style.display = 'block';
+	            document.getElementById('modalOverlay').style.display = 'block';
+	        });
+	}
+	
+	function closeModal() {
+	    document.getElementById('themeModal').style.display = 'none';
+	    document.getElementById('modalOverlay').style.display = 'none';
+	}
 
     document.addEventListener("click", function (event) {
         const modal = document.getElementById("themeModal");
