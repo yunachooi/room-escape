@@ -8,7 +8,7 @@
 	      <li><a href="/user/res/userReservation">예약</a></li>
 	    </ul>
 	    <div class="logo">
-	      	<a href="/user/"><img id="logo" src="/images/compoment/logo.png" alt="logo"></a>
+	      	<a href="/"><img id="logo" src="/images/compoment/logo.png" alt="logo"></a>
 	    </div>
 	    <ul class="nav-right">
 	      <li><a href="/user/notice/list">게시판</a></li>

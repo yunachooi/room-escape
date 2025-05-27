@@ -36,35 +36,47 @@ public class LoginController {
 	// 로그인 ID,PW 확인 및 로그인 정보 저장
 	@PostMapping("/login")
 	public String login(@RequestParam("id") String member_id,
-						@RequestParam("pw") String password,
-						HttpServletRequest request,
-						Model model,
-						RedirectAttributes rttr) {
-		
-		if( member_id == null || password == null ) {
-			rttr.addFlashAttribute("login_error1", true);
-			return "redirect:/user/admin/user/to_login";
-		}
-		
-		MemberDTO member = loginDao.loginCheck(member_id);
-		
-		if(member != null) {
-			BCryptPasswordEncoder  encoder = new BCryptPasswordEncoder();
-			
-			if (encoder.matches(password, member.getPassword())) {
-				HttpSession session = request.getSession();
-				session.setAttribute("loginInfo",member);
-				System.out.println("test 확인 중 어드민 확인 :"  + member.getRole());
-				return "redirect:/user/";
-			}
-		}
-		rttr.addFlashAttribute("login_error2", true);
-		return "redirect:/user/admin/user/to_login";
+	                    @RequestParam("pw") String password,
+	                    HttpServletRequest request,
+	                    Model model,
+	                    RedirectAttributes rttr) {
+
+	    if (member_id == null || password == null) {
+	        rttr.addFlashAttribute("login_error1", true);
+	        return "redirect:/user/to_login";
+	    }
+
+	    MemberDTO member = loginDao.loginCheck(member_id);
+
+	    if (member != null) {
+	        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
+	        if (encoder.matches(password, member.getPassword())) {
+	            HttpSession session = request.getSession();
+	            session.setAttribute("loginInfo", member);
+
+	            // 관리자일 경우 관리자 메인으로 리다이렉트
+	            if ("admin".equals(member.getRole())) {
+	                return "redirect:/admin/main"; // 관리자 메인 페이지
+	            }
+
+	            return "redirect:/"; // 일반 사용자 메인 페이지
+	        }
+	    }
+
+	    rttr.addFlashAttribute("login_error2", true);
+	    return "redirect:/user/to_login";
 	}
 	
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 	    session.invalidate(); 
-	    return "redirect:/user/"; 
+	    return "redirect:/"; 
+	}
+	
+	//관리자 계정 로그인
+	@GetMapping("/admin/main")
+	public String adminMain() {
+	    return "/admin/main"; // /WEB-INF/views/admin/index.jsp
 	}
 }

@@ -104,5 +104,5 @@ html, body {
 }
 /*테마검색*/
 .theme-search{
-	height:100vh;
+	min-height:100vh;
 }
