@@ -15,8 +15,6 @@
 
 <h2>테마 목록</h2>
 
-<input type="hidden" id="isLoggedIn" value="${not empty sessionScope.loginInfo}" />
-
 <form method="get" action="/user/theme/list">
     <select name="sort" onchange="this.form.submit()">
         <option value="">-- 정렬 선택 --</option>
@@ -63,7 +61,7 @@
             <div>${theme.title}</div>
             <button onclick="showDetail(${theme.theme_id})">상세보기</button>
             <button onclick="location.href='/review/show_review?theme_id=${theme.theme_id}'">리뷰 보기</button>
-            <button onclick="goWithLoginCheck('/user/res/userReservation', 'branch', ${theme.branch_id})">예약하기</button>
+            <button onclick="goReservation(${theme.theme_id})">예약하기</button>
             <p>평점: ⭐ ${theme.avgRating} / 5.0</p>
             <p>리뷰 수: ${theme.reviewCount}개</p>
         </div>
@@ -84,14 +82,17 @@
         <p><b>소요시간:</b> <span id="modalDuration"></span>분</p>
         <p><b>지점:</b> <span id="modalBranch"></span></p>
         <input type="hidden" id="modalThemeId" />
-        <input type="hidden" id="modalBranchId" />
         <div class="modal-buttons">
-            <button id="reservationBtn">예약하기</button>
+            <button id="reservationBtn" type="button">예약하기</button>
         </div>
     </div>
 </div>
 
 <script>
+    function goReservation(themeId) {
+        location.href = "/user/res/userReservation?theme_id=" + themeId;
+    }
+
 	function showDetail(themeId) {
 	    fetch('/user/theme/detail?theme_id=' + themeId)
 	        .then(res => res.json())
@@ -104,13 +105,18 @@
 	            document.getElementById('modalDuration').textContent = data.duration;
 	            document.getElementById('modalBranch').textContent = data.branch_name;
 	            document.getElementById('modalThemeId').value = themeId;
-	            document.getElementById('modalBranchId').value = data.branch_id;
-	
+
 	            document.getElementById('themeModal').style.display = 'block';
 	            document.getElementById('modalOverlay').style.display = 'block';
+
+	            // 모달 버튼에 이벤트 등록
+	            const reserveBtn = document.getElementById("reservationBtn");
+	            reserveBtn.onclick = function () {
+	                goReservation(themeId);
+	            };
 	        });
 	}
-	
+
 	function closeModal() {
 	    document.getElementById('themeModal').style.display = 'none';
 	    document.getElementById('modalOverlay').style.display = 'none';
@@ -121,22 +127,6 @@
         if (modal.style.display === 'block' && !modal.contains(event.target)) {
             closeModal();
         }
-    });
-
-    function goWithLoginCheck(url, paramKey, paramValue) {
-        const isLoggedIn = document.getElementById("isLoggedIn").value === "true";
-        if (isLoggedIn) {
-            location.href = `${url}?${paramKey}=${paramValue}`;
-        } else {
-            alert("로그인이 필요한 기능입니다.");
-        }
-    }
-
-    document.addEventListener("DOMContentLoaded", function () {
-        document.getElementById("reservationBtn")?.addEventListener("click", () => {
-            const branchId = document.getElementById("modalBranchId").value;
-            goWithLoginCheck("/user/res/userReservation", "branch", branchId);
-        });
     });
 </script>
 
