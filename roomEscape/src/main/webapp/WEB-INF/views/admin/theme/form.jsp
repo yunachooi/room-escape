@@ -4,9 +4,13 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>테마 등록</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/reset.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin-main.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin-themeForm.css">
+    <title>테마</title>
 </head>
 <body>
+	<%@ include file="/WEB-INF/views/admin/sidebar.jsp" %>
     <h2>${mode == 'edit' ? '테마 수정' : '테마 등록'}</h2>
     <form method="post" action="${mode == 'edit' ? '/admin/theme/update' : '/admin/theme/insert'}" onsubmit="return confirmUpdate()">
 	    <c:if test="${not empty theme.theme_id}">

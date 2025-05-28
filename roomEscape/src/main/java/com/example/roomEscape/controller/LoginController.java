@@ -57,6 +57,7 @@ public class LoginController {
 
 	            // 관리자일 경우 관리자 메인으로 리다이렉트
 	            if ("admin".equals(member.getRole())) {
+	            	session.setAttribute("loginId", member.getMember_id());
 	                return "redirect:/admin/main"; // 관리자 메인 페이지
 	            }
 
