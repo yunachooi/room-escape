@@ -62,6 +62,7 @@ public class LoginController {
 	            }
 
 	            if ("admin".equals(member.getRole())) {
+	            	session.setAttribute("loginId", member.getMember_id());
 	                return "redirect:/admin/main"; // 관리자 메인 페이지
 	            }
 
