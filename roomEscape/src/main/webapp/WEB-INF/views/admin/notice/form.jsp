@@ -1,5 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/reset.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/notice-detail.css">
+	<title>공지사항 상세보기</title>
+</head>	
+<body>
 <h2>공지사항 & 이벤트 작성</h2>
 <form method="post" action="/admin/notice/insert">
   <p>
@@ -18,3 +27,4 @@
   <p><input type="submit" value="등록"></p>
   
 </form>
+</body>
