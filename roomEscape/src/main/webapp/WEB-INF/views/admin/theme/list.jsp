@@ -4,9 +4,13 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/reset.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin-main.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin-theme.css">
     <title>테마 목록</title>
 </head>
 <body>
+	<%@ include file="/WEB-INF/views/admin/sidebar.jsp" %>
     <h2>테마 목록</h2>
     <a href="${pageContext.request.contextPath}/admin/theme/form">+ 테마 추가</a>
     <table border="1">

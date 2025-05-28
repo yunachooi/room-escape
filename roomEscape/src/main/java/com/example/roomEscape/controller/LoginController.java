@@ -33,7 +33,6 @@ public class LoginController {
 		return "/admin/user/login";
 	}
 
-	// 로그인 ID,PW 확인 및 로그인 정보 저장
 	@PostMapping("/login")
 	public String login(@RequestParam("id") String member_id,
 	                    @RequestParam("pw") String password,
@@ -55,8 +54,15 @@ public class LoginController {
 	            HttpSession session = request.getSession();
 	            session.setAttribute("loginInfo", member);
 
-	            // 관리자일 경우 관리자 메인으로 리다이렉트
+	            // 로그인 전 원래 요청 URL이 있으면 그쪽으로 리다이렉트
+	            String redirectUrl = (String) session.getAttribute("redirectAfterLogin");
+	            if (redirectUrl != null) {
+	                session.removeAttribute("redirectAfterLogin");
+	                return "redirect:" + redirectUrl;
+	            }
+
 	            if ("admin".equals(member.getRole())) {
+	            	session.setAttribute("loginId", member.getMember_id());
 	                return "redirect:/admin/main"; // 관리자 메인 페이지
 	            }
 
@@ -74,9 +80,8 @@ public class LoginController {
 	    return "redirect:/"; 
 	}
 	
-	//관리자 계정 로그인
 	@GetMapping("/admin/main")
 	public String adminMain() {
-	    return "/admin/main"; // /WEB-INF/views/admin/index.jsp
+	    return "/admin/main";
 	}
 }

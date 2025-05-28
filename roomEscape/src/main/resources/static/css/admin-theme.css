@@ -1,0 +1,71 @@
+/* 전체 배경 및 기본 폰트 */
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+}
+
+/* 제목 스타일 */
+h2 {
+    margin-left: 220px;
+    padding: 20px 0 10px 20px;
+    color: #2c3e50;
+}
+
+/* 테마 추가 링크 */
+a[href$="/admin/theme/form"] {
+    display: inline-block;
+    margin-left: 220px;
+    margin-bottom: 15px;
+    padding: 8px 12px;
+    background-color: #1abc9c;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+a[href$="/admin/theme/form"]:hover {
+    background-color: #16a085;
+}
+
+/* 테이블 설정 */
+table {
+    margin-left: 220px;
+    width: calc(100% - 240px);
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* 테이블 헤더 */
+th {
+    background-color: #34495e;
+    color: white;
+    padding: 12px;
+    text-align: center;
+}
+
+/* 테이블 셀 */
+td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+/* 버튼 스타일 */
+button {
+    padding: 6px 10px;
+    margin: 2px;
+    background-color: #2980b9;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #1f6391;
+}
+

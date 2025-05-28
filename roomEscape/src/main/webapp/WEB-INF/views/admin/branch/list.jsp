@@ -1,8 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
-<head><title>지점 목록</title></head>
+<head>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/reset.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin-main.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin-branch.css">
+	<title>지점 목록</title>
+</head>
 <body>
+	<%@ include file="/WEB-INF/views/admin/sidebar.jsp" %>
     <h2>지점 목록</h2>
     <a href="/admin/branch/form">+ 새 지점 등록</a>
     <table border="1">

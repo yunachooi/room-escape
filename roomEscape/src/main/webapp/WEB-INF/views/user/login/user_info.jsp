@@ -4,51 +4,48 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/reset.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/mypage.css">
+
 <title>Insert title here</title>
 </head>
+<!-- header -->
+	<%@ include file="/WEB-INF/views/common/header.jsp" %>
+
 <body>
-	<h1>마이페이지</h1>
-	<hr>
-	<form action="/user_info/update_info" method="POST"> 
-	<table border="1" cellpadding="5" cellspacing="0">
-		<thead >
-			<tr>
-				<th>아아디</th>
-				<th><input type="text" name="member_id" value="${loginInfo.member_id }" readonly></th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>비밀번호</td>
-				<td><input type="text" name="password" required> </td>
-			</tr>
-			<tr>
-				<td>비밀번호 확인</td>
-				<td><input type="text" name="pwcheck" required> </td>
-			</tr>
-			<tr>
-				<td>이름</td>
-				<td><input type="text" name="name" value="${loginInfo.name }" required></td>
-			</tr>
-			<tr>
-				<td>전화번호</td>
-				<td><input type="text" name="phone" value="${loginInfo.phone }"></td>
-			</tr>
-			<tr>
-				<td>이메일</td>
-				<td><input type="text" name="email" value="${loginInfo.email }"></td>
-			</tr>
-			<tr>
-				<td>가입일</td>
-				<td><input type="text" name="reg_date" value="${loginInfo.reg_date }" readonly></td>
-			</tr>
-			<tr>
-				<td colspan="2"><input type="submit" value="수정"></td>
-			</tr>
-		</tbody>
-	</table>
-	</form>
+<main>
+	<form method="POST" action="/user_info/update_info">
+    <h2>마이페이지</h2>
+
+    <label>아이디</label>
+    <input type="text" name="member_id" value="${loginInfo.member_id}" readonly>
+
+    <label>비밀번호</label>
+    <input type="password" name="password" required>
+
+    <label>비밀번호 확인</label>
+    <input type="password" name="pwcheck" required>
+
+    <label>이름</label>
+    <input type="text" name="name" value="${loginInfo.name}" required>
+
+    <label>전화번호</label>
+    <input type="text" name="phone" value="${loginInfo.phone}">
+
+    <label>이메일</label>
+    <input type="text" name="email" value="${loginInfo.email}">
+
+    <label>가입일</label>
+    <input type="text" name="reg_date" value="${loginInfo.reg_date}" readonly>
+
+    <input type="submit" value="수정">
+</form>
+</main>
 	<hr>
 	
 </body>
+
+<!-- footer -->
+	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 </html>

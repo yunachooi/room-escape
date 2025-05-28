@@ -21,6 +21,7 @@ import com.example.roomEscape.dto.MemberDTO;
 import com.example.roomEscape.dto.ReservationDTO;
 import com.example.roomEscape.dto.ThemeFlatDTO;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -38,8 +39,6 @@ public class ReservationController {
 	        @RequestParam(value="find_date", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate find_date,
 	        @RequestParam(value="branch", required = false) String branch,
 	        Model model) {
-
-	    System.out.println("find_date..." + find_date + "...branch..." + branch);
 
 	    if (find_date == null) {
 	        find_date = LocalDate.now();
@@ -82,18 +81,23 @@ public class ReservationController {
 	    @RequestParam("TIME_LABEL") String time,
 	    @RequestParam(value = "RESV_DATE", required = false) String date,
 	    @RequestParam(value = "branch", required = false) String branch,
-	    Model model, HttpSession session) {
+	    Model model, HttpSession session, HttpServletRequest request) {
 		
 		Object loginInfo = session.getAttribute("loginInfo");
 		
 		if (loginInfo == null) {
+            String redirectUrl = request.getRequestURI();
+            String queryString = request.getQueryString();
+            if (queryString != null) {
+                redirectUrl += "?" + queryString;
+            }
+            session.setAttribute("redirectAfterLogin", redirectUrl);
+
             return "redirect:/user/to_login";
         }
 
 	    if (date == null) date = LocalDate.now().toString();
 	    if (branch == null) branch = "강남점";
-
-	    System.out.println("reservationInfo..." + title + "..." + date + "..." + branch + "..." + themeType + "..." + time);
 
 	    model.addAttribute("title", title);
 	    model.addAttribute("theme_type", themeType);
@@ -132,7 +136,6 @@ public class ReservationController {
 	
 	@GetMapping("/reservationStatus")
     public String reservationStatus(HttpSession session, Model model) {
-        System.out.println("reservationStatus...");
         Object loginInfo = session.getAttribute("loginInfo");
 
         if (loginInfo == null) {
@@ -140,12 +143,11 @@ public class ReservationController {
         }
 
         MemberDTO member = (MemberDTO) loginInfo;
-        System.out.println("user id..." + member.getMember_id());
         
         List<ReservationDTO> list = reservationDao.reservationCheck(member.getMember_id());
         for (ReservationDTO item : list) {
-            int reviewed = reviewDao.checkReviewExists(item.getRESV_ID()); // 0 or 1 반환
-            item.setIsReviewed(reviewed); // DTO에 isReviewed 필드가 있어야 함
+            int reviewed = reviewDao.checkReviewExists(item.getRESV_ID());
+            item.setIsReviewed(reviewed);
         }
         
         model.addAttribute("list", list);
@@ -155,9 +157,7 @@ public class ReservationController {
 	
 	@GetMapping("/reservation/cancel")
 	public String reservationCancel(@RequestParam("RESV_ID") int RESV_ID) {
-		System.out.println("cancel..." + RESV_ID);
 	    int SCHEDULE_ID = reservationDao.findScheduleIdByResvId(RESV_ID);
-	    System.out.println("SCHEDULE_ID..." + SCHEDULE_ID);
 	    reservationDao.deleteReservationById(RESV_ID);
 	    reservationDao.updateScheduleUnbooked(SCHEDULE_ID);
 	    return "redirect:/user/res/reservationStatus";
