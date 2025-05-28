@@ -65,3 +65,4 @@ public class QnaAnswerController {
 		return qnaanswerDao.get_one_by_qna_id(qna_id);
 	}
 }
+	

@@ -13,7 +13,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.roomEscape.dao.IQnaAnswerDAO;
 import com.example.roomEscape.dao.IQnaDAO;
+import com.example.roomEscape.dto.EventDTO;
 import com.example.roomEscape.dto.MemberDTO;
+import com.example.roomEscape.dto.NoticeDTO;
 import com.example.roomEscape.dto.QnaAnswerDTO;
 import com.example.roomEscape.dto.QnaDTO;
 
@@ -25,6 +27,7 @@ public class QnaController {
 
 	@Autowired
 	private IQnaDAO qnaDao;
+
 	
 	@Autowired
 	private IQnaAnswerDAO qnaanswerDao;
@@ -127,10 +130,8 @@ public class QnaController {
 		List<QnaDTO> qna_list = qnaDao.get_search_qna(type,keyword);
 		model.addAttribute("qna_list", qna_list);
 		return "/user/board/qna/show_qna_list";
-		
-		
+
 	}
-	
 	
 	
 	

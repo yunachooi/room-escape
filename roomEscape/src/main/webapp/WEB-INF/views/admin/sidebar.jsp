@@ -7,7 +7,9 @@
     <li><a href="/admin/theme/list"><span class="menu-text">테마관리</span></a></li>
     <li><a href="/admin/branch/list"><span class="menu-text">지점관리</span></a></li>
     <li><a href="/admin/res/reservation"><span class="menu-text">예약관리</span></a></li>
+    <li><a href="/qna/show_qna_user"><span class="menu-text">QNA 관리</span></a></li>
     <li><a href="/admin/notice/list"><span class="menu-text">게시판 관리</span></a></li>
+    <li><a href="/admin/notice/list"><span class="menu-text">FAQ 관리</span></a></li>
     <li><a href="/"><span class="menu-text">사용자 홈페이지</span></a></li>
   </ul>
 

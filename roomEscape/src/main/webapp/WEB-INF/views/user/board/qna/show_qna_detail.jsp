@@ -1,42 +1,61 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/reset.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/qna-detail.css">
+<title>QNA 상세보기</title>
 </head>
 <body>
-	<h1>Show QnA Detail</h1>
-	<hr>
-	<table border="1" cellpadding="5" cellspacing="0">
-		<thead>
-			<tr>
-				<th>제목</th>
-				<th>내용</th>
-				<th>작성일</th>
-				<th>작성자</th>
-				<th>답변 여부</th>
-				<th>수정 및 삭제</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>${qna.title }</td>
-				<td>${qna.content }</td>
-				<td>${qna.reg_date }</td>
-				<td>${qna.member_id }</td>
-				<td>${qna.is_answered}</td>
-				<td>
-					<c:if test="${qna.is_answered == 'N' }">
-						<button onclick="qnaDelete()">삭제 및 삭제 </button>
-					</c:if>
-				</td>
-			</tr>
-		</tbody>
-	</table>
-	<hr>
+	<!-- header -->
+	<%@ include file="/WEB-INF/views/common/header.jsp" %>
+	<h2>Show QnA Detail</h2>
+
+	<div id="tablewrap">
+		<table>
+		    <thead>
+		        <tr>
+		            <th>-</th>
+		            <th>-</th>
+		        </tr>
+		    </thead>
+		    <tbody>
+		        <tr>
+		            <td>제목</td>
+		            <td>${qna.title}</td>
+		        </tr>
+		        <tr>
+		            <td>내용</td>
+		            <td><div class="qna-content">${qna.content}</div></td>
+		        </tr>
+		        <tr>
+		            <td>작성일</td>
+		            <td>${qna.reg_date}</td>
+		        </tr>
+		        <tr>
+		            <td>작성자</td>
+		            <td>${qna.member_id}</td>
+		        </tr>
+		        <tr>
+		            <td>답변 여부</td>
+		            <td>${qna.is_answered}</td>
+		        </tr>
+		        <c:if test="${qna.is_answered == 'N'}">
+		            <tr>
+		                <td>관리</td>
+		                <td>
+		                    <button onclick="qnaDelete()">삭제 및 수정</button>
+		                </td>
+		            </tr>
+		        </c:if>
+		    </tbody>
+		</table>
+			<a href="${pageContext.request.contextPath}/user/notice/list">목록으로</a>
+	</div>
+
 	<c:if test="${not empty qna_answer }">
 		<table border="1" cellpadding="5" cellspacing="0">
 			<thead>
@@ -71,6 +90,7 @@
 		}
 	</script>
 	
-	
+	<!-- footer -->
+	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 </body>
 </html>
