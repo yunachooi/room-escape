@@ -51,39 +51,38 @@ public class ReviewController {
 	
 	// 필터 옵션에 맞춘 데이터 반환. 
 	@GetMapping("/show_review_option")
-	@ResponseBody
-	public List<ReviewDTO> show_review_option(@RequestParam("select_value")String select,
-											  @RequestParam(value="theme_id", required = false)String theme_id) {
-		System.out.println("테스트중임: "+theme_id);
-		if(theme_id != null && !theme_id.isEmpty()) {
-			if(select.equals("별점높은순")) {
-				List<ReviewDTO> review = reviewDao.get_review_ratingDESC_theme_id(theme_id);
-				return review ;
-				
-			} else if(select.equals("별점낮은순")) {
-				List<ReviewDTO> review = reviewDao.get_review_rating_theme_id(theme_id);
-				return review ;
-				//최신순
-			} else  {
-				List<ReviewDTO> review = reviewDao.get_review_reg_date_theme_id(theme_id);
-				return review ;
-			} 
-			
-		}else {
-			if(select.equals("별점높은순")) {
-				List<ReviewDTO> review = reviewDao.get_review_ratingDESC();
-				return review ;
-				
-			} else if(select.equals("별점낮은순")) {
-				List<ReviewDTO> review = reviewDao.get_review_rating();
-				return review ;
-				//최신순
-			} else  {
-				List<ReviewDTO> review = reviewDao.get_review_reg_date();
-				return review ;
-			} 
-		}
-	}
+    @ResponseBody
+    public List<ReviewDTO> show_review_option(@RequestParam("select_value") String select,
+                                              @RequestParam(value = "theme_id", required = false) String theme_id) {
+
+        System.out.println("필터 선택: " + select + ", 테마 ID: " + theme_id);
+
+        // 조건 분기
+        boolean hasTheme = theme_id != null && !theme_id.isEmpty();
+
+	        switch (select) {
+	            case "별점높은순":
+	                return hasTheme ?
+	                    reviewDao.get_review_ratingDESC_theme_id(theme_id) :
+	                    reviewDao.get_review_ratingDESC();
+	
+	            case "별점낮은순":
+	                return hasTheme ?
+	                    reviewDao.get_review_rating_theme_id(theme_id) :
+	                    reviewDao.get_review_rating();
+	
+	            case "최신순":
+	                return hasTheme ?
+	                    reviewDao.get_review_reg_date_theme_id(theme_id) :
+	                    reviewDao.get_review_reg_date();
+	
+	            // ✅ "전체 보기" 또는 잘못된 값일 경우 전체 리스트 반환
+	            default:
+	                return hasTheme ?
+	                    reviewDao.get_review_by_theme_id(theme_id) :
+	                    reviewDao.getAll();
+	        }
+    }
 	
 	@GetMapping("/write_review")// id 세션값으로 받기 
 	public String write_review(@RequestParam("title")String title,

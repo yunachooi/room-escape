@@ -1,0 +1,125 @@
+@charset "UTF-8";
+
+
+#wrap {
+    width: 1000px;
+    min-height: 100vh;
+}
+
+/* QnA 박스 */
+.qna-detail-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* 제목 */
+h2 {
+    text-align: center;
+    color: orange;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
+/* 테이블 공통 */
+#tablewrap{
+	width:1000px;
+	    margin:auto;
+	    padding-bottom:50px;
+}
+
+table {
+    width: 1000px;
+    border-collapse: collapse;
+    font-size: 1rem;
+
+    margin-bottom: 20px;
+}
+
+thead th {
+    background-color: orange;
+    color: orange;
+    padding: 12px;
+    text-align: center;
+}
+
+tbody td {
+    padding: 16px;
+    border-bottom: 1px solid #ddd;
+}
+
+tbody td:first-child {
+    font-weight: bold;
+    background-color: #f4f4f4;
+    width: 40%;
+    text-align: center;
+}
+
+tbody td:last-child {
+    width: 60%;
+}
+
+/* QnA 본문 */
+.qna-content {
+    min-height: 200px;
+    white-space: pre-wrap;
+    line-height: 1.6;
+}
+
+/* 버튼 및 링크 */
+.to-list,
+.qna-delete-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 16px;
+    border: none;
+    background-color: orange;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.to-list:hover,
+.qna-delete-btn:hover {
+    background-color: darkorange;
+}
+
+/* 반응형 */
+@media (max-width: 600px) {
+    .qna-detail-container {
+        padding: 20px 15px;
+    }
+
+    table, tbody, tr, td {
+        display: block;
+        width: 100%;
+    }
+
+    thead {
+        display: none;
+    }
+
+    tbody td {
+        padding: 10px 0;
+        text-align: left;
+        border: none;
+        border-bottom: 1px solid #eee;
+    }
+
+    tbody td:first-child {
+        background-color: transparent;
+        font-weight: bold;
+        width: auto;
+    }
+
+    tbody td:last-child {
+        margin-bottom: 10px;
+    }
+}

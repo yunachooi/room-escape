@@ -2,10 +2,9 @@
 
 /* 공통 제목 스타일 */
 h2 {
-    margin-left: 220px;
-    padding: 20px 0 10px 20px;
-    color: #2c3e50;
-    font-size: 24px;
+	margin-bottom: 10px ;
+    color: #2c3e50 ;
+    font-size: 24px ;
 }
 
 /* 차트 폼 영역 */
@@ -16,7 +15,7 @@ h2 {
     width: calc(100% - 240px);
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     border-radius: 6px;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
 }
 
 #reservationChartForm input[type="month"] {
@@ -43,7 +42,7 @@ h2 {
 
 /* 검색 폼 */
 .reservationSelect form {
-    margin-bottom: 15px;
+    margin-bottom: 5px;
 }
 
 .reservationSelect input[type="text"] {

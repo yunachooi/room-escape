@@ -23,7 +23,7 @@
 	    <div id="noticeDiv" class="tab active" data-tab="notice">공지사항</div>
 	    <div id="QnaDiv" class="tab" data-tab="qna">문의하기</div>
 	    <div id="eventDiv" class="tab" data-tab="event">이벤트</div>
-	    <div id="QnaDiv" class="tab" data-tab="review">리뷰</div>
+	    <div class="tab" onclick="location.href='/review/show_review'">리뷰</div>
 	</div>
 	
 		
@@ -134,7 +134,15 @@
         </tbody>
     </table>
 </div>
-
+	
+	<script>
+	//탭 이동 함수
+	function moveTab(tabName) {
+	    const url = new URL(window.location.href);
+	    url.searchParams.set("tab", tabName);
+	    location.href = url.toString();
+	}
+	</script>
 
 	<script>
 	

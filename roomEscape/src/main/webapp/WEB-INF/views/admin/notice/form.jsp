@@ -4,13 +4,14 @@
 <html>
 <head>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/reset.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/notice-detail.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin-main.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin-noticeF	orm.css">
 	<title>공지사항 상세보기</title>
 </head>	
 <body>
+<%@ include file="/WEB-INF/views/admin/sidebar.jsp" %>
 <h2>공지사항 & 이벤트 작성</h2>
-<form method="post" action="/admin/notice/insert">
+<form method="post" action="/admin/notice/insert" class="notice-form">
   <p>
     지점 선택:
     <label><input type="radio" name="branch" value="강남" checked> 강남</label>
@@ -28,3 +29,4 @@
   
 </form>
 </body>
+</html>

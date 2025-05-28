@@ -5,12 +5,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/reset.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin-main.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin-qna.css">
+<title>QNA 페이지</title>
 </head>
-<body>
-	<h1>Show QnA List Page </h1>
-	<hr>
-	
+<body id="main-content">
+<%@ include file="/WEB-INF/views/admin/sidebar.jsp" %>
+	<h2>Show QnA List Page </h2>
 	<form action="/qna/search_qna" method="GET">
 		<select name="type">
 			<option value="title">제목</option>
@@ -20,10 +22,9 @@
 		<input type="text" name="keyword" >
 		<input type="submit" value="검색">
 	</form>
-	
-	<table border="1" cellpadding="5" cellspacing="0">
+
+	<table >
 		<thead>
-			
 			<tr>
 				<th>번호</th>
 				<th>제목</th>

@@ -5,12 +5,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/reset.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin-main.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin-qna.css">
+<title>QNA 페이지</title>
 </head>
-<body>
-	<h1> Show Qna List Page</h1>
-	<hr>
-	<table border = "1">
+<body id="main-content">
+<%@ include file="/WEB-INF/views/admin/sidebar.jsp" %>
+
+<div >
+	<h2> Show Qna List Page</h2>
+	<table>
 		<thead>
 			<tr>
 				<th>번호</th>
@@ -42,18 +47,14 @@
 			</c:forEach>
 		</tbody>
 	</table>
-	
-		<!--  삭제 필요 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
-		<h3>제목을 누르면 답변 모달창 띄어짐 </h3>
-		
-		
+
 		<!-- 모달 -->
 		<div id="qna_answer_modal" style="display:none; position:fixed; top:30%; left:30%; background:#fff; border:1px solid #ccc; padding:20px;">
 		    <h3 id="modal_title"></h3>
 		    <p id="modal_content"></p>
 		    <button onclick="closeModal()">닫기</button>
 		</div>
-	
+</div>	
 	
 	<script>
 		//답변하기 버튼 누르면 이동 
