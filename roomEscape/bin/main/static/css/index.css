@@ -1,14 +1,6 @@
 @charset "UTF-8";
 
-/*index*/
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  font-family: 'Segoe UI', sans-serif;
-  color: white;
-}
-
+/* ===================== Hero Section ===================== */
 .hero {
   background: url('/images/index/fullscreen.png') no-repeat center center/cover;
   height: 100vh;
@@ -39,8 +31,8 @@ html, body {
   letter-spacing: 2px;
   font-weight: 900;
   color: #FF5C00;
-  animation: flicker 4s infinite;
-  animation-timing-function: ease-in-out;
+  animation: flicker 4s infinite ease-in-out;
+  margin-bottom: 50px;
 }
 
 .hero-text p {
@@ -55,27 +47,16 @@ html, body {
   animation: fadeUp 1.5s ease-out forwards;
 }
 
-.hero-text .line1 {
-  animation-delay: 0.5s;
-}
-
-.hero-text .line2 {
-  animation-delay: 1.2s;
-}
+.hero-text .line1 { animation-delay: 0.5s; }
+.hero-text .line2 { animation-delay: 1.2s; }
 
 @keyframes flicker {
-  0%   { opacity: 1; }
-  5%   { opacity: 0.4; }
-  10%  { opacity: 1; }
-  20%  { opacity: 0.1; }
-  25%  { opacity: 1; }
-  35%  { opacity: 0.7; }
-  40%  { opacity: 1; }
-  55%  { opacity: 0.3; }
-  60%  { opacity: 1; }
-  70%  { opacity: 0.6; }
-  80%  { opacity: 1; }
-  100% { opacity: 1; }
+  0%, 10%, 25%, 40%, 60%, 80%, 100% { opacity: 1; }
+  5% { opacity: 0.4; }
+  20% { opacity: 0.1; }
+  35% { opacity: 0.7; }
+  55% { opacity: 0.3; }
+  70% { opacity: 0.6; }
 }
 
 @keyframes fadeUp {
@@ -88,68 +69,12 @@ html, body {
   to { opacity: 1; transform: translate(-50%, -50%); }
 }
 
-@keyframes fadeOut {
-  from { opacity: 1; transform: translate(-50%, -50%); }
-  to { opacity: 0; transform: translate(-50%, -60%); }
-}
-
+/* ===================== 검색 필터 ===================== */
 .theme-search {
-  min-height: 100vh;
-}
-
-#themeModal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: white;
-  border: 1px solid #aaa;
-  padding: 20px;
-  z-index: 9999;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-#themeModal.active {
-  visibility: visible;
-  opacity: 1;
-  animation: fadeIn 0.3s ease forwards;
-}
-
-#themeModal button {
-  background-color: orange;
-  color: white;
-  border: none;
-  padding: 8px 14px;
-  margin-right: 10px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background-color 0.3s;
-}
-
-#themeModal button:hover {
-  background-color: darkorange;
-}
-
-#modalOverlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.5);
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease;
-  z-index: 9998;
-}
-
-#modalOverlay.active {
-  opacity: 1;
-  visibility: visible;
+  padding: 30px 0 30px 10px;
+  border-radius: 10px;
+  max-width: 1200px;
+  margin: 0 auto 40px;
 }
 
 .theme-filter-form {
@@ -158,6 +83,8 @@ html, body {
   gap: 12px;
   justify-content: center;
   align-items: flex-end;
+  border:2px solid #eee;
+  border-radius : 5px;
   margin: 20px auto;
   max-width: 1000px;
 }
@@ -172,6 +99,8 @@ html, body {
   color: #333;
   text-align: center;
   font-weight: 700;
+  margin-bottom: 6px;
+  font-size: 0.9rem;
 }
 
 .theme-filter-form select,
@@ -181,6 +110,7 @@ html, body {
   border: 1px solid #ccc;
   font-size: 0.95rem;
   text-align: center;
+  cursor: pointer;
 }
 
 .theme-filter-form button {
@@ -188,7 +118,7 @@ html, body {
   color: white;
   font-weight: bold;
   border: none;
-  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 .theme-filter-form button:hover {
@@ -203,4 +133,150 @@ html, body {
   .theme-filter-form .filter-group {
     width: 100%;
   }
+}
+
+/* ===================== 테마 카드 ===================== */
+.theme-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto; /* ✅ 여기에서 margin-right: -86px 제거됨 */
+}
+
+.theme-card {
+    flex: 0 0 calc(33.333% - 20px); /* 한 줄에 3개 (gap 제외) */
+    box-sizing: border-box;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    padding: 16px;
+    text-align: center;
+    overflow: hidden;
+}
+
+/* 이미지 */
+.theme-card img {
+	width: 70% !important; 
+    height: 350px !important;
+    object-fit: none;
+    object-position: center top;
+    margin: 0 auto;
+    border-radius: 8px;
+    display: block;
+    cursor: pointer;
+}
+
+.theme-title {
+  margin-top: 10px;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+/* ===================== 모달 ===================== */
+#modalOverlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 9998;
+  display: none;
+}
+
+#modalOverlay.active {
+  display: block;
+}
+
+#themeModal {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  width: 90%;
+  max-width: 500px;
+  z-index: 9999;
+  box-shadow: 0 0 15px rgba(0,0,0,0.4);
+  animation: fadeIn 0.3s ease;
+}
+
+#themeModal h3 {
+  margin-top: 0;
+  font-size: 1.5rem;
+  color: orange;
+  text-align: center;
+}
+
+#themeModal p {
+  margin: 5px 0;
+  color: #333;
+}
+
+#themeModal button {
+  margin-top: 15px;
+  padding: 8px 16px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  background-color: orange;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#themeModal button:hover {
+  background-color: darkorange;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 35px;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #555;
+}
+
+.modal-close:hover {
+  color: red;
+}
+
+.modal-body p {
+  margin: 8px 0;
+}
+
+.modal-buttons {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.modal-buttons button {
+  padding: 8px 16px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  background-color: orange;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.modal-buttons button:hover {
+  background-color: darkorange;
+}
+
+#modalTitle {
+  margin: 0 auto;
 }

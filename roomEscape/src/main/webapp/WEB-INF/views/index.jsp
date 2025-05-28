@@ -78,8 +78,8 @@ select, button {
 	    <div class="hero-text">
 	      <h1>THE EXIT IS NOT <br>WHAT IT SEEMS</h1>
 	      <p>
-			  <span class="line1">방 안의 모든 것은 단서다.</span><br>
-			  <span class="line2">당신의 직감이 열쇠가 된다.</span>
+			  <span class="line1" style="color:white;">방 안의 모든 것은 단서다.</span><br>
+			  <span class="line2" style="color:white;">당신의 직감이 열쇠가 된다.</span>
 		  </p>
 	    </div>
 	  </div>
