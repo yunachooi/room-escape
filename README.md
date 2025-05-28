@@ -128,7 +128,7 @@
 
 ## 🖥️ 시연 및 결과
 
-- 주요 기능 시연은 [PPT 문서](RoomEscape.pptx)를 참고해주세요.
+- 주요 기능 시연은 [[PPT 문서](RoomEscape.pptx)](https://docs.google.com/presentation/d/1jUguLLQHd8pRKiA_ceLCD_CmfJQNqRII/edit?usp=sharing&ouid=100973109632084360692&rtpof=true&sd=true)를 참고해주세요.
 - 기능 흐름은 `Depth Flow.xlsx`에 정리되어 있습니다.
 
 ---
