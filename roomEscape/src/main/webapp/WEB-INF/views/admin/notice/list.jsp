@@ -5,27 +5,14 @@
 <html>
 <head>
   <meta charset="UTF-8">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/reset.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin-main.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin-notice.css">
   <title>공지사항 & 이벤트 목록</title>
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <style>
-    table {
-      border-collapse: collapse;
-      width: 100%;
-    }
-    th, td {
-      border: 1px solid gray;
-      padding: 6px;
-      text-align: center;
-    }
-    a {
-      text-decoration: none;
-      color: red;
-      font-weight: bold;
-    }
-  </style>
 </head>
 <body>
-
+<%@ include file="/WEB-INF/views/admin/sidebar.jsp" %>
 <h2>공지사항 & 이벤트 목록</h2>
 <p><a href="/admin/notice/form">+ 새 글 등록</a></p>
 

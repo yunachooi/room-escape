@@ -1,0 +1,88 @@
+@charset "UTF-8";
+
+/* 공통 제목 스타일 */
+h2 {
+    margin-left: 220px;
+    padding: 20px 0 10px 20px;
+    color: #2c3e50;
+    font-size: 24px;
+}
+
+/* 차트 폼 영역 */
+.reservationChart {
+    margin-left: 220px;
+    padding: 20px;
+    background-color: white;
+    width: calc(100% - 240px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border-radius: 6px;
+    margin-bottom: 30px;
+}
+
+#reservationChartForm input[type="month"] {
+    padding: 8px 12px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* 차트 컨테이너 */
+#reservationChartContainer {
+    margin-top: 20px;
+}
+
+/* 예약 검색 영역 */
+.reservationSelect {
+    margin-left: 220px;
+    padding: 20px;
+    background-color: white;
+    width: calc(100% - 240px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border-radius: 6px;
+}
+
+/* 검색 폼 */
+.reservationSelect form {
+    margin-bottom: 15px;
+}
+
+.reservationSelect input[type="text"] {
+    padding: 8px 12px;
+    font-size: 14px;
+    width: 200px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+.reservationSelect button {
+    padding: 8px 12px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.reservationSelect button:hover {
+    background-color: #2980b9;
+}
+
+/* 테이블 */
+.reservationSelect table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.reservationSelect th {
+    background-color: #34495e;
+    color: white;
+    padding: 12px;
+    text-align: center;
+}
+
+.reservationSelect td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
