@@ -37,7 +37,7 @@
 	myChart.setOption({
 	    title: { text: '지점별 예약 통계' },
 	    tooltip: {},
-	    xAxis: { type: 'category', data: ['강남점', '홍대점', '신촌점'] },
+	    xAxis: { type: 'category', data: ['강남점', '홍대점', '잠실점'] },
 	    yAxis: { type: 'value' },
 	    series: [{
 	        name: '예약 수',
@@ -48,15 +48,15 @@
 	
 	const dummyData = {
 			  "2025-05": {
-			    labels: ["강남점", "홍대점", "신촌점"],
+			    labels: ["강남점", "홍대점", "잠실점"],
 			    values: [12, 28, 7]
 			  },
 			  "2025-06": {
-			    labels: ["강남점", "홍대점", "신촌점"],
+			    labels: ["강남점", "홍대점", "잠실점"],
 			    values: [22, 14, 30]
 			  },
 			  "2025-07": {
-			    labels: ["강남점", "홍대점", "신촌점"],
+			    labels: ["강남점", "홍대점", "잠실점"],
 			    values: [10, 40, 25]
 			  }
 			};
@@ -64,15 +64,15 @@
 	window.addEventListener('DOMContentLoaded', () => {
 		  const dummyData = {
 		    "2025-05": {
-		      labels: ["강남점", "홍대점", "신촌점"],
+		      labels: ["강남점", "홍대점", "잠실점"],
 		      values: [12, 28, 7]
 		    },
 		    "2025-06": {
-		      labels: ["강남점", "홍대점", "신촌점"],
+		      labels: ["강남점", "홍대점", "잠실점"],
 		      values: [22, 14, 30]
 		    },
 		    "2025-07": {
-		      labels: ["강남점", "홍대점", "신촌점"],
+		      labels: ["강남점", "홍대점", "잠실점"],
 		      values: [10, 40, 25]
 		    }
 		  };
