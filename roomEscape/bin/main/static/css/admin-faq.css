@@ -1,0 +1,65 @@
+@charset "UTF-8";
+
+#main-content {
+  margin-left: 200px;
+  padding: 40px;
+  background-color: #f9f9f9;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* 제목 */
+h2 {
+  font-size: 1.8rem;
+  color: #2c3e50;
+  margin-bottom: 30px;
+}
+
+/* 폼 전체 */
+form {
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 라벨 */
+form label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 8px;
+  color: #34495e;
+}
+
+/* 입력창 */
+form input[type="text"],
+form textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+form textarea {
+  resize: vertical;
+  min-height: 150px;
+}
+
+/* 버튼 */
+form button[type="submit"] {
+  padding: 10px 24px;
+  background-color: #2980b9;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+form button[type="submit"]:hover {
+  background-color: #1f6391;
+}
