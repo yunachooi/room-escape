@@ -29,6 +29,9 @@ public class MemberController {
 		
 		if(loginInfo == null ) {
 			return "redirect:/user/to_login";
+		}else if("admin".equals(loginInfo.getRole())){
+			return "redirect:/admin/main";
+			
 		}else {
 			
 //			MemberDTO userInfo = memberDao.show_info(loginInfo);
