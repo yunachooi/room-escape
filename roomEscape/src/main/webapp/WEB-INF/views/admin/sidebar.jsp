@@ -13,7 +13,7 @@
 
   <div class="admin-info">
     <p>${sessionScope.loginId}님 반갑습니다.</p>
-    <form method="post" action="${pageContext.request.contextPath}/logout">
+    <form method="post" action="/admin/logout">
       <button id="sidebar-submit" type="submit">로그아웃</button>
     </form>
   </div>

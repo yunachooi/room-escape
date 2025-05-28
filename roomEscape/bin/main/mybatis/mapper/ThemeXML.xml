@@ -16,7 +16,7 @@
         T.IS_ACTIVE,
         T.BRANCH_ID,
         T.TYPE_ID,
-        NVL(AVG(R.RATING), 0) AS avgRating,
+         NVL(ROUND(AVG(R.RATING), 1), 0) AS avgRating, 
         COUNT(R.REVIEW_ID) AS reviewCount
     FROM THEME T
     LEFT JOIN REVIEW R ON T.THEME_ID = R.THEME_ID
