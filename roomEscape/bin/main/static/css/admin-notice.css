@@ -1,0 +1,76 @@
+@charset "UTF-8";
+
+/* 제목 */
+h2 {
+    margin-left: 220px;
+    padding: 20px 0 10px 20px;
+    color: #2c3e50;
+    font-size: 24px;
+}
+
+/* 새 글 등록 버튼 */
+p a[href$="/admin/notice/form"] {
+    display: inline-block;
+    margin-left: 220px;
+    margin-bottom: 15px;
+    padding: 8px 12px;
+    background-color: #1abc9c;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+p a[href$="/admin/notice/form"]:hover {
+    background-color: #16a085;
+}
+
+/* 테이블 */
+table {
+    margin-left: 220px;
+    width: calc(100% - 240px);
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+th {
+    background-color: #34495e;
+    color: white;
+    padding: 12px;
+    text-align: center;
+}
+
+td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+/* 삭제 링크 */
+td a {
+    color: #e74c3c;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+td a:hover {
+    text-decoration: underline;
+}
+
+/* 페이지네이션 영역 */
+div[style*="text-align:center"] {
+    margin-left: 220px;
+}
+
+div[style*="text-align:center"] a {
+    color: #337ab7;
+    text-decoration: none;
+    margin: 0 6px;
+}
+
+div[style*="text-align:center"] span {
+    color: #d9534f;
+    font-weight: bold;
+    margin: 0 6px;
+}

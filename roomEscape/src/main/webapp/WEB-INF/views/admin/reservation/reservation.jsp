@@ -5,10 +5,14 @@
 <html>
 <head>
 	<meta charset="UTF-8">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/reset.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin-main.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin-res.css">
 	<title>[관리자페이지] 예약 조회</title>
 	<script src="https://cdn.jsdelivr.net/npm/echarts@5.6.0/dist/echarts.min.js"></script>
 </head>
 <body>
+<%@ include file="/WEB-INF/views/admin/sidebar.jsp" %>
 	<div class="reservationChart">
 		<h2>지점별 예약 통계</h2>
 		<form id="reservationChartForm">
