@@ -9,6 +9,7 @@ body {
     flex-direction: column;
     align-items: center;
     padding-top: 40px;
+    font-family: 'Arial', sans-serif;
 }
 #wrap{
 	width : 1000px;
@@ -52,7 +53,7 @@ table {
 
 thead th {
     background-color: orange;
-    color: orange;
+    color: white;
     padding: 12px;
     text-align: center;
 }
@@ -71,10 +72,6 @@ tbody td:first-child {
 
 tbody td:last-child {
     width: 80%;
-
-}
-tbody tr:last-child{
-	min-height :400px ;
 }
 
 /* 반응형 대응 */
