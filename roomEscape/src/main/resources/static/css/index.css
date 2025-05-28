@@ -106,11 +106,35 @@ html, body {
 }
 
 .hero-text .line1 {
-  animation-delay: 0.5s;
+  animation-delay: 1.5s;
 }
 
 .hero-text .line2 {
-  animation-delay: 1.2s;
+  animation-delay: 3.2s;
+}
+
+.line1, .line2 {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(30px);
+    animation-fill-mode: forwards;
+}
+
+/* 첫 번째 줄: 0.3초 후 실행 */
+.line1 {
+    animation: riseUp 0.6s ease-out 0.3s forwards;
+}
+
+/* 두 번째 줄: 1초 후 실행 */
+.line2 {
+    animation: riseUp 1.2s ease-out 1s forwards;
+}
+
+@keyframes riseUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 /*테마검색*/
 .theme-search{

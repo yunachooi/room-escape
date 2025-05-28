@@ -12,7 +12,7 @@
     <h2>${branchDto != null ? '지점 수정' : '새 지점 등록'}</h2>
     
     
-    <form method="post" action="/admin/branch/save">
+    <form id="branch-form" method="post" action="/admin/branch/save">
         <c:if test="${branchDto != null}">
             <input type="hidden" name="branchId" value="${branchDto.branchId}" />
         </c:if>
@@ -22,7 +22,7 @@
         
         <input type="submit" value="저장" />
         
-        <a href="/admin/branch/list">목록</a>
+        <a id="list-link" href="/admin/branch/list">목록</a>
     </form>
 </body>
 </html>

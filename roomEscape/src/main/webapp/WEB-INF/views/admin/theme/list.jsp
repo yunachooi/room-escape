@@ -33,15 +33,17 @@
                 <td>${theme.capacity_min}</td>
                 <td>${theme.capacity_max}</td>
                 <td>${theme.is_active}</td>
-                <td>
-				    <form method="get" action="${pageContext.request.contextPath}/admin/theme/form">
-				        <input type="hidden" name="theme_id" value="${theme.theme_id}">
-				        <button type="submit">수정</button>
-				    </form>
-				    <form method="post" action="${pageContext.request.contextPath}/admin/theme/delete">
-				        <input type="hidden" name="theme_id" value="${theme.theme_id}">
-				        <button type="submit" onclick="confirmDelete(${theme_id})">삭제</button>
-				    </form>
+                <td >
+	                <div id="formwrap">
+					    <form method="get" action="${pageContext.request.contextPath}/admin/theme/form">
+					        <input type="hidden" name="theme_id" value="${theme.theme_id}">
+					        <button type="submit">수정</button>
+					    </form>
+					    <form method="post" action="${pageContext.request.contextPath}/admin/theme/delete">
+					        <input type="hidden" name="theme_id" value="${theme.theme_id}">
+					        <button id="delete-btn" type="submit" onclick="confirmDelete(${theme_id})">삭제</button>
+					    </form>
+	                </div>
 				</td>
             </tr>
         </c:forEach>

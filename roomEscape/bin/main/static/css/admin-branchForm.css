@@ -8,7 +8,7 @@ h2 {
 }
 
 /* 폼 박스 */
-form {
+#branch-form {
     margin-left: 220px;
     background-color: #ffffff;
     padding: 20px 30px;
@@ -18,7 +18,7 @@ form {
 }
 
 /* 입력 필드 */
-form p {
+#branch-form p {
     margin-bottom: 16px;
 }
 
@@ -48,13 +48,13 @@ input[type="submit"]:hover {
 }
 
 /* 목록 링크 */
-a {
+#list-link {
     color: #2c3e50;
     font-size: 14px;
     text-decoration: none;
     padding: 10px;
 }
 
-a:hover {
+#list-link:hover {
     text-decoration: underline;
 }

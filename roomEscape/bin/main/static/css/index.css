@@ -23,77 +23,27 @@ html, body {
   position: absolute;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* 어두운 오버레이 */
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .hero-text {
   position: relative;
   z-index: 1;
-  margin-top : 100px;
-  margin-left : 600px;
+  margin-top: 100px;
+  margin-left: 600px;
   text-align: center;
 }
 
 .hero-text h1 {
   font-size: 3rem;
   letter-spacing: 2px;
-  margin-bottom:50px;
-  color: #FF5C00; /* 주황 강조 */
-}
-
-.hero-text p {
-  font-size: 1.25rem;
-  margin-top: 1rem;
-}
-
-
-@keyframes flicker {
-  0%   { opacity: 1; }
-  5%   { opacity: 0.4; }
-  10%  { opacity: 1; }
-  20%  { opacity: 0.1; }
-  25%  { opacity: 1; }
-  35%  { opacity: 0.7; }
-  40%  { opacity: 1; }
-  55%  { opacity: 0.3; }
-  60%  { opacity: 1; }
-  70%  { opacity: 0.6; }
-  80%  { opacity: 1; }
-  100% { opacity: 1; }
-}
-
-.hero-text h1 {
-  font-size: 3rem;
-  letter-spacing: 2px;
-  font-weight : 900;
+  font-weight: 900;
   color: #FF5C00;
   animation: flicker 4s infinite;
   animation-timing-function: ease-in-out;
 }
 
-@keyframes fadeUp {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translate(-50%, -60%); }
-  to { opacity: 1; transform: translate(-50%, -50%); }
-}
-
-@keyframes fadeOut {
-  from { opacity: 1; transform: translate(-50%, -50%); }
-  to { opacity: 0; transform: translate(-50%, -60%); }
-}
-
 .hero-text p {
-	margin-top : 20px;
   font-size: 1.25rem;
   margin-top: 1rem;
 }
@@ -112,35 +62,62 @@ html, body {
 .hero-text .line2 {
   animation-delay: 1.2s;
 }
-/*테마검색*/
-.theme-search{
-	min-height:100vh;
+
+@keyframes flicker {
+  0%   { opacity: 1; }
+  5%   { opacity: 0.4; }
+  10%  { opacity: 1; }
+  20%  { opacity: 0.1; }
+  25%  { opacity: 1; }
+  35%  { opacity: 0.7; }
+  40%  { opacity: 1; }
+  55%  { opacity: 0.3; }
+  60%  { opacity: 1; }
+  70%  { opacity: 0.6; }
+  80%  { opacity: 1; }
+  100% { opacity: 1; }
 }
 
-/*모달*/
+@keyframes fadeUp {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translate(-50%, -60%); }
+  to { opacity: 1; transform: translate(-50%, -50%); }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; transform: translate(-50%, -50%); }
+  to { opacity: 0; transform: translate(-50%, -60%); }
+}
+
+.theme-search {
+  min-height: 100vh;
+}
+
 #themeModal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: white;
-    border: 1px solid #aaa;
-    padding: 20px;
-    z-index: 9999;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, transform 0.3s ease;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  border: 1px solid #aaa;
+  padding: 20px;
+  z-index: 9999;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-/* 보일 때 클래스 */
 #themeModal.active {
-    visibility: visible;
-    opacity: 1;
-    animation: fadeIn 0.3s ease forwards;
+  visibility: visible;
+  opacity: 1;
+  animation: fadeIn 0.3s ease forwards;
 }
 
-/* 모달 내부 버튼 꾸미기 */
 #themeModal button {
   background-color: orange;
   color: white;
@@ -157,26 +134,24 @@ html, body {
   background-color: darkorange;
 }
 
-/*overlay*/
 #modalOverlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.5); /* 어두운 배경 */
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease;
-    z-index: 9998;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
+  z-index: 9998;
 }
 
-/* 모달이 열릴 때 오버레이도 보여짐 */
 #modalOverlay.active {
-    opacity: 1;
-    visibility: visible;
+  opacity: 1;
+  visibility: visible;
 }
-/*검색 필터 영역*/
+
 .theme-filter-form {
   display: flex;
   flex-wrap: wrap;
@@ -192,11 +167,13 @@ html, body {
   flex-direction: column;
   min-width: 120px;
 }
-.filter-group label{
-	color : #333;
-	text-align: center;
-	font-weight : 700;
+
+.filter-group label {
+  color: #333;
+  text-align: center;
+  font-weight: 700;
 }
+
 .theme-filter-form select,
 .theme-filter-form button {
   padding: 8px 12px;

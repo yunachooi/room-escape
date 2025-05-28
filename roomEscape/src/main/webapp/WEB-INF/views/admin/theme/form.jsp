@@ -12,7 +12,7 @@
 <body>
 	<%@ include file="/WEB-INF/views/admin/sidebar.jsp" %>
     <h2>${mode == 'edit' ? '테마 수정' : '테마 등록'}</h2>
-    <form method="post" action="${mode == 'edit' ? '/admin/theme/update' : '/admin/theme/insert'}" onsubmit="return confirmUpdate()">
+    <form id="theme-form" method="post" action="${mode == 'edit' ? '/admin/theme/update' : '/admin/theme/insert'}" onsubmit="return confirmUpdate()">
 	    <c:if test="${not empty theme.theme_id}">
 	        <input type="hidden" name="theme_id" value="${theme.theme_id}">
 	    </c:if>
@@ -51,7 +51,7 @@
 		    </c:forEach>
 		</select>
 		<br>
-	    <button type="submit">${mode == 'edit' ? '수정' : '등록'}</button>
+	    <button id="submit" type="submit">${mode == 'edit' ? '수정' : '등록'}</button>
 	</form>
 	
 </body>
