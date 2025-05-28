@@ -36,6 +36,7 @@
 					<th>No.</th>
 					<th>예약자</th>
 					<th>예약지점</th>
+					<th>테마</th>
 					<th>예약일</th>
 					<th>예약시간</th>
 					<th>인원수</th>
@@ -50,6 +51,7 @@
 								<td>${status.index + 1}</td>
 								<td>${reservation.MEMBER_NAME}(${reservation.MEMBER_ID})</td>
 								<td>${reservation.BRANCH_NAME}</td>
+								<td>${reservation.THEME_TITLE}</td>
 								<td>${reservation.RESV_DATE}</td>
 								<td>${reservation.TIME_LABEL}</td>
 								<td>${reservation.NUM_PEOPLE}</td>
