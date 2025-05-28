@@ -19,6 +19,6 @@ public class AdminMainController {
 	@PostMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate(); // 세션 종료
-        return "redirect:/login"; // 로그인 페이지 또는 메인 페이지로 리다이렉트
+        return "redirect:/user/to_login"; // 로그인 페이지 또는 메인 페이지로 리다이렉트
     }
 }
