@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/notice-detail.css">
 	<title>공지사항 상세보기</title>
-</head>
+</head>	
 <body>
 	<!-- header -->
 	<%@ include file="/WEB-INF/views/common/header.jsp" %>

@@ -53,14 +53,24 @@
 }
 
 /* 테마 카드 */
+
+/* 테마 카드 그리드 */
+.theme-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+/* 테마 카드 */
 .reservation_theme {
+    width: calc(33.333% - 20px); /* 3개씩 정렬 (마진 포함 계산) */
     display: flex;
     flex-direction: column;
     align-items: center;
     border: 1px solid #ddd;
     border-radius: 10px;
     padding: 16px;
-    margin-bottom: 40px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.05);
     background-color: #fafafa;
 }

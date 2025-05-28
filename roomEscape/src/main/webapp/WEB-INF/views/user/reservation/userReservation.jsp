@@ -42,27 +42,29 @@
                 <c:set var="themeList" value="${entry.value}" />
                 <c:set var="firstTheme" value="${themeList[0]}" />
 
-                <div class="reservation_theme">
-                    <img src="/images/themes/${firstTheme.THEME_ID}.jpeg" alt="${firstTheme.TITLE}" width="300" height="230">
-                    <div class="theme-title">${firstTheme.TITLE}</div>
-                    <div class="type">(${firstTheme.TYPE_NAME})</div>
-
-                    <div class="times">
-                        <c:forEach var="theme" items="${themeList}">
-                            <c:set var="resvDateTime" value="${theme.RESV_DATE}T${theme.TIME_LABEL}:00" />
-                            <c:choose>
-                                <c:when test="${!theme.IS_BOOKED and resvDateTime > now}">
-                                    <a href="/user/res/reservationInfo?TITLE=${theme.TITLE}&RESV_DATE=${selectedDate}&branch=${selectedBranch}&TYPE_NAME=${theme.TYPE_NAME}&TIME_LABEL=${theme.TIME_LABEL}">
-                                        <div class="time_available">${theme.TIME_LABEL}<br/>예약가능</div>
-                                    </a>
-                                </c:when>
-                                <c:otherwise>
-                                    <div class="time_unavailable">${theme.TIME_LABEL}<br/>예약불가</div>
-                                </c:otherwise>
-                            </c:choose>
-                        </c:forEach>
-                    </div>
-                </div>
+				<div class="theme-grid">
+	                <div class="reservation_theme">
+	                    <img src="/images/themes/${firstTheme.THEME_ID}.jpeg" alt="${firstTheme.TITLE}" width="300" height="230">
+	                    <div class="theme-title">${firstTheme.TITLE}</div>
+	                    <div class="type">(${firstTheme.TYPE_NAME})</div>
+	
+	                    <div class="times">
+	                        <c:forEach var="theme" items="${themeList}">
+	                            <c:set var="resvDateTime" value="${theme.RESV_DATE}T${theme.TIME_LABEL}:00" />
+	                            <c:choose>
+	                                <c:when test="${!theme.IS_BOOKED and resvDateTime > now}">
+	                                    <a href="/user/res/reservationInfo?TITLE=${theme.TITLE}&RESV_DATE=${selectedDate}&branch=${selectedBranch}&TYPE_NAME=${theme.TYPE_NAME}&TIME_LABEL=${theme.TIME_LABEL}">
+	                                        <div class="time_available">${theme.TIME_LABEL}<br/>예약가능</div>
+	                                    </a>
+	                                </c:when>
+	                                <c:otherwise>
+	                                    <div class="time_unavailable">${theme.TIME_LABEL}<br/>예약불가</div>
+	                                </c:otherwise>
+	                            </c:choose>
+	                        </c:forEach>
+	                    </div>
+	                </div>
+				</div>
             </c:forEach>
         </div>
     </div>

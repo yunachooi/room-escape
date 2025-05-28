@@ -9,21 +9,9 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin-main.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin-res.css">
 	<title>[관리자페이지] 예약 조회</title>
-	<script src="https://cdn.jsdelivr.net/npm/echarts@5.6.0/dist/echarts.min.js"></script>
 </head>
 <body>
-<%@ include file="/WEB-INF/views/admin/sidebar.jsp" %>
-	<div class="reservationChart">
-		<h2>지점별 예약 통계</h2>
-		<form id="reservationChartForm">
-			<input type="month" name="find_date" id="find_date">
-		</form>
-		<br />
-		<div id="reservationChartContainer">
-			<div id="myChart" style="width: 600px; height: 400px;"></div>
-		</div>
-	</div>
-
+<%@ include file="/WEB-INF/views/admin/sidebar.jsp" %>	
 	<div class="reservationSelect">
 		<h2>예약현황</h2>
 		<form action="reservation" method="POST">
@@ -73,21 +61,6 @@
 	    function allbtn() {
 	        location.href = "/admin/res/reservation";
 	    }
-
-	    const find_date = document.getElementById('find_date');
-	    const today = new Date();
-	    const monthValue = today.toISOString().slice(0, 7);
-	    find_date.value = monthValue;
-
-	    const chartDom = document.getElementById('myChart');
-	    const myChart = echarts.init(chartDom);
-
-	    myChart.setOption({
-	        title: { text: '지점별 예약 통계' },
-	        xAxis: { type: 'category', data: [] },
-	        yAxis: { type: 'value' },
-	        series: [{ type: 'bar', data: [] }]
-	    });
 
 	    find_date.addEventListener('change', function () {
 	        const selectedDate = find_date.value;
