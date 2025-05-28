@@ -24,8 +24,8 @@
 
 - **Frontend:** HTML, CSS, JavaScript
 - **Backend:** Java (Spring Framework), JSP
-- **Database:** MySQL
-- **협업 도구:** GitHub, KakaoTalk, Notion, Google Drive
+- **Database:** ORACLE DB
+- **협업 도구:** GitHub, KakaoTalk, Google Drive
 
 ---
 
@@ -33,10 +33,10 @@
 
 | 이름 | 역할 |
 |------|------|
-| 김성훈 | 백엔드 개발, DB 설계 |
-| 차수현 | 프론트엔드 개발, UI/UX 디자인 |
-| 김법진 | 서버 및 예약 시스템 구현 |
-| 최유나 | 팀장, 전체 기획 및 발표, 문서 작성 |
+| 김성훈 |  |
+| 차수현 |  |
+| 김법진 |  |
+| 최유나 |  |
 
 > 본 프로젝트는 **그린 컴퓨터 아카데미**에서 진행한 미니 프로젝트입니다.
 
