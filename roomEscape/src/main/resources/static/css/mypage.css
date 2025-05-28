@@ -1,0 +1,90 @@
+@charset "UTF-8";
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #f7f7f7;
+}
+main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 40px 0;
+}
+
+form {
+    margin-top: 0;              /* 위는 header에 바로 붙게 */
+    margin-bottom: 60px;        /* 아래 footer랑 간격 확보 */
+    padding: 30px 20px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    width: 95%;
+    max-width: 400px;
+}
+
+
+
+h2 {
+    font-size: 1.6rem;
+    margin-bottom: 24px;
+    text-align: center;
+    color: #ff8000;
+    font-weight: 700;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+input[readonly] {
+    background-color: #f0f0f0;
+}
+
+input[type="submit"],
+button {
+    background-color: #ff8000;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: block;
+    margin: 20px auto 0;
+}
+
+input[type="submit"]:hover,
+button:hover {
+    background-color: #e06600;
+}
+
+/* 안내 메시지 */
+#id_check,
+#pw_match_msg {
+    font-size: 0.9rem;
+    color: #666;
+    margin-left: 6px;
+}
+
+/* 반응형 대응 */
+@media (max-width: 480px) {
+    form {
+        padding: 20px;
+    }
+
+    input[type="submit"] {
+        width: 100%;
+    }
+}
