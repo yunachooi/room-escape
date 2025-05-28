@@ -1,5 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -95,73 +97,80 @@
 
 <!-- 리뷰 -->
 <div id="review" class="tab-content">
-    <select id="review_option" onchange="changeOption(this)">
-      <option>전체 보기</option>
-      <option value="별점높은순">별점 높은순</option>
-      <option value="별점낮은순">별점 낮은순</option>
-      <option value="최신순">최신순</option>
-    </select>
+    <!-- 정렬 + 유형 필터 -->
+    <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+        <select id="review_option" onchange="changeOption()">
+            <option value="전체 보기">전체 보기</option>
+            <option value="별점높은순">별점 높은순</option>
+            <option value="별점낮은순">별점 낮은순</option>
+            <option value="최신순">최신순</option>
+        </select>
+
+        
+    </div>
 
     <div id="review_option_list"></div>
 
     <table id="initialReviewTable" class="review-table">
-      <thead>
-        <tr>
-          <th>평점</th>
-          <th>리뷰내용</th>
-          <th>작성일</th>
-          <th>테마</th>
-          <th>작성자</th>
-        </tr>
-      </thead>
-      <tbody>
-        <c:forEach var="review" items="${reviewList}">
-          <tr>
-            <td>${review.rating}</td>
-            <td>${review.content}</td>
-            <td>${review.reg_date}</td>
-            <td>${review.theme_id}</td>
-            <td>${review.member_id}</td>
-          </tr>
-        </c:forEach>
-      </tbody>
+        <thead>
+            <tr>
+                <th>평점</th>
+                <th>리뷰내용</th>
+                <th>작성일</th>
+                <th>테마</th>
+                <th>작성자</th>
+            </tr>
+        </thead>
+        <tbody>
+            <c:forEach var="review" items="${reviewList}">
+                <tr>
+                    <td>${review.rating}</td>
+                    <td>${review.content}</td>
+                    <td>${review.reg_date}</td>
+                    <td>${review.theme_id}</td>
+                    <td>${review.member_id}</td>
+                </tr>
+            </c:forEach>
+        </tbody>
     </table>
 </div>
+
+
 	<script>
 	
-	function changeOption(selectElement) {
-	    const select_value = document.getElementById("review_option").value;
-	    const url = "/review/show_review_option?select_value=" + encodeURIComponent(select_value);
+	function changeOption() {
+        const select_value = document.getElementById("review_option").value;
 
-	    fetch(url)
-	      .then(response => response.json())
-	      .then(data => {
-	        const reviewbox = document.getElementById("review_option_list");
+        const url = "/review/show_review_option?select_value=" + encodeURIComponent(select_value);
 
-	        let html = '<table class="review-table">';
-	        html += '<thead><tr>';
-	        html += '<th>평점</th><th>리뷰내용</th><th>작성일</th><th>테마</th><th>작성자</th>';
-	        html += '</tr></thead><tbody>';
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                const reviewbox = document.getElementById("review_option_list");
+                const initialTable = document.getElementById("initialReviewTable");
+                if (initialTable) initialTable.style.display = "none";
 
-	        data.forEach((review) => {
-	          html += `<tr>`;
-	          html += `<td>${review.rating}</td>`;
-	          html += `<td>${review.content}</td>`;
-	          html += `<td>${review.reg_date}</td>`;
-	          html += `<td>${review.theme_id}</td>`;
-	          html += `<td>${review.member_id}</td>`;
-	          html += `</tr>`;
-	        });
+                let html = '<table class="review-table">';
+                html += '<thead><tr>';
+                html += '<th>평점</th><th>리뷰내용</th><th>작성일</th><th>테마</th><th>작성자</th>';
+                html += '</tr></thead><tbody>';
 
-	        html += '</tbody></table>';
-	        reviewbox.innerHTML = html;
+                data.forEach((review) => {
+                    html += `<tr>`;
+                    html += `<td>${review.rating}</td>`;
+                    html += `<td>${review.content}</td>`;
+                    html += `<td>${review.reg_date}</td>`;
+                    html += `<td>${review.theme_id}</td>`;
+                    html += `<td>${review.member_id}</td>`;
+                    html += `</tr>`;
+                });
 
-	        const originalTable = document.getElementById("initialReviewTable");
-	        if (originalTable) {
-	          originalTable.style.display = "none";
-	        }
-	      });
-	  }
+                html += '</tbody></table>';
+                reviewbox.innerHTML = html;
+            });
+    }
+
+
 	
 	    $('.tab').click(function() {
 	        $('.tab').removeClass('active');
