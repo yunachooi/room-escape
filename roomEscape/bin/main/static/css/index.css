@@ -1,6 +1,14 @@
 @charset "UTF-8";
 
-/* ===================== Hero Section ===================== */
+/*index*/
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Segoe UI', sans-serif;
+  color: white;
+}
+
 .hero {
   background: url('/images/index/fullscreen.png') no-repeat center center/cover;
   height: 100vh;
@@ -15,27 +23,77 @@
   position: absolute;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.5); /* 어두운 오버레이 */
 }
 
 .hero-text {
   position: relative;
   z-index: 1;
-  margin-top: 100px;
-  margin-left: 600px;
+  margin-top : 100px;
+  margin-left : 600px;
   text-align: center;
 }
 
 .hero-text h1 {
   font-size: 3rem;
   letter-spacing: 2px;
-  font-weight: 900;
-  color: #FF5C00;
-  animation: flicker 4s infinite ease-in-out;
-  margin-bottom: 50px;
+  margin-bottom:50px;
+  color: #FF5C00; /* 주황 강조 */
 }
 
 .hero-text p {
+  font-size: 1.25rem;
+  margin-top: 1rem;
+}
+
+
+@keyframes flicker {
+  0%   { opacity: 1; }
+  5%   { opacity: 0.4; }
+  10%  { opacity: 1; }
+  20%  { opacity: 0.1; }
+  25%  { opacity: 1; }
+  35%  { opacity: 0.7; }
+  40%  { opacity: 1; }
+  55%  { opacity: 0.3; }
+  60%  { opacity: 1; }
+  70%  { opacity: 0.6; }
+  80%  { opacity: 1; }
+  100% { opacity: 1; }
+}
+
+.hero-text h1 {
+  font-size: 3rem;
+  letter-spacing: 2px;
+  font-weight : 900;
+  color: #FF5C00;
+  animation: flicker 4s infinite;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes fadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translate(-50%, -60%); }
+  to { opacity: 1; transform: translate(-50%, -50%); }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; transform: translate(-50%, -50%); }
+  to { opacity: 0; transform: translate(-50%, -60%); }
+}
+
+.hero-text p {
+	margin-top : 20px;
   font-size: 1.25rem;
   margin-top: 1rem;
 }
@@ -47,44 +105,108 @@
   animation: fadeUp 1.5s ease-out forwards;
 }
 
-.hero-text .line1 { animation-delay: 0.5s; }
-.hero-text .line2 { animation-delay: 1.2s; }
-
-@keyframes flicker {
-  0%, 10%, 25%, 40%, 60%, 80%, 100% { opacity: 1; }
-  5% { opacity: 0.4; }
-  20% { opacity: 0.1; }
-  35% { opacity: 0.7; }
-  55% { opacity: 0.3; }
-  70% { opacity: 0.6; }
+.hero-text .line1 {
+  animation-delay: 1.5s;
 }
 
-@keyframes fadeUp {
-  0% { opacity: 0; transform: translateY(20px); }
-  100% { opacity: 1; transform: translateY(0); }
+.hero-text .line2 {
+  animation-delay: 3.2s;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translate(-50%, -60%); }
-  to { opacity: 1; transform: translate(-50%, -50%); }
+.line1, .line2 {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(30px);
+    animation-fill-mode: forwards;
 }
 
-/* ===================== 검색 필터 ===================== */
-.theme-search {
-  padding: 30px 0 30px 10px;
-  border-radius: 10px;
-  max-width: 1200px;
-  margin: 0 auto 40px;
+/* 첫 번째 줄: 0.3초 후 실행 */
+.line1 {
+    animation: riseUp 0.6s ease-out 0.3s forwards;
 }
 
+/* 두 번째 줄: 1초 후 실행 */
+.line2 {
+    animation: riseUp 1.2s ease-out 1s forwards;
+}
+
+@keyframes riseUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/*테마검색*/
+.theme-search{
+	min-height:100vh;
+}
+
+/*모달*/
+#themeModal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border: 1px solid #aaa;
+    padding: 20px;
+    z-index: 9999;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* 보일 때 클래스 */
+#themeModal.active {
+    visibility: visible;
+    opacity: 1;
+    animation: fadeIn 0.3s ease forwards;
+}
+
+/* 모달 내부 버튼 꾸미기 */
+#themeModal button {
+  background-color: orange;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  margin-right: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+#themeModal button:hover {
+  background-color: darkorange;
+}
+
+/*overlay*/
+#modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5); /* 어두운 배경 */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+    z-index: 9998;
+}
+
+/* 모달이 열릴 때 오버레이도 보여짐 */
+#modalOverlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+/*검색 필터 영역*/
 .theme-filter-form {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
   justify-content: center;
   align-items: flex-end;
-  border:2px solid #eee;
-  border-radius : 5px;
   margin: 20px auto;
   max-width: 1000px;
 }
@@ -94,15 +216,11 @@
   flex-direction: column;
   min-width: 120px;
 }
-
-.filter-group label {
-  color: #333;
-  text-align: center;
-  font-weight: 700;
-  margin-bottom: 6px;
-  font-size: 0.9rem;
+.filter-group label{
+	color : #333;
+	text-align: center;
+	font-weight : 700;
 }
-
 .theme-filter-form select,
 .theme-filter-form button {
   padding: 8px 12px;
@@ -110,7 +228,6 @@
   border: 1px solid #ccc;
   font-size: 0.95rem;
   text-align: center;
-  cursor: pointer;
 }
 
 .theme-filter-form button {
@@ -118,7 +235,7 @@
   color: white;
   font-weight: bold;
   border: none;
-  transition: background-color 0.3s;
+  cursor: pointer;
 }
 
 .theme-filter-form button:hover {
@@ -133,150 +250,4 @@
   .theme-filter-form .filter-group {
     width: 100%;
   }
-}
-
-/* ===================== 테마 카드 ===================== */
-.theme-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto; /* ✅ 여기에서 margin-right: -86px 제거됨 */
-}
-
-.theme-card {
-    flex: 0 0 calc(33.333% - 20px); /* 한 줄에 3개 (gap 제외) */
-    box-sizing: border-box;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    padding: 16px;
-    text-align: center;
-    overflow: hidden;
-}
-
-/* 이미지 */
-.theme-card img {
-	width: 70% !important; 
-    height: 350px !important;
-    object-fit: none;
-    object-position: center top;
-    margin: 0 auto;
-    border-radius: 8px;
-    display: block;
-    cursor: pointer;
-}
-
-.theme-title {
-  margin-top: 10px;
-  font-weight: bold;
-  font-size: 1.1rem;
-}
-
-/* ===================== 모달 ===================== */
-#modalOverlay {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.6);
-  z-index: 9998;
-  display: none;
-}
-
-#modalOverlay.active {
-  display: block;
-}
-
-#themeModal {
-  display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: #fff;
-  border-radius: 10px;
-  padding: 20px;
-  width: 90%;
-  max-width: 500px;
-  z-index: 9999;
-  box-shadow: 0 0 15px rgba(0,0,0,0.4);
-  animation: fadeIn 0.3s ease;
-}
-
-#themeModal h3 {
-  margin-top: 0;
-  font-size: 1.5rem;
-  color: orange;
-  text-align: center;
-}
-
-#themeModal p {
-  margin: 5px 0;
-  color: #333;
-}
-
-#themeModal button {
-  margin-top: 15px;
-  padding: 8px 16px;
-  font-size: 1rem;
-  border: none;
-  border-radius: 6px;
-  background-color: orange;
-  color: white;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-#themeModal button:hover {
-  background-color: darkorange;
-}
-
-.modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 35px;
-}
-
-.modal-close {
-  background: none;
-  border: none;
-  font-size: 1.2rem;
-  cursor: pointer;
-  color: #555;
-}
-
-.modal-close:hover {
-  color: red;
-}
-
-.modal-body p {
-  margin: 8px 0;
-}
-
-.modal-buttons {
-  margin-top: 20px;
-  text-align: center;
-}
-
-.modal-buttons button {
-  padding: 8px 16px;
-  font-size: 1rem;
-  border: none;
-  border-radius: 6px;
-  background-color: orange;
-  color: white;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.modal-buttons button:hover {
-  background-color: darkorange;
-}
-
-#modalTitle {
-  margin: 0 auto;
 }
