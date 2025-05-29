@@ -42,12 +42,18 @@
 
 ---
 
-## 📌 유저 접근 프로세스
+## 📌 ERD
+![resized_erd_image](https://github.com/user-attachments/assets/cdaba110-fc05-4848-8aeb-a7c27b773863)
 
+---
+
+## 📌 유저 접근 프로세스
+![resized_right_image](https://github.com/user-attachments/assets/f5498628-67cc-4ae0-aeed-1017daeae445)
 
 ---
 
 ## 📌 관리자 접근 프로세스
+![cb793680-7dfa-4439-8bb9-0c207759fb71](https://github.com/user-attachments/assets/81570a35-6747-4098-9d69-2c8449d0c6a6)
 
 ---
 
