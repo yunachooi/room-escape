@@ -166,3 +166,10 @@
 - 편의 기능 확대
 - 다국어 지원
 - 커뮤니티 기능
+
+---
+
+## 🎬시연영상
+
+<img src="https://github.com/user-attachments/assets/6c746148-97af-4065-b095-cdc5a73dc04e" width="1100">
+
